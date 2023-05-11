@@ -12,7 +12,7 @@ class Carrito extends React.Component {
   render() {
     return (
       <div>
-        <p>Estas en la pestaña de carrito</p>
+        <p>Estas en la pestaña de Carrito</p>
         <button onClick={() => this.sendNumber(1)}>Enviar 1</button>
         <button onClick={() => this.sendNumber(2)}>Enviar 2</button>
         <button onClick={() => this.sendNumber(3)}>Enviar 3</button>

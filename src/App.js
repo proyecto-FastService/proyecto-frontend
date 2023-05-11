@@ -1,7 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navegationbar';
-import NumberSender from './components/numberSender';
-import Productos from './components/Productos';
+import Inicio from './components/Inicio';
+import Comida from './components/Comida';
+import Productos from './components/Comida';
 import Carrito from './components/Carrito';
 
 
@@ -10,7 +11,8 @@ function App() {
     <BrowserRouter>
     <Navbar/>
       <Routes>
-        <Route path="/" element={<NumberSender />} />
+        <Route path="/inicio" element={<Inicio />} />
+        <Route path="/Comida" element={<Comida />} />
         <Route path="/productos" element={<Productos />} />
         <Route path="/carrito" element={<Carrito />} />
       </Routes>
