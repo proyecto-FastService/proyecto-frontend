@@ -1,21 +1,21 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import '../App.css';
-// import NavDropdown from 'react-bootstrap/NavDropdown';
-
 
 function Navegationbar() {
   return (
     <Navbar collapseOnSelect expand="lg" className="custom-navbar sticky-top">
       <Container>
-        <Navbar.Brand href="#">FASTSERVICE</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/">FASTSERVICE</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" className='navbar-toggler' style={{backgroundColor: 'white'}}/>
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/productos">Productos</Nav.Link>
-            <Nav.Link href="/bebidas">Bebidas</Nav.Link>
-            <Nav.Link href="/carrito" className="custom-cart">Carrito</Nav.Link>
+            <Nav.Link as={Link} to="/productos">Productos</Nav.Link>
+            <Nav.Link as={Link} to="/bebidas">Bebidas</Nav.Link>
+            <Nav.Link as={Link} to="/carrito" className="custom-cart">Carrito</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
@@ -24,6 +24,7 @@ function Navegationbar() {
 }
 
 export default Navegationbar;
+
 
 
 // function Navegationbar() {
