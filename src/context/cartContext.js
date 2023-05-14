@@ -10,8 +10,14 @@ export const CartProvider = ({ children }) => {
   };
 
   const removeFromCart = (itemId) => {
-    setCart(cart.filter(item => item.id !== itemId));
+    const itemIndex = cart.findIndex((item) => item.id === itemId);
+    if (itemIndex !== -1) {
+      const newCart = [...cart];
+      newCart.splice(itemIndex, 1);
+      setCart(newCart);
+    }
   };
+  
 
   const clearCart = () => {
     setCart([]);
