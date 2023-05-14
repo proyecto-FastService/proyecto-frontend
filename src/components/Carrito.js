@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 import { CartContext } from '../context/cartContext';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 
 const Carrito = () => {
   const { cart, removeFromCart, clearCart } = useContext(CartContext);
@@ -15,25 +17,44 @@ const Carrito = () => {
   };
 
   return (
-    <div>
-      <h1>Carrito</h1>
-      {cart.length === 0 ? (
-        <p>No hay productos en el carrito.</p>
-      ) : (
-        <div>
-          <ul>
-            {cart.map((item) => (
-              <li key={item.id}>
-                {item.name} - {item.price} €
-                <button onClick={() => handleRemoveFromCart(item.id)}>Eliminar</button>
-              </li>
-            ))}
-          </ul>
-          <button onClick={() => handleClearCart()}>Vaciar carrito</button>
-        </div>
-      )}
+    <div className='Body-Carrito'>
+      <div className='d-flex justify-content-center'>
+        <Card className="w-50 mt-5">
+          <Card.Header>
+            <h1 className='text-center'>Carrito</h1>
+          </Card.Header>
+          <Card.Body>
+            {cart.length === 0 ? (
+              <p>No hay productos en el carrito.</p>
+            ) : (
+              <ul>
+                {cart.map((item) => (
+                  <li key={item.id}>
+                    {item.name} - {item.price} €
+                    <Button
+                      className='mx-2'
+                      variant='danger'
+                      onClick={() => handleRemoveFromCart(item.id)}
+                    >
+                      Eliminar
+                    </Button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </Card.Body>
+          {cart.length > 0 && (
+            <Card.Footer>
+              <Button variant='secondary' onClick={() => handleClearCart()}>
+                Vaciar carrito
+              </Button>
+            </Card.Footer>
+          )}
+        </Card>
+      </div>
     </div>
   );
 };
 
 export default Carrito;
+
