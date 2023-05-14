@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -9,13 +9,13 @@ function Navegationbar() {
   return (
     <Navbar collapseOnSelect expand="lg" className="custom-navbar sticky-top">
       <Container>
-        <Navbar.Brand as={Link} to="/">FASTSERVICE</Navbar.Brand>
+        <Navbar.Brand as={NavLink} activeClassName="active-link" to="/">FASTSERVICE</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" className='navbar-toggler' style={{backgroundColor: 'white'}}/>
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link as={Link} to="/productos">Productos</Nav.Link>
-            <Nav.Link as={Link} to="/bebidas">Bebidas</Nav.Link>
-            <Nav.Link as={Link} to="/carrito" className="custom-cart">Carrito</Nav.Link>
+            <Nav.Link as={NavLink} to="/productos" activeClassName="active-link">Productos</Nav.Link>
+            <Nav.Link as={NavLink} to="/bebidas" activeClassName="active-link">Bebidas</Nav.Link>
+            <Nav.Link as={NavLink} to="/carrito" className="custom-cart" activeClassName="active-link">Carrito</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
@@ -24,6 +24,7 @@ function Navegationbar() {
 }
 
 export default Navegationbar;
+
 
 
 
