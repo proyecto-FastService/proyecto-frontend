@@ -1,21 +1,38 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import { CartContext } from '../context/cartContext';
+import { FaShoppingCart } from 'react-icons/fa';
 import '../App.css';
 
 function Navegationbar() {
+  const { cart } = useContext(CartContext);
+
+  const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
+
   return (
     <Navbar collapseOnSelect expand="lg" className="custom-navbar sticky-top">
       <Container>
-        <Navbar.Brand as={NavLink} activeClassName="active-link" to="/">FASTSERVICE</Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" className='navbar-toggler' style={{backgroundColor: 'white'}}/>
+        <Navbar.Brand as={NavLink} activeClassName="active-link" to="/">
+          FASTSERVICE
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" className="navbar-toggler" style={{ backgroundColor: 'white' }} />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link as={NavLink} to="/productos" activeClassName="active-link">Productos</Nav.Link>
-            <Nav.Link as={NavLink} to="/bebidas" activeClassName="active-link">Bebidas</Nav.Link>
-            <Nav.Link as={NavLink} to="/carrito" className="custom-cart" activeClassName="active-link">Carrito</Nav.Link>
+            <Nav.Link as={NavLink} to="/productos" activeClassName="active-link">
+              Productos
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/bebidas" activeClassName="active-link">
+              Bebidas
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/carrito" className="custom-cart" activeClassName="active-link">
+              <span>Carrito</span>
+              {cartItemCount > 0 && <span className="cart-count">({cartItemCount})</span>}
+              <FaShoppingCart style={{ marginLeft: '0.5rem' }} className="cart-icon" />
+            </Nav.Link>
+
           </Nav>
         </Navbar.Collapse>
       </Container>
@@ -24,6 +41,8 @@ function Navegationbar() {
 }
 
 export default Navegationbar;
+
+
 
 
 
