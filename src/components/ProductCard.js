@@ -81,7 +81,8 @@ function ProductCard(props) {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            border: '2px solid black'
+            border: '3px solid black',
+            backgroundColor: 'wheat',
           }
         }}
       >
