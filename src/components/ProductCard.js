@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useSpring, animated } from 'react-spring';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
@@ -12,6 +12,7 @@ Modal.setAppElement('#root');
 function ProductCard(props) {
   const { addToCart } = useContext(CartContext);
   const [showModal, setShowModal] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(true);
 
   const handleClick = () => {
     addToCart({
@@ -31,8 +32,22 @@ function ProductCard(props) {
   // Configuración de animación con react-spring
   const animationProps = useSpring({
     opacity: showModal ? 1 : 0,
-    transform: showModal ? 'translateY(0)' : 'translateY(-50%)'
+    transform: showModal ? 'translateY(0)' : 'translateY(-50%)',
+    rotate: showModal ? '0deg' : '10deg',
+    config: {
+      tension: 50,
+      friction: 8,
+      mass: 0.5
+    }
   });
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setIsAnimating(false);
+    }, 1000);
+
+    return () => clearTimeout(timeout);
+  }, []);
 
   return (
     <div>
@@ -74,7 +89,6 @@ function ProductCard(props) {
           <h2>Producto añadido al carrito</h2><TiTickOutline size={48} color="green" />
           <p>{props.title} se ha añadido al carrito.</p>
           <button onClick={closeModal}>Cerrar</button>
-
         </animated.div>
       </Modal>
     </div>
@@ -82,6 +96,9 @@ function ProductCard(props) {
 }
 
 export default ProductCard;
+
+
+
 
 
 
