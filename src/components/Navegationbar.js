@@ -5,6 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { CartContext } from '../context/cartContext';
 import { FaShoppingCart } from 'react-icons/fa';
+import logo from '../img/fastservice-logo.jpg'; // Ruta de la imagen de tu logo
 import '../App.css';
 
 function Navegationbar() {
@@ -16,7 +17,7 @@ function Navegationbar() {
     <Navbar collapseOnSelect expand="lg" className="custom-navbar sticky-top">
       <Container>
         <Navbar.Brand as={NavLink} activeClassName="active-link" to="/">
-          FASTSERVICE
+          <img src={logo} alt="Logo" className="logo" /> FASTSERVICE
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" className="navbar-toggler" style={{ backgroundColor: 'white' }} />
         <Navbar.Collapse id="responsive-navbar-nav">
@@ -41,6 +42,7 @@ function Navegationbar() {
 }
 
 export default Navegationbar;
+
 
 
 
