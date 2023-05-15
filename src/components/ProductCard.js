@@ -17,7 +17,7 @@ function ProductCard(props) {
   };
 
   return (
-    <Card className="ProductCard shadow-lg rounded" style={{ width: '28rem' }}>
+    <Card className="ProductCard shadow-lg rounded mx-auto" style={{ maxWidth: '28rem' }}>
       <Card.Img variant="top" src={props.image} alt={props.title} />
       <Card.Body className="ProductCard-Body">
         <Card.Title>{props.title}</Card.Title>

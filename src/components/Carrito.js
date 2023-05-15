@@ -19,21 +19,20 @@ const Carrito = () => {
   return (
     <div className='Body-Carrito'>
       <div className='d-flex justify-content-center'>
-        <Card className="w-50 mt-5">
+        <Card className="Card-Carrito w-50 mt-5">
           <Card.Header>
-            <h1 className='text-center'>Carrito</h1>
+            <h1 className='text-center text-carrito-header'>Carrito</h1>
           </Card.Header>
-          <Card.Body>
+          <Card.Body className='body-body-carrito'>
             {cart.length === 0 ? (
               <p>No hay productos en el carrito.</p>
             ) : (
               <ul>
                 {cart.map((item) => (
                   <li key={item.id}>
-                    {item.name} - {item.price} €
+                    {item.title}  {item.price}
                     <Button
-                      className='mx-2'
-                      variant='danger'
+                      className='Carrito-Button mx-2'
                       onClick={() => handleRemoveFromCart(item.id)}
                     >
                       Eliminar
@@ -45,7 +44,7 @@ const Carrito = () => {
           </Card.Body>
           {cart.length > 0 && (
             <Card.Footer>
-              <Button variant='secondary' onClick={() => handleClearCart()}>
+              <Button className='boton-borrar-carrito' onClick={() => handleClearCart()}>
                 Vaciar carrito
               </Button>
             </Card.Footer>

@@ -7,13 +7,17 @@ const Productos = () => {
 
   const handleAddToCart = (product) => {
     addToCart(product);
+    
   };
+
+  
 
   return (
     <div className="product-list">
       <ProductList onAddToCart={handleAddToCart} />
     </div>
   );
+  
 };
 
 export default Productos;

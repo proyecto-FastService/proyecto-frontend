@@ -1,27 +1,25 @@
 * {
   font-family: 'Dosis', sans-serif !important;
-  
-}
 
-body{
-  
 }
 
 #root {
   background-color: #f58a53;
   height: 100%;
-  
+
 }
+
 /* CSS DE LA LISTA DE PRODUCTO */
 
-.product-list{
+.product-list {
   height: 100vh;
 }
+
 /* CSS DE LA CARD DE PRODUCTO */
 
 .ProductCard {
   margin: auto;
-  width: 50%;
+  
   margin-top: 2%;
   border: 2px solid brown !important;
 }
@@ -40,13 +38,33 @@ body{
   justify-content: center !important;
   line-height: 24px !important;
   max-width: 100% !important;
-  padding: 0 25px !important;
   position: relative !important;
-  text-align: center!important ;
+  text-align: center !important;
   text-decoration: none !important;
   user-select: none !important;
   -webkit-user-select: none !important;
   touch-action: manipulation !important;
+}
+
+.ProductCard-Button::before {
+  content: "" !important;
+  position: absolute !important;
+  left: -100% !important;
+  top: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background-color: #e2725b;
+  z-index: -1 !important;
+  transition: left 0.3s ease !important;
+}
+
+.ProductCard-Button:hover {
+  background-color: #e2725b !important;
+  color: black !important;
+}
+
+.ProductCard-Button:hover::before {
+  left: 0 !important;
 }
 
 
@@ -69,7 +87,7 @@ body{
   text-decoration: underline;
 }
 
-.navbar-brand.active{
+.navbar-brand.active {
   color: yellow !important;
 }
 
@@ -89,9 +107,9 @@ body{
   text-decoration: underline;
 }
 
-.active-link a{
+.active-link a {
   text-decoration: underline;
-  color:yellow !important;
+  color: yellow !important;
 }
 
 
@@ -101,6 +119,166 @@ body{
   right: 0;
 }
 
-.Body-Carrito{
+.Body-Carrito {
   height: 100vh;
+}
+
+.card-body li {
+  margin-top: 5px;
+  list-style-type: circle;
+}
+
+.Carrito-Button {
+  align-items: center !important;
+  background-color: #fee6e3 !important;
+  border: 2px solid #111 !important;
+  border-radius: 8px !important;
+  box-sizing: border-box !important;
+  color: #111 !important;
+  cursor: pointer !important;
+  font-size: 16px !important;
+  justify-content: center !important;
+  line-height: 24px !important;
+  max-width: 100% !important;
+  padding: 0 25px !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  touch-action: manipulation !important;
+
+}
+
+.Carrito-Button::before {
+  content: "" !important;
+  position: absolute !important;
+  left: -100% !important;
+  top: 0 !important;
+  width: 100% !important;
+  height: 100% !important; 
+  background-color: red !important;
+  z-index: -1 !important;
+  transition: left 0.3s ease !important;
+}
+
+.Carrito-Button:hover {
+  background-color: red !important;
+  color: white !important;
+}
+
+.Carrito-Button:hover::before {
+  left: 0 !important;
+}
+
+
+.boton-borrar-carrito {
+  background-color: rgb(216, 60, 60) !important;
+  border: 1px solid black !important;
+  border-radius: 8px !important;
+  box-sizing: border-box !important;
+}
+
+.boton-borrar-carrito::before {
+  content: "" !important;
+  position: absolute !important;
+  left: -100% !important;
+  top: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background-color: #e2725b !important;
+  z-index: -1 !important;
+  transition: left 0.3s ease !important;
+}
+
+.boton-borrar-carrito:hover {
+  background-color: red !important;
+  color: white !important;
+}
+
+.boton-borrar-carrito:hover::before {
+  left: 0 !important;
+}
+
+
+.Card-Carrito{
+  background-color: wheat !important;
+  
+}
+.body-body-carrito{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-carrito-header{
+  color: yellow;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+}
+
+/* CSS DEL FOOTER */
+
+.footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: black;
+  opacity: 0.7;
+  position: sticky;
+  bottom: 0;
+  color: yellow;
+  padding: 20px;
+}
+
+.container-footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+}
+
+.social-icons {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  gap: 10px;
+  list-style: none;
+  justify-content: flex-end;
+}
+
+.social-icons li {
+  margin: 0;
+  padding: 0;
+}
+
+.social-icons li:first-child {
+  margin-left: 0;
+}
+
+.social-icons li:last-child {
+  margin-right: 0;
+}
+
+.social-icons a {
+  color: yellow;
+  font-size: 24px;
+}
+
+.social-icons a:hover {
+  color: #e2725b;
+}
+
+
+
+.footer-left,
+.footer-center,
+.footer-right {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.footer-center {
+  flex-grow: 2;
 }

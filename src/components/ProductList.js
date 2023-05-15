@@ -20,7 +20,7 @@ function ProductList(props) {
       }
       const data = await response.json();
       setProductos(data);
-      console.log(productos)
+      console.log(data)
       if (token == null) {
         localStorage.setItem('token', data.token);
       }
@@ -33,9 +33,10 @@ function ProductList(props) {
       {productos.map((product) => (
         <ProductCard
           key={product.id}
+          id={product.id}
           title={product.nombre}
           description={product.descripcion}
-          price={`$${product.precio}`}
+          price={`${product.precio}€`}
           image={product.imagen}
           onAddToCart={() => onAddToCart(product)}
         />
