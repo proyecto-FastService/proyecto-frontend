@@ -2,9 +2,12 @@ import React, { useContext } from 'react';
 import { CartContext } from '../context/cartContext';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import axios from 'axios';
 
 const Carrito = () => {
   const { cart, removeFromCart, clearCart, getTotalPrice } = useContext(CartContext);
+  const token = localStorage.getItem('token');
+  const mesa = localStorage.getItem('mesa');
 
   const handleRemoveFromCart = (itemId) => {
     removeFromCart(itemId);
@@ -12,6 +15,36 @@ const Carrito = () => {
 
   const handleClearCart = () => {
     clearCart();
+  };
+
+  const handlePlaceOrder = () => {
+    console.log(mesa);
+    console.log(token);
+    const orderData = {
+      cartItems: cart,
+      totalPrice: getTotalPrice(),
+      // Otros datos que necesites enviar con el pedido
+    };
+
+    // Obtener el token y el número de mesa del localStorage
+
+
+
+    // Verificar que el token y el número de mesa estén disponibles
+    if (token && mesa) {
+      // Realizar la solicitud POST a tu localhost con la ruta, mesa y token
+      axios.post(`http://127.0.0.1:8000/api/prueba2/${mesa}/${token}`, orderData)
+        .then(response => {
+          // Manejar la respuesta de la API
+          console.log(response.data);
+        })
+        .catch(error => {
+          // Manejar los errores de la solicitud
+          console.error(error);
+        });
+    } else {
+      console.log('Token o número de mesa no disponibles');
+    }
   };
 
   return (
@@ -42,10 +75,17 @@ const Carrito = () => {
           </Card.Body>
           {cart.length > 0 && (
             <Card.Footer>
-              <p>Precio total: {getTotalPrice()} € </p>
-              <Button className='boton-borrar-carrito' onClick={() => handleClearCart()}>
-                Vaciar carrito
-              </Button>
+              {cart.length > 0 && (
+                <div>
+                  <p>Precio total: {getTotalPrice()} €</p>
+                  <Button className='boton-borrar-carrito' onClick={() => handleClearCart()}>
+                    Vaciar carrito
+                  </Button>
+                  <Button className='boton-hacer-pedido' onClick={() => handlePlaceOrder()}>
+                    Hacer pedido
+                  </Button>
+                </div>
+              )}
             </Card.Footer>
           )}
         </Card>
