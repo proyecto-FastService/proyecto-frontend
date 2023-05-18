@@ -17,15 +17,30 @@ export const CartProvider = ({ children }) => {
       setCart(newCart);
     }
   };
-  
 
   const clearCart = () => {
     setCart([]);
   };
 
+  const getTotalPrice = () => {
+    if (cart.length === 0) {
+      return 0; // Si el carrito está vacío, retorna 0 como precio total
+    }
+  
+    const totalPrice = cart.reduce(
+      (total, item) => total + parseFloat(item.price) * item.quantity,
+      0
+    );
+    
+    return totalPrice.toFixed(2); // Redondear el precio total a 2 decimales
+  };
+  
+  
+
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart }}>
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart, getTotalPrice }}>
       {children}
     </CartContext.Provider>
   );
 };
+
