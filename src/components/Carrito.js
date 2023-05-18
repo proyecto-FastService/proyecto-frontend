@@ -23,6 +23,8 @@ const Carrito = () => {
     const orderData = {
       cartItems: cart,
       totalPrice: getTotalPrice(),
+      token: token,
+      mesa: mesa,
       // Otros datos que necesites enviar con el pedido
     };
 
@@ -33,7 +35,7 @@ const Carrito = () => {
     // Verificar que el token y el número de mesa estén disponibles
     if (token && mesa) {
       // Realizar la solicitud POST a tu localhost con la ruta, mesa y token
-      axios.post(`http://127.0.0.1:8000/api/prueba2/${mesa}/${token}`, orderData)
+      axios.post(`http://127.0.0.1:8000/api/cargar-productos/${mesa}/${token}`, orderData)
         .then(response => {
           // Manejar la respuesta de la API
           console.log(response.data);
