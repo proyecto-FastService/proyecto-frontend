@@ -24,14 +24,34 @@ function MesaCard() {
     enviarInfoMesa();
   }, [mesaId]);
 
+  const handleLiberarMesa = async () => {
+    const token = localStorage.getItem('token');
+    try {
+      await axios.post(`http://127.0.0.1:8000/api/admLiberarMesa/${token}/${mesaId}`);
+      console.log('Mesa liberada exitosamente');
+    } catch (error) {
+      console.error('Error al liberar la mesa:', error);
+    }
+  };
+
+  const handleReservarMesa = async () => {
+    const token = localStorage.getItem('token');
+    try {
+      await axios.post(`http://127.0.0.1:8000/api/admReservarMesa/${token}/${mesaId}`);
+      console.log('Mesa reservada exitosamente');
+    } catch (error) {
+      console.error('Error al reservar la mesa:', error);
+    }
+  };
+
   return (
     <div className="card">
       <h2>Mesa {mesaId}</h2>
       <p>Descripción de la mesa {mesaId}</p>
+      <button onClick={handleLiberarMesa}>Liberar Mesa</button>
+      <button onClick={handleReservarMesa}>Reservar Mesa</button>
     </div>
   );
 }
 
 export default MesaCard;
-
-
