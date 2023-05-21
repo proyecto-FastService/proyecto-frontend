@@ -22,9 +22,9 @@ function App() {
           <Route path="/carrito" element={<Carrito />} />
           <Route path="/pagar" element={<Pagar />} />
           <Route path="/productos/0/*" element={<PanelAdmin />} />
-          <Route path="/productos/0/mesa1" element={<Mesa1 />} />
-          <Route path="/productos/0/mesa2" element={<Mesa2 />} />
-          <Route path="/productos/0/mesa3" element={<Mesa3 />} />
+          <Route path="/adminMesa/0/1" element={<Mesa1 />} />
+          <Route path="/productos/0/2" element={<Mesa2 />} />
+          <Route path="/productos/0/3" element={<Mesa3 />} />
           <Route path="/productos/0/pedido-detalles/:mesaId" element={<PedidoDetalles />} />
         </Routes>
         <Footer />
