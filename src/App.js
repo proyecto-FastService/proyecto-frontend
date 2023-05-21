@@ -21,8 +21,7 @@ function App() {
           <Route path="/pagar" element={<Pagar />} />
           <Route path="/productos/0/*" element={<PanelAdmin />} />
           <Route path="/productos/0/:mesaId" element={<MesaCard  />} />
-          <Route path="/0/editar-productos" element={<ProductEditor  />} />
-          
+          <Route path="/0/editar-productos" element={<ProductEditor  />} />          
         </Routes>
         <Footer />
       </CartProvider>
