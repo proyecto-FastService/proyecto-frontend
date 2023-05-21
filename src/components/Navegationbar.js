@@ -34,6 +34,9 @@ function Navegationbar() {
               {cartItemCount > 0 && <span className="cart-count">({cartItemCount})</span>}
               <FaShoppingCart style={{ marginLeft: '0.5rem' }} className="cart-icon" />
             </Nav.Link>
+            <Nav.Link as={NavLink} to="/pagar" activeClassName="active-link">
+              Pagar
+            </Nav.Link>
 
           </Nav>
         </Navbar.Collapse>

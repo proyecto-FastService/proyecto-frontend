@@ -6,6 +6,7 @@ import Carrito from './components/Carrito';
 import { CartProvider } from './context/cartContext';
 import './App.css';
 import Footer from './components/Footer';
+import Pagar from './components/Pagar';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/productos" element={<Productos />} />
           <Route path="/productos/:numeroMesa" element={<Productos />} />
           <Route path="/carrito" element={<Carrito />} />
+          <Route path="/pagar" element={<Pagar />} />
         </Routes>
         <Footer />
       </CartProvider>
