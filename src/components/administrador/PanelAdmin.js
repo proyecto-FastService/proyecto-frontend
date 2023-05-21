@@ -56,7 +56,7 @@ function Admin() {
         ))}
       </div>
 
-      <Button onClick={handleEditarProductos}>Editar Productos</Button>
+      <Button onClick={handleEditarProductos}>Gestionar Productos</Button>
     </div>
   );
 }
