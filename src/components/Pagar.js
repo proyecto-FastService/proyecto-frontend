@@ -1,10 +1,24 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { CartContext } from '../context/cartContext';
 import axios from 'axios';
 
 const Pagar = () => {
   const { cart, getTotalPrice, clearCart } = useContext(CartContext);
   const token = localStorage.getItem('token');
+  const [productosNoPagados, setProductosNoPagados] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`api/devolverProductosPedidosNoPagados/${token}`);
+        setProductosNoPagados(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, [token]);
 
   const handlePagarCarrito = async () => {
     try {
@@ -21,11 +35,19 @@ const Pagar = () => {
     <div>
       <h2>Total a pagar: ${getTotalPrice()}</h2>
       <button onClick={handlePagarCarrito}>Pagar</button>
+
+      <h2>Productos No Pagados:</h2>
+      <ul>
+        {productosNoPagados.map((producto) => (
+          <li key={producto.id}>{producto.nombre}</li>
+        ))}
+      </ul>
     </div>
   );
 };
 
 export default Pagar;
+
 
 
 
