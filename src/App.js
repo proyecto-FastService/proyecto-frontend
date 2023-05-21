@@ -8,10 +8,7 @@ import './App.css';
 import Footer from './components/Footer';
 import Pagar from './components/Pagar';
 import PanelAdmin from './components/administrador/PanelAdmin';
-import Mesa1 from './components/administrador/Mesa1';
-import Mesa2 from './components/administrador/Mesa2';
-import Mesa3 from './components/administrador/Mesa3';
-import PedidoDetalles from './components/administrador/PedidoDetalles';
+import MesaCard from './components/administrador/MesaCard';
 function App() {
   return (
     <BrowserRouter>
@@ -22,10 +19,7 @@ function App() {
           <Route path="/carrito" element={<Carrito />} />
           <Route path="/pagar" element={<Pagar />} />
           <Route path="/productos/0/*" element={<PanelAdmin />} />
-          <Route path="/adminMesa/0/1" element={<Mesa1 />} />
-          <Route path="/productos/0/2" element={<Mesa2 />} />
-          <Route path="/productos/0/3" element={<Mesa3 />} />
-          <Route path="/productos/0/pedido-detalles/:mesaId" element={<PedidoDetalles />} />
+          <Route path="/productos/0/:mesaId" element={<MesaCard  />} />
         </Routes>
         <Footer />
       </CartProvider>

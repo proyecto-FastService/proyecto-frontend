@@ -36,7 +36,7 @@ function Admin() {
   }, []);
 
   const handleClickMesa = (mesaId) => {
-    navigate(`/adminMesa/0/${mesaId}`);
+    navigate(`/productos/0/${mesaId}`);
   };
 
   return (
