@@ -9,6 +9,7 @@ import Footer from './components/Footer';
 import Pagar from './components/Pagar';
 import PanelAdmin from './components/administrador/PanelAdmin';
 import MesaCard from './components/administrador/MesaCard';
+import MesaCard from './components/administrador/ProductEditor';
 function App() {
   return (
     <BrowserRouter>
@@ -20,6 +21,8 @@ function App() {
           <Route path="/pagar" element={<Pagar />} />
           <Route path="/productos/0/*" element={<PanelAdmin />} />
           <Route path="/productos/0/:mesaId" element={<MesaCard  />} />
+          <Route path="/0/editar-productos" element={<ProductEditor  />} />
+          
         </Routes>
         <Footer />
       </CartProvider>

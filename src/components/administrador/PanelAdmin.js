@@ -8,7 +8,6 @@ function Admin() {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
 
-
   useEffect(() => {
     const obtenerMesas = async () => {
       try {
@@ -39,6 +38,10 @@ function Admin() {
     navigate(`/productos/0/${mesaId}`);
   };
 
+  const handleEditarProductos = () => {
+    navigate('/0/editar-productos');
+  };
+
   return (
     <div>
       <h1>Panel de Administrador</h1>
@@ -52,12 +55,14 @@ function Admin() {
           </div>
         ))}
       </div>
+
+      <Button onClick={handleEditarProductos}>Editar Productos</Button>
     </div>
   );
-
 }
 
 export default Admin;
+
 
 
 
