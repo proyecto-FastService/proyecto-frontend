@@ -10,8 +10,8 @@ const Pagar = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`api/devolverProductosPedidosNoPagados/${token}`);
-        setProductosNoPagados(response.data);
+        const response = await axios.get(`http://127.0.0.1:8000/api/devolverProductosPedidosNoPagados/${token}`);
+        setProductosNoPagados(response.data.productosNoPagados);
       } catch (error) {
         console.error(error);
       }
@@ -22,7 +22,7 @@ const Pagar = () => {
 
   const handlePagarCarrito = async () => {
     try {
-      await axios.get(`/pagarCarrito/${token}`);
+      await axios.get(`http://127.0.0.1:8000/api/pagarCarrito/${token}`);
       clearCart(); // Vaciar el carrito al hacer la solicitud de pago exitosamente
       localStorage.clear(); // Limpiar el localStorage al hacer la solicitud de pago exitosamente
       // Aquí puedes agregar el código adicional para manejar la respuesta de la API después de hacer la solicitud
@@ -34,20 +34,17 @@ const Pagar = () => {
   return (
     <div>
       <h2>Total a pagar: ${getTotalPrice()}</h2>
-      <button onClick={handlePagarCarrito}>Pagar</button>
+
 
       <h2>Productos No Pagados:</h2>
       <ul>
         {productosNoPagados.map((producto) => (
-          <li key={producto.id}>{producto.nombre}</li>
+          <li key={producto.id}>{producto.id}</li>
         ))}
       </ul>
+      <button onClick={handlePagarCarrito}>Pagar</button>
     </div>
   );
 };
 
 export default Pagar;
-
-
-
-
