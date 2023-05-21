@@ -10,6 +10,7 @@ import '../App.css';
 
 function Navegationbar() {
   const { cart } = useContext(CartContext);
+  const mesa = localStorage.getItem('mesa');
 
   const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
 
@@ -22,7 +23,7 @@ function Navegationbar() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" className="navbar-toggler" style={{ backgroundColor: 'white' }} />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link as={NavLink} to="/productos" activeClassName="active-link">
+            <Nav.Link as={NavLink} to={`/productos/${mesa}`} activeClassName="active-link">
               Productos
             </Nav.Link>
             <Nav.Link as={NavLink} to="/bebidas" activeClassName="active-link">
