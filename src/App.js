@@ -9,7 +9,7 @@ import Footer from './components/Footer';
 import Pagar from './components/Pagar';
 import PanelAdmin from './components/administrador/PanelAdmin';
 import MesaCard from './components/administrador/MesaCard';
-import MesaCard from './components/administrador/ProductEditor';
+import ProductEditor from './components/administrador/ProductEditor';
 function App() {
   return (
     <BrowserRouter>
