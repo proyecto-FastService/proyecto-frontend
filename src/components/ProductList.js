@@ -13,10 +13,10 @@ function ProductList() {
     async function fetchData() {
       let response;
       if (token != null) {
-        let ruta = `http://127.0.0.1:8000/api/prueba2/${numeroMesa}/${token}`;
+        let ruta = `http://127.0.0.1:8000/api/cargar-productos/${numeroMesa}/${token}`;
         response = await fetch(ruta);
       } else {
-        response = await fetch(`http://127.0.0.1:8000/api/prueba2/${numeroMesa}/`);
+        response = await fetch(`http://127.0.0.1:8000/api/cargar-productos/${numeroMesa}/`);
       }
       const data = await response.json();
       setProductos(data);

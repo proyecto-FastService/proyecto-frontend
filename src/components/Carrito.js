@@ -18,8 +18,6 @@ const Carrito = () => {
   };
 
   const handlePlaceOrder = () => {
-    console.log(mesa);
-    console.log(token);
     const orderData = {
       cartItems: cart,
       totalPrice: getTotalPrice(),
@@ -28,20 +26,12 @@ const Carrito = () => {
       // Otros datos que necesites enviar con el pedido
     };
 
-    // Obtener el token y el número de mesa del localStorage
-
-
-
-    // Verificar que el token y el número de mesa estén disponibles
     if (token && mesa) {
-      // Realizar la solicitud POST a tu localhost con la ruta, mesa y token
-      axios.post(`http://127.0.0.1:8000/api/cargar-productos/${mesa}/${token}`, orderData)
+      axios.post(`http://127.0.0.1:8000/api/pedirListaProductosPorId/${token}`, { arrayProductosIds: orderData })
         .then(response => {
-          // Manejar la respuesta de la API
           console.log(response.data);
         })
         .catch(error => {
-          // Manejar los errores de la solicitud
           console.error(error);
         });
     } else {
@@ -97,5 +87,6 @@ const Carrito = () => {
 };
 
 export default Carrito;
+
 
 
