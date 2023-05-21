@@ -1,9 +1,17 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
+  const [mesa, setMesa] = useState(null);
+
+  useEffect(() => {
+    const storedMesa = localStorage.getItem('mesa');
+    if (storedMesa) {
+      setMesa(storedMesa);
+    }
+  }, []);
 
   const addToCart = (item) => {
     setCart([...cart, item]);
@@ -24,23 +32,30 @@ export const CartProvider = ({ children }) => {
 
   const getTotalPrice = () => {
     if (cart.length === 0) {
-      return 0; // Si el carrito está vacío, retorna 0 como precio total
+      return 0;
     }
-  
+
     const totalPrice = cart.reduce(
       (total, item) => total + parseFloat(item.price) * item.quantity,
       0
     );
-    
-    return totalPrice.toFixed(2); // Redondear el precio total a 2 decimales
+
+    return totalPrice.toFixed(2);
   };
-  
-  
+
+  useEffect(() => {
+    if (mesa) {
+      localStorage.setItem('mesa', mesa);
+    } else {
+      localStorage.removeItem('mesa');
+    }
+  }, [mesa]);
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart, getTotalPrice }}>
+    <CartContext.Provider
+      value={{ cart, addToCart, removeFromCart, clearCart, getTotalPrice, mesa, setMesa }}
+    >
       {children}
     </CartContext.Provider>
   );
 };
-

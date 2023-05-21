@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -9,8 +9,7 @@ import logo from '../img/fastservice-logo.jpg'; // Ruta de la imagen de tu logo
 import '../App.css';
 
 function Navegationbar() {
-  const { cart } = useContext(CartContext);
-  const mesa = localStorage.getItem('mesa');
+  const { cart, mesa } = useContext(CartContext);
 
   const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
 

@@ -5,7 +5,7 @@ import { CartContext } from '../context/cartContext';
 
 function ProductList() {
   const { numeroMesa } = useParams();
-  const { onAddToCart } = useContext(CartContext);
+  const { onAddToCart, setMesa } = useContext(CartContext);
   const [productos, setProductos] = useState([]);
   const token = localStorage.getItem('token');
 
@@ -23,10 +23,12 @@ function ProductList() {
       if (token == null) {
         localStorage.setItem('token', data.token);
       }
-      localStorage.setItem('mesa', numeroMesa); // Guardar el número de mesa en el localStorage
+      if (numeroMesa) {
+        setMesa(numeroMesa); // Actualiza el valor de mesa en el contexto
+      }
     }
     fetchData();
-  }, [numeroMesa, token]);
+  }, [numeroMesa, token, setMesa]);
 
   return (
     <div className="product-list">
@@ -50,6 +52,7 @@ function ProductList() {
 }
 
 export default ProductList;
+
 
 
 
