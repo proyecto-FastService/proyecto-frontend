@@ -30,17 +30,21 @@ function ProductList() {
 
   return (
     <div className="product-list">
-      {productos.map((product) => (
-        <ProductCard
-          key={product.id}
-          id={product.id}
-          title={product.nombre}
-          description={product.descripcion}
-          price={`${product.precio}€`}
-          image={product.imagen}
-          onAddToCart={() => onAddToCart(product)}
-        />
-      ))}
+      {Array.isArray(productos) ? (
+        productos.map((product) => (
+          <ProductCard
+            key={product.id}
+            id={product.id}
+            title={product.nombre}
+            description={product.descripcion}
+            price={`${product.precio}€`}
+            image={product.imagen}
+            onAddToCart={() => onAddToCart(product)}
+          />
+        ))
+      ) : (
+        <p>Cargando productos...</p>
+      )}
     </div>
   );
 }
