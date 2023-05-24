@@ -124,7 +124,7 @@ function ProductEditor() {
       formData.append('alergenos', editedProduct.alergenos);
       formData.append('imagen', editedProduct.imagen);
 
-      await axios.post(`http://127.0.0.1:8000/api/admAgregarProducto/${token}`, formData, {
+      await axios.post(`http://127.0.0.1:8000/api/admAddProducto/${token}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
