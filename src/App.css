@@ -1,131 +1,102 @@
 * {
-  font-family: 'Dosis', sans-serif !important;
+
+  font-family: 'Caveat' !important;
 
 }
 
 #root {
-  background-color: #f58a53;
+  background-color: #6174df;
+  background-image: linear-gradient(43deg, #6174df 0%, #ce5fc7 46%, #FFCC70 100%);
   height: 100%;
-
 }
 
 /* CSS DE LA LISTA DE PRODUCTO */
 
 .product-list {
-  height: 100vh;
+  border-radius: 60%;
 }
 
 /* CSS DE LA CARD DE PRODUCTO */
 
 .ProductCard {
+  background-color: black;
   margin: auto;
-  margin-top: 2%;
-  border: 2px solid brown !important;
+  margin-top: 4%;
+  border: 2px solid rgb(0, 0, 0) !important;
 }
-
-.ProductCard-Button {
-  align-items: center !important;
-  background-color: #fee6e3 !important;
-  border: 2px solid #111 !important;
-  border-radius: 8px !important;
-  box-sizing: border-box !important;
-  color: #111 !important;
-  cursor: pointer !important;
-  display: flex !important;
-  font-size: 16px !important;
-  height: 48px !important;
-  justify-content: center !important;
-  line-height: 24px !important;
-  max-width: 100% !important;
-  position: relative !important;
-  text-align: center !important;
-  text-decoration: none !important;
-  user-select: none !important;
-  -webkit-user-select: none !important;
-  touch-action: manipulation !important;
-}
-
-.ProductCard-Button::before {
-  content: "" !important;
-  position: absolute !important;
-  left: -100% !important;
-  top: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  background-color: #e2725b;
-  z-index: -1 !important;
-  transition: left 0.3s ease !important;
-}
-
-.ProductCard-Button:hover {
-  background-color: #e2725b !important;
-  color: black !important;
-}
-
-.ProductCard-Button:hover::before {
-  left: 0 !important;
-}
-
 
 .ProductCard-Body {
-  background-color: wheat;
+  background-color: #FFCC70;
+  border: black solid 2px;
+  border-radius: 8px;
   justify-content: center;
+}
+
+p.card-text {
+  color: black;
 }
 
 /* CSS DEL NAVBAR */
 
 
 .logo {
-  width: 100px; /* Ajusta el ancho del logo según tus necesidades */
-  height: auto; /* Permite que la altura se ajuste automáticamente para mantener la proporción */
-  border-radius: 50%;
-  margin-right: 20px;
+  width: 80px;
+  /* Ajusta el ancho del logo según tus necesidades */
+  height: auto;
+  /* Permite que la altura se ajuste automáticamente para mantener la proporción */
+  border-radius: 20%;
+  margin-right: 30px;
 }
 
 .custom-navbar {
-  opacity: 0.7;
-  background-color: black;
+  background-color: rgb(5, 5, 5);
 }
 
 .nav-link.active {
-  color: yellow !important;
-  text-decoration: underline;
+  color: #FFCC70 !important;
+
 }
 
 .navbar-brand.active {
   color: yellow !important;
+
 }
 
 .navbar-toggler {
-  background-color: white;
+  background-color: #FFCC70 ;
+  
 }
 
 .custom-navbar a {
-  color: yellow;
+  color: #C850C0;
 }
 
 .custom-navbar a:hover {
-  color: #e2725b;
+  color: #4158D0;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #4158D0;
 }
 
 .nav-link:active {
   text-decoration: underline;
 }
 
-.active-link a {
-  text-decoration: underline;
-  color: yellow !important;
-}
-
-
 /* CSS DEL CARRITO*/
+.botones {
+  width: 50%;
+  margin-left: 28%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
 
 .custom-cart {
   right: 0;
 }
 
 .Body-Carrito {
-  height: 100vh;
+ height: 100%; 
 }
 
 .card-body li {
@@ -133,91 +104,25 @@
   list-style-type: circle;
 }
 
-.Carrito-Button {
-  align-items: center !important;
-  background-color: #fee6e3 !important;
-  border: 2px solid #111 !important;
-  border-radius: 8px !important;
-  box-sizing: border-box !important;
-  color: #111 !important;
-  cursor: pointer !important;
-  font-size: 16px !important;
-  justify-content: center !important;
-  line-height: 24px !important;
-  max-width: 100% !important;
-  padding: 0 25px !important;
-  text-align: center !important;
-  text-decoration: none !important;
-  user-select: none !important;
-  -webkit-user-select: none !important;
-  touch-action: manipulation !important;
+
+.Card-Carrito {
+  background-color: #ffff ;
+  border: 2px solid black ;
 
 }
 
-.Carrito-Button::before {
-  content: "" !important;
-  position: absolute !important;
-  left: -100% !important;
-  top: 0 !important;
-  width: 100% !important;
-  height: 100% !important; 
-  background-color: red !important;
-  z-index: -1 !important;
-  transition: left 0.3s ease !important;
-}
-
-.Carrito-Button:hover {
-  background-color: red !important;
-  color: white !important;
-}
-
-.Carrito-Button:hover::before {
-  left: 0 !important;
-}
-
-
-.boton-borrar-carrito {
-  background-color: rgb(216, 60, 60) !important;
-  border: 1px solid black !important;
-  border-radius: 8px !important;
-  box-sizing: border-box !important;
-}
-
-.boton-borrar-carrito::before {
-  content: "" !important;
-  position: absolute !important;
-  left: -100% !important;
-  top: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  background-color: #e2725b !important;
-  z-index: -1 !important;
-  transition: left 0.3s ease !important;
-}
-
-.boton-borrar-carrito:hover {
-  background-color: red !important;
-  color: white !important;
-}
-
-.boton-borrar-carrito:hover::before {
-  left: 0 !important;
-}
-
-
-.Card-Carrito{
-  background-color: wheat !important;
-  
-}
-.body-body-carrito{
+.body-body-carrito {
+  height: max-content;
+  background-color: #FFCC70;
+  border-radius: 0.3rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.text-carrito-header{
-  color: yellow;
+.text-carrito-header {
+  color: #FFCC70;
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
 }
@@ -225,15 +130,16 @@
 /* CSS DEL FOOTER */
 
 .footer {
+  bottom: 0;
+  position: relative;
+  margin-top: 10;
+  width: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
   background-color: black;
-  opacity: 0.7;
-  position: sticky;
-  bottom: 0;
-  color: yellow;
-  padding: 20px;
+  color: #C850C0;
+  padding: 10px;
 }
 
 .container-footer {
@@ -241,7 +147,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 5px;
+  padding: 2px;
 }
 
 .social-icons {
@@ -267,12 +173,12 @@
 }
 
 .social-icons a {
-  color: yellow;
+  color: #C850C0;
   font-size: 24px;
 }
 
 .social-icons a:hover {
-  color: #e2725b;
+  color: #C850C0;
 }
 
 
@@ -290,10 +196,17 @@
 
 /* CSS CARD ADMIN */
 
+.admin{
+height: 100%;
+}
 .card-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
+}
+
+.fondo-mesa-card {
+  height: 100% ;
 }
 
 .card {

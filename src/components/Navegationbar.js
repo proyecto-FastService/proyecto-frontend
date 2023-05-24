@@ -5,7 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { CartContext } from '../context/cartContext';
 import { FaShoppingCart } from 'react-icons/fa';
-import logo from '../img/fastservice-logo.jpg'; // Ruta de la imagen de tu logo
+import logo from '../img/logo fondo blanco.png'; // Ruta de la imagen de tu logo
 import '../App.css';
 
 function Navegationbar() {
@@ -16,27 +16,26 @@ function Navegationbar() {
   return (
     <Navbar collapseOnSelect expand="lg" className="custom-navbar sticky-top">
       <Container>
-        <Navbar.Brand as={NavLink} activeClassName="active-link" to="/">
-          <img src={logo} alt="Logo" className="logo" /> FASTSERVICE
+        <Navbar.Brand as={NavLink} activeClassName="active-link" to={`/productos/${mesa}`}>
+          <img src={logo} alt="Logo" className="logo" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" className="navbar-toggler" style={{ backgroundColor: 'white' }} />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto">
+          <Nav className="w-100">
             <Nav.Link as={NavLink} to={`/productos/${mesa}`} activeClassName="active-link">
-              Productos
+              COMIDA
             </Nav.Link>
             <Nav.Link as={NavLink} to="/bebidas" activeClassName="active-link">
-              Bebidas
+              BEBIDA
             </Nav.Link>
             <Nav.Link as={NavLink} to="/carrito" className="custom-cart" activeClassName="active-link">
-              <span>Carrito</span>
+              <span>CARRITO</span>
               {cartItemCount > 0 && <span className="cart-count">({cartItemCount})</span>}
-              <FaShoppingCart style={{ marginLeft: '0.5rem' }} className="cart-icon" />
+              <FaShoppingCart style={{ marginLeft: '0.5rem' }} className="cart-icon text-ligthl" />
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/pagar" activeClassName="active-link">
-              Pagar
+            <Nav.Link as={NavLink} to="/pagar" activeClassName="active-link" className='ms-lg-auto '>
+              MI RECIBO
             </Nav.Link>
-
           </Nav>
         </Navbar.Collapse>
       </Container>

@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import ProductCard from './ProductCard';
 import { CartContext } from '../context/cartContext';
 
+
 function ProductList() {
   const { numeroMesa } = useParams();
   const { onAddToCart, setMesa } = useContext(CartContext);
@@ -31,29 +32,43 @@ function ProductList() {
   }, [numeroMesa, token, setMesa]);
 
   return (
-    <div className="product-list">
-      {Array.isArray(productos) ? (
-        productos.map((product) => (
-          <ProductCard
-            key={product.id}
-            id={product.id}
-            title={product.nombre}
-            description={product.descripcion}
-            price={`${product.precio}€`}
-            image={product.imagen}
-            onAddToCart={() => onAddToCart(product)}
-          />
-        ))
-      ) : (
-        <p>Cargando productos...</p>
-      )}
+    <div className="row">
+      <div className="col-md-6">
+        {Array.isArray(productos) ? (
+          productos.slice(0, Math.ceil(productos.length / 2)).map((product) => (
+            <ProductCard
+              key={product.id}
+              id={product.id}
+              title={product.nombre}
+              description={product.descripcion}
+              price={`${product.precio}€`}
+              image={product.imagen}
+              onAddToCart={() => onAddToCart(product)}
+            />
+          ))
+        ) : (
+          <p>Cargando productos...</p>
+        )}
+      </div>
+      <div className="col-md-6">
+        {Array.isArray(productos) ? (
+          productos.slice(Math.ceil(productos.length / 2)).map((product) => (
+            <ProductCard
+              key={product.id}
+              id={product.id}
+              title={product.nombre}
+              description={product.descripcion}
+              price={`${product.precio}€`}
+              image={product.imagen}
+              onAddToCart={() => onAddToCart(product)}
+            />
+          ))
+        ) : (
+          <p>Cargando productos...</p>
+        )}
+      </div>
     </div>
   );
 }
 
 export default ProductList;
-
-
-
-
-

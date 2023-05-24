@@ -1,6 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { CartContext } from '../context/cartContext';
 import axios from 'axios';
+import Swal from 'sweetalert';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 const Pagar = () => {
   const { cart, getTotalPrice, clearCart } = useContext(CartContext);
@@ -25,6 +29,10 @@ const Pagar = () => {
       await axios.get(`http://127.0.0.1:8000/api/pagarCarrito/${token}`);
       clearCart(); // Vaciar el carrito al hacer la solicitud de pago exitosamente
       localStorage.clear(); // Limpiar el localStorage al hacer la solicitud de pago exitosamente
+
+      // Mostrar SweetAlert de confirmación
+      Swal("¡Pago exitoso!", "El pago se ha realizado correctamente", "success");
+
       // Aquí puedes agregar el código adicional para manejar la respuesta de la API después de hacer la solicitud
     } catch (error) {
       // Aquí puedes manejar los errores en caso de que ocurra alguno durante la solicitud
@@ -32,19 +40,34 @@ const Pagar = () => {
   };
 
   return (
-    <div>
-      <h2>Total a pagar: ${getTotalPrice()}</h2>
-
-
-      <h2>Productos No Pagados:</h2>
-      <ul>
-        {productosNoPagados.map((producto) => (
-          <li key={producto.id}>{producto.id}</li>
-        ))}
-      </ul>
-      <button onClick={handlePagarCarrito}>Pagar</button>
+    <div className='Body-Carrito d-flex flex-column flex-grow-1 pb-5'>
+      <div className='d-flex justify-content-center'>
+        <Card className="Card-Carrito w-50 mt-5">
+          <Card.Header>
+            <h2 className='text-center text-carrito-header'>Mi recibo:</h2>
+          </Card.Header>
+          <Card.Body className='body-body-carrito'>
+            <div>
+              <h4>Productos a pagar:</h4>
+              <ul>
+                {productosNoPagados.map((producto) => (
+                  <li key={producto.id}>
+                    {producto.nombre} - {producto.precio}
+                  </li>
+                ))}
+              </ul>
+              
+            </div>
+          </Card.Body>
+          <h4>Precio total: {getTotalPrice()} €</h4>
+              <div className='botones'>
+                <button className="btn btn-warning btn-md" onClick={handlePagarCarrito}>Pagar</button>
+                <button className="btn btn-warning btn-md" onClick={handlePagarCarrito}>Llamar a Camarero</button> 
+              </div>
+        </Card>
+      </div>
     </div>
   );
-};
+}
 
 export default Pagar;

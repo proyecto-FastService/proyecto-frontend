@@ -15,6 +15,7 @@ function ProductCard(props) {
   const [isAnimating, setIsAnimating] = useState(true);
 
   const handleClick = () => {
+    
     addToCart({
       id: props.id,
       title: props.title,
@@ -51,16 +52,18 @@ function ProductCard(props) {
 
   return (
     <div>
-      <Card className="ProductCard shadow-lg rounded mx-auto" style={{ maxWidth: '28rem' }}>
-        <Card.Img variant="top" src={props.image} alt={props.title} />
+      <Card className="ProductCard shadow-lg rounded mx-auto pb-5" style={{ maxWidth: '30rem'}}>
+        <Card.Title>{props.title}</Card.Title>
         <Card.Body className="ProductCard-Body">
-          <Card.Title>{props.title}</Card.Title>
-          <Card.Text>{props.description}</Card.Text>
-          <Button className="ProductCard-Button" onClick={handleClick}>
+          <Card.Img variant="top" src={props.image} alt={props.title} />
+          <Card.Text>{props.description}</Card.Text>       
+          <Button className="btn btn-warning border-dark "  onClick={handleClick}>
             {props.price}
-          </Button>
+          </Button>   
         </Card.Body>
+        
       </Card>
+      
 
       <Modal
         isOpen={showModal}
@@ -82,14 +85,14 @@ function ProductCard(props) {
             alignItems: 'center',
             justifyContent: 'center',
             border: '3px solid black',
-            backgroundColor: 'wheat',
+            borderRadius:'3px',
+            backgroundColor: '#FFCC70',
           }
         }}
       >
         <animated.div style={animationProps}>
-          <h2>Producto añadido al carrito</h2><TiTickOutline size={48} color="green" />
-          <p>{props.title} se ha añadido al carrito.</p>
-          <button onClick={closeModal}>Cerrar</button>
+          <h4><TiTickOutline size={40} color="green" />Se añadió {props.title} al carrito.</h4>
+          <button className='btn btn-success' onClick={closeModal}>Cerrar</button>
         </animated.div>
       </Modal>
     </div>

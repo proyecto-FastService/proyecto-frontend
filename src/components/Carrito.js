@@ -3,6 +3,8 @@ import { CartContext } from '../context/cartContext';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
+import Swal from 'sweetalert';
+import { BsTrash } from 'react-icons/bs';
 
 const Carrito = () => {
   const { cart, removeFromCart, clearCart, getTotalPrice } = useContext(CartContext);
@@ -14,7 +16,17 @@ const Carrito = () => {
   };
 
   const handleClearCart = () => {
-    clearCart();
+    Swal({
+      title: "¿Estás seguro?",
+      text: "Esta acción vaciará el carrito",
+      icon: "warning",
+      buttons: ["Cancelar", "Aceptar"],
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        clearCart(); // Vaciar el carrito
+      }
+    });
   };
 
   const handlePlaceOrder = () => {
@@ -30,6 +42,8 @@ const Carrito = () => {
       axios.post(`http://127.0.0.1:8000/api/pedirListaProductosPorId/${token}`, { arrayProductosIds: orderData })
         .then(response => {
           console.log(response.data);
+          Swal("¡Oído cocína!", "¡Marchando!", "success");
+          clearCart();
         })
         .catch(error => {
           console.error(error);
@@ -40,7 +54,7 @@ const Carrito = () => {
   };
 
   return (
-    <div className='Body-Carrito'>
+    <div className='Body-Carrito d-flex flex-column flex-grow-1 pb-5'>
       <div className='d-flex justify-content-center'>
         <Card className="Card-Carrito w-50 mt-5">
           <Card.Header>
@@ -54,11 +68,10 @@ const Carrito = () => {
                 {cart.map((item) => (
                   <li key={item.id}>
                     {item.title} - {item.price}
-                    <Button
-                      className='Carrito-Button mx-2'
+                    <Button className="btn btn-danger bg-transparent border-0 ms-2"
                       onClick={() => handleRemoveFromCart(item.id)}
                     >
-                      Eliminar
+                     <BsTrash className="text-danger"/>
                     </Button>
                   </li>
                 ))}
@@ -69,13 +82,15 @@ const Carrito = () => {
             <Card.Footer>
               {cart.length > 0 && (
                 <div>
-                  <p>Precio total: {getTotalPrice()} €</p>
-                  <Button className='boton-borrar-carrito' onClick={() => handleClearCart()}>
-                    Vaciar carrito
-                  </Button>
-                  <Button className='boton-hacer-pedido' onClick={() => handlePlaceOrder()}>
+                  <h4>Precio total: {getTotalPrice()} €</h4>
+                  <div className='botones'>
+                    <Button className="btn btn-warning btn-md" onClick={() => handlePlaceOrder()}>
                     Hacer pedido
                   </Button>
+                  <Button className="btn btn-danger btn-md" onClick={() => handleClearCart()}>
+                    Eliminar carrito
+                  </Button>
+                  </div>                  
                 </div>
               )}
             </Card.Footer>
