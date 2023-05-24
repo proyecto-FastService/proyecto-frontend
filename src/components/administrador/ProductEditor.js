@@ -104,7 +104,7 @@ function ProductEditor() {
                         </Form.Group>
                         <Form.Group controlId="formPrecio">
                             <Form.Label>Precio</Form.Label>
-                            <Form.Control type="number" name="precios" value={editedProduct.precio} onChange={handleInputChange} />
+                            <Form.Control type="number" name="precio" value={editedProduct.precio} onChange={handleInputChange} />
                         </Form.Group>
                         <Form.Group controlId="formDescripcion">
                             <Form.Label>Descripción</Form.Label>
