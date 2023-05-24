@@ -1,6 +1,6 @@
 * {
 
-  font-family: 'Caveat' !important;
+  font-family: 'Roboto', sans-serif !important;
 
 }
 
@@ -36,6 +36,17 @@ p.card-text {
   color: black;
 }
 
+.product-list-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.product-list-column {
+  flex: 0 0 50%;
+  padding: 0;
+}
+
+
 /* CSS DEL NAVBAR */
 
 
@@ -49,8 +60,11 @@ p.card-text {
 }
 
 .custom-navbar {
-  background-color: rgb(5, 5, 5);
+  position: relative;
 }
+
+
+
 
 .nav-link.active {
   color: #FFCC70 !important;
@@ -63,13 +77,16 @@ p.card-text {
 }
 
 .navbar-toggler {
-  background-color: #FFCC70 ;
-  
+  background-color: #FFCC70;
+
 }
 
 .custom-navbar a {
-  color: #C850C0;
+  color: whitesmoke;
+  text-shadow: -0.5px -0.5px 0 black, 0.5px -0.5px 0 black, -0.5px 0.5px 0 black, 0.5px 0.5px 0 black;
 }
+
+
 
 .custom-navbar a:hover {
   color: #4158D0;
@@ -96,7 +113,7 @@ p.card-text {
 }
 
 .Body-Carrito {
- height: 100%; 
+  height: 100%;
 }
 
 .card-body li {
@@ -106,8 +123,8 @@ p.card-text {
 
 
 .Card-Carrito {
-  background-color: #ffff ;
-  border: 2px solid black ;
+  background-color: #ffff;
+  border: 2px solid black;
 
 }
 
@@ -131,7 +148,7 @@ p.card-text {
 
 .footer {
   bottom: 0;
-  position: relative;
+  position: absolute;
   margin-top: 10;
   width: 100%;
   display: flex;
@@ -196,9 +213,10 @@ p.card-text {
 
 /* CSS CARD ADMIN */
 
-.admin{
-height: 100%;
+.admin {
+  height: 100%;
 }
+
 .card-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -206,7 +224,7 @@ height: 100%;
 }
 
 .fondo-mesa-card {
-  height: 100% ;
+  height: 100%;
 }
 
 .card {
