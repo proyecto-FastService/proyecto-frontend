@@ -55,7 +55,7 @@ function ProductCard(props) {
       <Card className="ProductCard shadow-lg rounded mx-auto pb-5" style={{ maxWidth: '30rem'}}>
         <Card.Title>{props.title}</Card.Title>
         <Card.Body className="ProductCard-Body">
-          <Card.Img variant="top" src={props.image} alt={props.title} />
+          <Card.Img variant="top" src='./img/fast-service-logo.jpg' alt={props.title} />
           <Card.Text>{props.description}</Card.Text>       
           <Button className="btn btn-warning border-dark "  onClick={handleClick}>
             {props.price}
