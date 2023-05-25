@@ -166,15 +166,15 @@ p.card-text {
 }
 
 .footer {
+  
   bottom: 0;
   position: relative;
-  margin-top: 10;
+  margin-top: 10px;
   width: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: black;
-  color: #C850C0;
+  color: #ffff;
   padding: 10px;
 }
 
@@ -209,12 +209,12 @@ p.card-text {
 }
 
 .social-icons a {
-  color: #C850C0;
+  color: #ffff;
   font-size: 24px;
 }
 
 .social-icons a:hover {
-  color: #C850C0;
+  color: #FFCC70;
 }
 
 .footer-left,

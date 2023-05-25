@@ -7,6 +7,8 @@ import { CartContext } from '../context/cartContext';
 import { FaShoppingCart } from 'react-icons/fa';
 import logo from '../img/logo fondo blanco.png'; // Ruta de la imagen de tu logo
 import '../App.css';
+import { TbBellRingingFilled } from 'react-icons/tb';
+
 
 function Navegationbar() {
   const { cart, mesa } = useContext(CartContext);
@@ -33,9 +35,16 @@ function Navegationbar() {
               {cartItemCount > 0 && <span className="cart-count">({cartItemCount})</span>}
               <FaShoppingCart style={{ marginLeft: '0.5rem' }} className="cart-icon text-ligthl" />
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/pagar" activeClassName="active-link" className='ms-lg-auto '>
-              MI RECIBO
+            <Nav.Link as={NavLink} to="/pagar" activeClassName="active-link" className="ms-lg-auto">
+              <div className="d-flex align-items-center">
+                <button className="btn btn-light " style={{ marginRight: '0.5rem' }} >MI RECIBO</button>
+                <button className="btn btn-danger">
+                  <TbBellRingingFilled style={{ marginRight: '0.5rem' }} />
+                  CAMARERO
+                </button>
+              </div>
             </Nav.Link>
+
           </Nav>
         </Navbar.Collapse>
       </Container>

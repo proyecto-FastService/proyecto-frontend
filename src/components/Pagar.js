@@ -62,7 +62,6 @@ const Pagar = () => {
           <h4>Precio total: {getTotalPrice()} €</h4>
               <div className='botones'>
                 <button className="btn btn-warning btn-md" onClick={handlePagarCarrito}>Pagar</button>
-                <button className="btn btn-warning btn-md" onClick={handlePagarCarrito}>Llamar a Camarero</button> 
               </div>
         </Card>
       </div>
