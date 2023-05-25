@@ -3,7 +3,6 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { CartContext } from '../context/cartContext';
 import Swal from 'sweetalert';
-import ScrollUpButton from 'react-scroll-up-button';
 
 
 // Establece el elemento raíz para el modal
@@ -41,9 +40,6 @@ function ProductCard(props) {
           </Button>   
         </Card.Body>        
       </Card>
-      <ScrollUpButton ContainerClassName="scroll-up-button-container"
-        TransitionClassName="scroll-up-button-transition"
-      />
     </div>
   );
 }

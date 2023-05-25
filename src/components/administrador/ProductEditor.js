@@ -255,7 +255,7 @@ function ProductEditor() {
           <Button variant="secondary" onClick={handleCloseAddModal}>
             Cancelar
           </Button>
-          <Button variant="primary" onClick={handleAddProduct}>
+          <Button variant="primary" onClick={handleAddNewProduct}>
             Añadir Producto
           </Button>
         </Modal.Footer>
