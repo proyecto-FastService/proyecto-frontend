@@ -1,7 +1,6 @@
 * {
 
-  font-family: 'Roboto', sans-serif !important;
-
+  font-family: 'Concert One', cursive;
 }
 
 #root {
@@ -100,13 +99,23 @@ p.card-text {
 
 /* CSS DEL CARRITO*/
 .botones {
-  width: 50%;
-  margin-left: 28%;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-
+  flex-wrap: wrap;
+  justify-content: center;
 }
+
+.botones > .btn {
+  width: calc(50% - 3px);
+  margin: 3px;
+}
+
+@media (max-width: 600px) {
+  .botones > .btn {
+    width: 100%;
+    margin: 3px 0;
+  }
+}
+
 
 .custom-cart {
   right: 0;
@@ -146,9 +155,19 @@ p.card-text {
 
 /* CSS DEL FOOTER */
 
+.scroll-up-button-container {
+  width: 30px;
+  height: 30px;
+}
+
+.scroll-up-button-transition {
+  width: 30px !important;
+  height: 30px !important;
+}
+
 .footer {
   bottom: 0;
-  position: absolute;
+  position: relative;
   margin-top: 10;
   width: 100%;
   display: flex;
@@ -197,8 +216,6 @@ p.card-text {
 .social-icons a:hover {
   color: #C850C0;
 }
-
-
 
 .footer-left,
 .footer-center,

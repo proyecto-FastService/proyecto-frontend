@@ -14,7 +14,7 @@ function Navegationbar() {
   const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
 
   return (
-    <Navbar collapseOnSelect expand="lg" className="custom-navbar sticky-top">
+    <Navbar collapseOnSelect expand="lg" className="custom-navbar ">
       <Container>
         <Navbar.Brand as={NavLink} activeClassName="active-link" to={`/productos/${mesa}`}>
           <img src={logo} alt="Logo" className="logo" />

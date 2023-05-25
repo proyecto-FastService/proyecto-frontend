@@ -22,18 +22,18 @@ function ProductEditor() {
   });
 
   useEffect(() => {
-    const obtenerListadoProducto = async () => {
-      try {
-        const response = await axios.get(`http://127.0.0.1:8000/api/admObtenerListadoProducto/${token}`);
-        const data = response.data.productos;
-        setProductos(data);
-      } catch (error) {
-        console.error('Error al obtener el listado de productos:', error);
-      }
-    };
-
     obtenerListadoProducto();
-  }, [token]);
+  }, []);
+
+  const obtenerListadoProducto = async () => {
+    try {
+      const response = await axios.get(`http://127.0.0.1:8000/api/admObtenerListadoProducto/${token}`);
+      const data = response.data.productos;
+      setProductos(data);
+    } catch (error) {
+      console.error('Error al obtener el listado de productos:', error);
+    }
+  };
 
   const handleEditProduct = (product) => {
     setSelectedProduct(product);
@@ -97,7 +97,7 @@ function ProductEditor() {
       formData.append('alergenos', editedProduct.alergenos);
       formData.append('imagen', editedProduct.imagen);
 
-      await axios.put(
+      await axios.post(
         `http://127.0.0.1:8000/api/admEditarProducto/${token}/${selectedProduct.id}`,
         formData,
         {
@@ -106,8 +106,10 @@ function ProductEditor() {
           },
         }
       );
-      // Realizar acciones adicionales si es necesario
+
       setShowEditModal(false);
+
+      obtenerListadoProducto();
     } catch (error) {
       console.error('Error al guardar los cambios del producto:', error);
     }
@@ -129,29 +131,43 @@ function ProductEditor() {
           'Content-Type': 'multipart/form-data',
         },
       });
-      // Realizar acciones adicionales si es necesario
+
       setShowAddModal(false);
+
+      obtenerListadoProducto();
     } catch (error) {
       console.error('Error al agregar el nuevo producto:', error);
     }
   };
 
   return (
-    <div>
-      <h1>Gestión de Productos</h1>
-      <div>
-        {productos.map((producto) => (
-          <div key={producto.id} className="card">
-            <h2>{producto.nombre}</h2>
-            <p>Existencias: {producto.existencias}</p>
-            <p>Precio: {producto.precio}</p>
-            <p>Descripción: {producto.descripcion}</p>
-            <p>Ingredientes: {producto.ingredientes}</p>
-            <p>Alergenos: {producto.alergenos}</p>
-            <button onClick={() => handleEditProduct(producto)}>Editar Producto</button>
-          </div>
-        ))}
-      </div>
+    <div className='ProductCard card'>
+      <h1>Editor de Productos</h1>
+      
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Existencias</th>
+            <th>Precio</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {productos.map((product) => (
+            <tr key={product.id}>
+              <td>{product.nombre}</td>
+              <td>{product.existencias}</td>
+              <td>{product.precio}</td>
+              <td>
+                <Button variant="primary" onClick={() => handleEditProduct(product)}>
+                  Editar
+                </Button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
 
       <Modal show={showEditModal} onHide={handleCloseEditModal}>
         <Modal.Header closeButton>
@@ -239,17 +255,16 @@ function ProductEditor() {
           <Button variant="secondary" onClick={handleCloseAddModal}>
             Cancelar
           </Button>
-          <Button variant="primary" onClick={handleAddNewProduct}>
+          <Button variant="primary" onClick={handleAddProduct}>
             Añadir Producto
           </Button>
         </Modal.Footer>
       </Modal>
 
       <button onClick={handleAddProduct}>Añadir Producto</button>
+
     </div>
   );
 }
 
 export default ProductEditor;
-
-
