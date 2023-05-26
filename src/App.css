@@ -10,6 +10,29 @@
 
 }
 
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.logo-loader {
+  width: 200px; /* Ajusta el ancho del logo según tus necesidades */
+  animation: scale 1.5s ease-in-out infinite; /* Aplica la animación de escalado */
+}
+
+@keyframes scale {
+  0%, 100% {
+    transform: scale(1); /* Escala inicial y final */
+  }
+  50% {
+    transform: scale(1.2); /* Escala máxima */
+  }
+}
+
+
+
 
 /* CSS DE LA LISTA DE PRODUCTO */
 

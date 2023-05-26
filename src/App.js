@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, useParams } from 'react-router-dom';
 import Navbar from './components/Navegationbar';
 import Productos from './components/Productos';
@@ -11,10 +11,28 @@ import MesaCard from './components/administrador/MesaCard';
 import ProductEditor from './components/administrador/ProductEditor';
 import AdminNavegationbar from './components/administrador/AdminNavegationbar';
 import './App.css';
+import fastServiceLogo from './img/logo.png';
 
 
 function App() {
+  const [loading, setLoading] = useState(true);
   const mesa = localStorage.getItem('mesa');
+
+  useEffect(() => {
+    // Simula una carga de datos o procesamiento
+    setTimeout(() => {
+      setLoading(false);
+    }, 3500);
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="loader-container">
+        <img src={fastServiceLogo} alt="FastService Logo" className="logo-loader" />
+      </div>
+    );
+  }
+  
 
   return (
     <BrowserRouter>
@@ -35,4 +53,5 @@ function App() {
 }
 
 export default App;
+
 
