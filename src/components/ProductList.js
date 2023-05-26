@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import ProductCard from './ProductCard';
 import { CartContext } from '../context/cartContext';
 
-
 function ProductList() {
   const { numeroMesa } = useParams();
   const { onAddToCart, setMesa } = useContext(CartContext);
@@ -42,7 +41,7 @@ function ProductList() {
               title={product.nombre}
               description={product.descripcion}
               price={`${product.precio}€`}
-              image={product.imagen}
+              image={`../${product.imagen}`}
               onAddToCart={() => onAddToCart(product)}
             />
           ))
@@ -59,7 +58,7 @@ function ProductList() {
               title={product.nombre}
               description={product.descripcion}
               price={`${product.precio}€`}
-              image={product.imagen}
+              image={`../${product.imagen}`}
               onAddToCart={() => onAddToCart(product)}
             />
           ))
@@ -69,7 +68,6 @@ function ProductList() {
       </div>
     </div>
   );
-  
 }
 
 export default ProductList;

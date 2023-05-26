@@ -61,7 +61,7 @@ function Admin() {
 
     if (result.isConfirmed) {
       try {
-        const response = await axios.get(`http://127.0.0.1:8000/api/mesaAtendida/${token}`);
+        const response = await axios.get(`http://127.0.0.1:8000/api/mesaAtendida/${mesa.codigo}`);
         console.log(response.data);
         // Realizar acciones adicionales después de atender la mesa
 
