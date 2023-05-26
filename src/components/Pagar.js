@@ -73,7 +73,8 @@ const Pagar = () => {
   
         // Mostrar SweetAlert2 de confirmación
         Swal.fire('¡Pago exitoso!', 'El pago se ha realizado correctamente', 'success');
-  
+        await axios.get(`http://127.0.0.1:8000/api/pagarCarrito/${token}`);
+
         // Aquí puedes agregar el código adicional para manejar la respuesta de la API después de hacer la solicitud
       }
     } catch (error) {
