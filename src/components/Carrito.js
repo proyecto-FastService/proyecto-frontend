@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../context/cartContext';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
@@ -11,6 +12,7 @@ const Carrito = () => {
   const { cart, removeFromCart, clearCart, getTotalPrice } = useContext(CartContext);
   const token = localStorage.getItem('token');
   const mesa = localStorage.getItem('mesa');
+  const navigate = useNavigate();
 
   const handleRemoveFromCart = (itemId) => {
     removeFromCart(itemId);
@@ -48,6 +50,7 @@ const Carrito = () => {
           console.log(response.data);
           Swal.fire("¡Oído cocina!", "¡Marchando!", "success");
           clearCart();
+          navigate(`/productos/${mesa}`); // Redireccionar a "/productos/${mesa}"
         })
         .catch(error => {
           console.error(error);
@@ -89,10 +92,10 @@ const Carrito = () => {
                   <h4>Precio total: {getTotalPrice()} €</h4>
                   <div className='botones'>
                     <Button className="btn btn-warning btn-md" onClick={() => handlePlaceOrder()}>
-                      Hacer pedido
+                      PEDIR A COCINA
                     </Button>
                     <Button className="btn btn-danger btn-md" onClick={() => handleClearCart()}>
-                      Eliminar carrito
+                      VACIAR CARRITO ENTERO
                     </Button>
                   </div>
                 </div>
@@ -106,6 +109,5 @@ const Carrito = () => {
 };
 
 export default Carrito;
-
 
 
