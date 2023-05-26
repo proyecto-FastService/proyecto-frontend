@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { CartContext } from '../context/cartContext';
 import axios from 'axios';
-import Swal from 'sweetalert';
+import Swal from 'sweetalert2';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -11,6 +11,7 @@ const Pagar = () => {
   const token = localStorage.getItem('token');
   const [productosNoPagados, setProductosNoPagados] = useState([]);
   const [precioTotal, setPrecioTotal] = useState(0);
+  const [email, setEmail] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,14 +37,38 @@ const Pagar = () => {
 
   const handlePagarCarrito = async () => {
     try {
-      await axios.get(`http://127.0.0.1:8000/api/pagarCarrito/${token}`);
-      clearCart(); // Vaciar el carrito al hacer la solicitud de pago exitosamente
-      localStorage.clear(); // Limpiar el localStorage al hacer la solicitud de pago exitosamente
+      // Mostrar SweetAlert2 para solicitar el correo electrónico
+      const { value: inputEmail } = await Swal.fire({
+        title: 'Ingrese su correo electrónico',
+        input: 'email',
+        inputLabel: 'Correo electrónico',
+        inputPlaceholder: 'Ingrese su correo electrónico para recibir el ticket',
+        showCancelButton: true,
+        confirmButtonText: 'OK',
+        cancelButtonText: 'Cancelar',
+        inputValidator: (value) => {
+          if (!value) {
+            return 'Debe ingresar un correo electrónico';
+          }
+        },
+      });
 
-      // Mostrar SweetAlert de confirmación
-      Swal("¡Pago exitoso!", "El pago se ha realizado correctamente", "success");
+      if (inputEmail) {
+        setEmail(inputEmail);
 
-      // Aquí puedes agregar el código adicional para manejar la respuesta de la API después de hacer la solicitud
+        // Realizar la petición a la API con el token y el correo electrónico
+        await axios.get(`http://127.0.0.1:8000/api/pagarCarrito/${token}`, {
+          params: { email: inputEmail },
+        });
+
+        clearCart(); // Vaciar el carrito al hacer la solicitud de pago exitosamente
+        localStorage.clear(); // Limpiar el localStorage al hacer la solicitud de pago exitosamente
+
+        // Mostrar SweetAlert2 de confirmación
+        Swal.fire('¡Pago exitoso!', 'El pago se ha realizado correctamente', 'success');
+
+        // Aquí puedes agregar el código adicional para manejar la respuesta de la API después de hacer la solicitud
+      }
     } catch (error) {
       // Aquí puedes manejar los errores en caso de que ocurra alguno durante la solicitud
     }
