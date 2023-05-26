@@ -10,12 +10,22 @@ const Pagar = () => {
   const { cart, getTotalPrice, clearCart } = useContext(CartContext);
   const token = localStorage.getItem('token');
   const [productosNoPagados, setProductosNoPagados] = useState([]);
+  const [precioTotal, setPrecioTotal] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`http://127.0.0.1:8000/api/devolverProductosPedidosNoPagados/${token}`);
         setProductosNoPagados(response.data.productosNoPagados);
+        
+        // Calcular el precio total sumando los precios de los productos no pagados
+        const total = response.data.productosNoPagados.reduce((accumulator, producto) => {
+          return accumulator + producto.precio;
+        }, 0);
+        setPrecioTotal(total);
+
+        console.log(productosNoPagados);
+        console.log(precioTotal);
       } catch (error) {
         console.error(error);
       }
@@ -44,25 +54,24 @@ const Pagar = () => {
       <div className='d-flex justify-content-center '>
         <Card className="Card-Carrito w-50 mt-5 container-card">
           <Card.Header>
-            <h2 className='text-center text-carrito-header'>Mi recibo:</h2>
+            <h2 className='text-center text-carrito-header'>Productos pendientes de pago:</h2>
           </Card.Header>
           <Card.Body className='body-body-carrito'>
             <div>
-              <h4>Productos a pagar:</h4>
               <ul>
                 {productosNoPagados.map((producto) => (
                   <li key={producto.id}>
-                    {producto.nombre} - {producto.precio}
+                    {producto.nombre} - {producto.precio}€
                   </li>
                 ))}
               </ul>
               
             </div>
           </Card.Body>
-          <h4>Precio total: {getTotalPrice()} €</h4>
-              <div className='botones'>
-                <button className="btn btn-warning btn-md" onClick={handlePagarCarrito}>Pagar</button>
-              </div>
+          <h4>Precio total: {precioTotal} €</h4>
+          <div className='botones'>
+            <button className="btn btn-warning btn-md" onClick={handlePagarCarrito}>Pagar</button>
+          </div>
         </Card>
       </div>
     </div>
