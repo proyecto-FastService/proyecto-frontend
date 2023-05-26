@@ -42,12 +42,20 @@ function MesaCard() {
         try {
           await axios.post(`http://127.0.0.1:8000/api/admLiberarMesa/${token}/${mesaId}`);
           console.log('Mesa liberada exitosamente');
+  
+          // Mostrar SweetAlert2 para indicar que la mesa ha sido liberada exitosamente
+          Swal.fire({
+            title: 'Mesa liberada',
+            text: 'La mesa ha sido liberada exitosamente',
+            icon: 'success',
+          });
         } catch (error) {
           console.error('Error al liberar la mesa:', error);
         }
       }
     });
   };
+  
   
   
 
@@ -75,10 +83,10 @@ function MesaCard() {
       <div className="d-flex justify-content-center align-items-center flex-wrap">
         <div className="m-3 container-card" style={{ width: '40rem' }}>
           <button className="btn-admin" onClick={handleReservarMesa}>
-            Reservar Mesa
+            Reservar mesa
           </button>
           <button className="btn-admin" onClick={handleLiberarMesa}>
-            Liberar Mesa
+            Liberar mesa
           </button>
         </div>
       </div>
