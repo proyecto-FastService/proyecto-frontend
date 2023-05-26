@@ -20,7 +20,7 @@ const Pagar = () => {
         
         // Calcular el precio total sumando los precios de los productos no pagados
         const total = response.data.productosNoPagados.reduce((accumulator, producto) => {
-          return accumulator + producto.precio;
+          return accumulator + parseFloat(producto.precio); // Convertir a número usando parseFloat
         }, 0);
         setPrecioTotal(total);
 
