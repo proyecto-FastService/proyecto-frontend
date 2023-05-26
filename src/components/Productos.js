@@ -13,8 +13,8 @@ const Productos = () => {
   
 
   return (
-    <div className="product-list">
-      <ProductList onAddToCart={handleAddToCart} />
+    <div className='productos' >
+      <ProductList onAddToCart={handleAddToCart} className="product-list" />
     </div>
   );
   

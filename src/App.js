@@ -27,10 +27,11 @@ function App() {
           <Route path="/productos/0/:mesaId" element={<MesaCard />} />
           <Route path="/0/editar-productos" element={<ProductEditor />} />
         </Routes>
-        <Footer />
+        {mesa !== '0' && <Footer />} {/* Renderizar el footer solo si mesa no es 0 */}
       </CartProvider>
     </BrowserRouter>
   );
 }
 
 export default App;
+

@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
-import Swal from 'sweetalert';
-
+import Swal from 'sweetalert2';
+import { FiArrowLeft } from 'react-icons/fi';
 
 function MesaCard() {
   const { mesaId } = useParams();
@@ -29,15 +29,16 @@ function MesaCard() {
   const handleLiberarMesa = async () => {
     const token = localStorage.getItem('token');
   
-    // Mostrar SweetAlert para confirmar la liberación de la mesa
-    Swal({
-      title: "¿Estás seguro?",
-      text: "Esta acción liberará la mesa",
-      icon: "warning",
-      buttons: ["Cancelar", "Aceptar"],
-      dangerMode: true,
-    }).then(async (willDelete) => {
-      if (willDelete) {
+    // Mostrar SweetAlert2 para confirmar la liberación de la mesa
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Esta acción liberará la mesa',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
         try {
           await axios.post(`http://127.0.0.1:8000/api/admLiberarMesa/${token}/${mesaId}`);
           console.log('Mesa liberada exitosamente');
@@ -48,31 +49,48 @@ function MesaCard() {
     });
   };
   
+  
 
   const handleReservarMesa = async () => {
     const token = localStorage.getItem('token');
-  
+
     try {
       await axios.post(`http://127.0.0.1:8000/api/admReservarMesa/${token}/${mesaId}`);
       console.log('Mesa reservada exitosamente');
-  
+
       // Mostrar SweetAlert de confirmación
-      Swal("¡Mesa reservada!", "La mesa se ha reservado correctamente", "success");
+      Swal.fire({
+        title: '¡Mesa reservada!',
+        text: 'La mesa se ha reservado correctamente',
+        icon: 'success',
+      });
     } catch (error) {
       console.error('Error al reservar la mesa:', error);
     }
   };
-  
 
   return (
-      <div className="card">
-      <h2>Mesa {mesaId}</h2>
-      <p>Descripción de la mesa {mesaId}</p>
-      <button onClick={handleReservarMesa}>Reservar Mesa</button>
-      <button onClick={handleLiberarMesa}>Liberar Mesa</button>
+    <div>
+      <h2 className="text-center">Mesa {mesaId}</h2>
+      <div className="d-flex justify-content-center align-items-center flex-wrap">
+        <div className="m-3 container-card" style={{ width: '40rem' }}>
+          <button className="btn-admin" onClick={handleReservarMesa}>
+            Reservar Mesa
+          </button>
+          <button className="btn-admin" onClick={handleLiberarMesa}>
+            Liberar Mesa
+          </button>
+        </div>
+      </div>
+      <div className="text-center">
+        <Link to="/productos/0" className="text-black">
+          <FiArrowLeft className="mr-1" /> Volver al Panel de Administración
+        </Link>
+      </div>
     </div>
-    
   );
 }
 
-export default MesaCard;
+export default MesaCard
+
+

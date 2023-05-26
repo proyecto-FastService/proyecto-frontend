@@ -41,8 +41,8 @@ const Pagar = () => {
 
   return (
     <div className='Body-Carrito d-flex flex-column flex-grow-1 pb-5'>
-      <div className='d-flex justify-content-center'>
-        <Card className="Card-Carrito w-50 mt-5">
+      <div className='d-flex justify-content-center '>
+        <Card className="Card-Carrito w-50 mt-5 container-card">
           <Card.Header>
             <h2 className='text-center text-carrito-header'>Mi recibo:</h2>
           </Card.Header>

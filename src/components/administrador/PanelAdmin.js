@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
+import { Card, Button } from 'react-bootstrap';
 
 function Admin() {
   const [mesas, setMesas] = useState([]);
@@ -43,26 +43,23 @@ function Admin() {
   };
 
   return (
-    <div>
-      <h1>Panel de Administrador</h1>
-
-      <div>
+    <div className='d-flex' style={{ flexDirection: 'column' }}>
+      <h1 className='text-center'>Panel de Administrador</h1>
+      <div className='d-flex justify-content-center align-items-center flex-wrap' >
         {mesas.map((mesa) => (
-          <div key={mesa.id} className="card" >
-            <h2>Mesa {mesa.id}</h2>
-            <button onClick={() => handleClickMesa(mesa.id)}>Administrar Mesa</button>
-            <p>Descripción de la mesa</p>
-          </div>
+          <Card key={mesa.id} className='m-3 container-card' style={{ width: '20rem' }}>
+            <Card.Body>
+              <Card.Title>Mesa {mesa.id}</Card.Title>
+              <Button className='btn-admin' onClick={() => handleClickMesa(mesa.id)}>Administrar</Button>
+            </Card.Body>
+          </Card>
         ))}
       </div>
-
-      <Button onClick={handleEditarProductos}>Gestionar Productos</Button>
     </div>
   );
 }
 
 export default Admin;
-
 
 
 

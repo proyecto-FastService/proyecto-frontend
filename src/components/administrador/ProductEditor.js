@@ -141,9 +141,8 @@ function ProductEditor() {
   };
 
   return (
-    <div className='ProductCard card'>
+    <div className='container-card card'>
       <h1>Editor de Productos</h1>
-      
       <table>
         <thead>
           <tr>
@@ -160,7 +159,7 @@ function ProductEditor() {
               <td>{product.existencias}</td>
               <td>{product.precio}</td>
               <td>
-                <Button variant="primary" onClick={() => handleEditProduct(product)}>
+                <Button className='custom-button'variant="primary" onClick={() => handleEditProduct(product)}>
                   Editar
                 </Button>
               </td>
@@ -260,11 +259,12 @@ function ProductEditor() {
           </Button>
         </Modal.Footer>
       </Modal>
-
-      <button onClick={handleAddProduct}>Añadir Producto</button>
+      <button className='btn-admin' style={{ width: '10rem' }} onClick={handleAddProduct}>Añadir producto</button>
 
     </div>
-  );
+ 
+ );
+
 }
 
 export default ProductEditor;

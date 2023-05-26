@@ -21,11 +21,11 @@ function AdminNavegationbar() {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" className="navbar-toggler" style={{ backgroundColor: 'white' }} />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <NavLink to={`/productos/${mesa}`} className="nav-link" activeClassName="active-link" style={{ marginRight:'5px' }}>
+          <NavLink to={`/productos/${mesa}`} className="nav-link" activeClassName="active-link" style={{ marginRight:'10px' }}>
               MESAS
           </NavLink>
           <Nav.Link as={NavLink} to="/0/editar-productos" activeClassName="active-link" >
-            PRODUCTOS
+            EDITOR DE PRODUCTOS
           </Nav.Link>
         </Navbar.Collapse>
       </Container>

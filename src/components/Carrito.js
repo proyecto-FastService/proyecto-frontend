@@ -4,6 +4,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import Swal from 'sweetalert';
+
 import { BsTrash } from 'react-icons/bs';
 
 const Carrito = () => {
@@ -56,11 +57,11 @@ const Carrito = () => {
   return (
     <div className='Body-Carrito d-flex flex-column flex-grow-1 pb-5'>
       <div className='d-flex justify-content-center'>
-        <Card className="Card-Carrito w-50 mt-5">
+        <Card className="Card-Carrito w-50 mt-5 container-card">
           <Card.Header>
-            <h1 className='text-center text-carrito-header'>Carrito</h1>
+            <h1 className='text-center text-carrito-header '>Carrito</h1>
           </Card.Header>
-          <Card.Body className='body-body-carrito'>
+          <Card.Body className='body-body-carrito '>
             {cart.length === 0 ? (
               <p>No hay productos en el carrito.</p>
             ) : (

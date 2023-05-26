@@ -6,8 +6,10 @@
 #root {
   background-color: #6174df;
   background-image: linear-gradient(43deg, #6174df 0%, #ce5fc7 46%, #FFCC70 100%);
-  height: 100%;
+  min-height: 100%;
+
 }
+
 
 /* CSS DE LA LISTA DE PRODUCTO */
 
@@ -16,34 +18,272 @@
 }
 
 /* CSS DE LA CARD DE PRODUCTO */
-
-.ProductCard {
-  background-color: black;
-  margin: auto;
-  margin-top: 4%;
-  border: 2px solid rgb(0, 0, 0) !important;
+.custom-button {
+  --borderWidth: 2 !important;
+  --buttonColor: black !important;
+  --bg: hsl(0, 0%, 5%) !important;
+  --backdrop: transparent !important;
+  --fontSize: 1 !important;
+  --horizontalPadding: 16 !important;
+  --verticalPadding: 8 !important;
+  background: pink !important;
+  border: calc(var(--borderWidth) * 1px) solid var(--buttonColor) !important;
+  text-align: center !important;
+  line-height: 24px !important;
+  color: var(--textColor, var(--buttonColor)) !important;
+  cursor: pointer !important;
+  font-size: calc(var(--fontSize) * 1rem) !important;
+  font-weight: bold !important;
+  font-family: sans-serif !important;
+  outline: transparent !important;
+  padding: calc(var(--verticalPadding) * 1px) calc(var(--horizontalPadding) * 1px) !important;
+  text-decoration: none !important;
+  height: 40px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100px !important;
+  transition: transform 0.2s !important;
+  transform: translate(0, calc(var(--y, 0) * 1%)) scale(var(--scale, 1)) !important;
 }
 
-.ProductCard-Body {
-  background-color: #FFCC70;
-  border: black solid 2px;
-  border-radius: 8px;
-  justify-content: center;
+.custom-button:hover {
+  --y: -5 !important;
+  --scale: 1.05 !important;
+
 }
 
-p.card-text {
-  color: black;
+.custom-button:active {
+  --y: 0 !important;
+  --scale: 0.95 !important;
+}
+
+.custom-button span {
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  clip-path: var(--clip) !important;
+  -webkit-clip-path: var(--clip) !important;
+  z-index: 1 !important;
+}
+
+.custom-button span:nth-of-type(1):hover,
+.custom-button span:nth-of-type(2):hover,
+.custom-button span:nth-of-type(3):hover,
+.custom-button span:nth-of-type(4):hover {
+  --clip: polygon(0 0, 100% 0, 100% 100%, 0 100%) !important;
+  z-index: 2 !important;
+}
+
+.custom-button span:nth-of-type(1):hover ~ b:nth-of-type(1),
+.custom-button span:nth-of-type(2):hover ~ b:nth-of-type(2),
+.custom-button span:nth-of-type(3):hover ~ b:nth-of-type(3),
+.custom-button span:nth-of-type(4):hover ~ b:nth-of-type(4) {
+  --clip: inset(0 0 0 0) !important;
+}
+
+.custom-button span:nth-of-type(1) {
+  --clip: polygon(0 0, 100% 0, 50% 50%, 50% 50%) !important;
+}
+
+.custom-button span:nth-of-type(2) {
+  --clip: polygon(100% 0, 100% 100%, 50% 50%) !important;
+}
+
+.custom-button span:nth-of-type(3) {
+  --clip: polygon(0 100%, 100% 100%, 50% 50%) !important;
+}
+
+.custom-button span:nth-of-type(4) {
+  --clip: polygon(0 0, 0 100%, 50% 50%) !important;
+}
+
+.custom-button b {
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  clip-path: var(--clip) !important;
+  -webkit-clip-path: var(--clip) !important;
+  background: var(--slideColor, var(--buttonColor)) !important;
+  border: calc(var(--borderWidth) * 1px) solid var(--buttonColor) !important;
+  font-weight: bold !important;
+  color: var(--bg, #fafafa) !important;
+  padding: calc(var(--verticalPadding) * 1px) calc(var(--horizontalPadding) * 1px) !important;
+  transition: clip-path 0.25s ease !important;
+  border-radius: 9999px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.custom-button b:nth-of-type(1) {
+  --clip: inset(0 0 100% 0) !important;
+}
+
+.custom-button b:nth-of-type(2) {
+  --clip: inset(0 0 0 100%) !important;
+}
+
+.custom-button b:nth-of-type(3) {
+  --clip: inset(100% 0 0 0) !important;
+}
+
+.custom-button b:nth-of-type(4) {
+  --clip: inset(0 100% 0 0) !important;
+}
+
+.custom-button--secondary {
+  --buttonColor: hsl(0, 0%, 100%) !important;
+  --bg: hsl(0, 0%, 5%) !important;
+}
+
+.custom-button--filled {
+  --backdrop: red !important;
+  --slideColor: hsl(0, 0%, 5%) !important;
+  --textColor: hsl(0, 0%, 5%) !important;
+  --bg: red !important;
+}
+
+
+
+
+.container {
+  width: 1200px !important;
+  padding: 0 !important;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media screen and (min-width: 992px) and (max-width: 1439px) {
+  .container {
+    max-width: 1279px !important;
+    padding: 0 !important;
+    margin: 0 80px !important;
+    width: auto !important;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .container {
+    max-width: 959px !important;
+    margin: 0 16px !important;
+    padding: 0 !important;
+    width: auto !important;
+  }
 }
 
 .product-list-container {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  padding: 30px;
 }
 
-.product-list-column {
-  flex: 0 0 50%;
-  padding: 0;
+@media screen and (max-width: 991px) {
+  .product-list-container {
+    grid-template-columns: 1fr;
+  }
 }
+
+.container-title {
+  text-align: center;
+  padding: 0 !important;
+  margin-bottom: 40px;
+  font-size: 40px;
+  color: #fff;
+  font-weight: 600;
+  line-height: 60px;
+}
+
+.ProductCard {
+  max-width: 550px;
+  border: 0;
+  width: 100%;
+  margin-inline: auto;
+}
+
+.container-card {
+  position: relative;
+  margin: 10px;
+  border: 2px solid transparent;
+  background-image: linear-gradient(135deg, #FF94B4 0%, #FFD291 50%, #96CFFF 100%);
+  background-clip: padding-box;
+  border-radius: 45px;
+  padding: 40px;
+}
+
+.container-card img {
+  margin-bottom: 32px;
+}
+
+.bg-green-box,
+.bg-white-box,
+.bg-yellow-box,
+.bg-blue-box {
+  position: relative;
+}
+
+.bg-green-box::after,
+.bg-white-box::after,
+.bg-yellow-box::after,
+.bg-blue-box::after {
+  position: absolute;
+  top: -1px;
+  bottom: -1px;
+  left: -1px;
+  right: -1px;
+  content: "";
+  z-index: -1;
+  border-radius: 45px;
+}
+
+.bg-green-box::after {
+  background: linear-gradient(71deg, #0d1212, #3da077, #0d1212);
+}
+
+.bg-white-box::after {
+  background: linear-gradient(71deg, #121013, #b0afb0, #121013);
+}
+
+.bg-yellow-box::after {
+  background: linear-gradient(71deg, #110e0e, #afa220, #110e0e);
+}
+
+.bg-blue-box::after {
+  background: linear-gradient(71deg, #0c0a0e, #5f6fad, #0c0a0e);
+}
+
+.card-title {
+  font-weight: 600;
+  color: black;
+  letter-spacing: -0.02em;
+  line-height: 40px;
+  font-style: normal;
+  font-size: 28px;
+  padding-bottom: 8px;
+  background: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 1);
+
+}
+
+.card-description {
+  font-weight: 600;
+  line-height: 32px;
+  color: black;
+  font-size: 16px;
+  max-width: 470px;
+  background: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 1);
+
+}
+
 
 
 /* CSS DEL NAVBAR */
@@ -62,15 +302,15 @@ p.card-text {
   position: relative;
 }
 
-.custom-hover-mi-recibo:hover button{
+.custom-hover-mi-recibo:hover button {
   color: white !important;
   -webkit-text-stroke-width: 0px;
   -webkit-text-stroke-color: #4158D0;
-  background-color: lightgreen;
+  background-color: #4158D0;
 }
 
 
-.custom-hover-camarero:hover button{
+.custom-hover-camarero:hover button {
   color: white !important;
   -webkit-text-stroke-width: 0px;
   -webkit-text-stroke-color: #4158D0;
@@ -84,9 +324,11 @@ p.card-text {
   0% {
     transform: rotate(0);
   }
+
   50% {
     transform: rotate(35deg);
   }
+
   100% {
     transform: rotate(0);
   }
@@ -135,13 +377,13 @@ p.card-text {
   justify-content: center;
 }
 
-.botones > .btn {
+.botones>.btn {
   width: calc(50% - 3px);
   margin: 3px;
 }
 
 @media (max-width: 600px) {
-  .botones > .btn {
+  .botones>.btn {
     width: 100%;
     margin: 3px 0;
   }
@@ -170,7 +412,7 @@ p.card-text {
 
 .body-body-carrito {
   height: max-content;
-  background-color: #FFCC70;
+  background-color: white;
   border-radius: 0.3rem;
   display: flex;
   flex-direction: column;
@@ -188,7 +430,7 @@ p.card-text {
 
 
 .footer {
-  
+
   bottom: 0;
   position: relative;
   margin-top: 10px;
@@ -274,4 +516,17 @@ p.card-text {
   text-align: center;
   text-decoration: none;
   color: #333;
+}
+
+.btn-admin{
+  background-color: pink !important;
+  color: black !important;
+  border: 1px solid black !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  height: 2rem;
+  width: 50%;
+}
+
+.btn-admin:hover{
+  background-color: rgb(191, 156, 252) !important;
 }

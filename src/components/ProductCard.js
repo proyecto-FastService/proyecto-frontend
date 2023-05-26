@@ -1,18 +1,13 @@
-import React, { useContext, useState} from 'react';
+import React, { useContext } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { CartContext } from '../context/cartContext';
 import Swal from 'sweetalert';
 
-
-// Establece el elemento raíz para el modal
-
 function ProductCard(props) {
   const { addToCart } = useContext(CartContext);
 
-
   const handleClick = () => {
-    
     addToCart({
       id: props.id,
       title: props.title,
@@ -30,15 +25,15 @@ function ProductCard(props) {
 
   return (
     <div>
-      <Card className="ProductCard shadow-lg rounded mx-auto pb-5" style={{ maxWidth: '30rem'}}>
-        <Card.Title>{props.title}</Card.Title>
-        <Card.Body className="ProductCard-Body">
-          <Card.Img variant="top" src='./img/fast-service-logo.jpg' alt={props.title} />
-          <Card.Text>{props.description}</Card.Text>       
-          <Button className="btn btn-warning border-dark "  onClick={handleClick}>
+      <Card className="container-card shadow-lg rounded mx-auto pb-5" style={{ maxWidth: '30rem' }}>
+        <Card.Title className="card-title">{props.title}</Card.Title>
+        <Card.Body>
+          <Card.Img className="card-image" variant="top" src={props.image} alt={props.title} />
+          <Card.Text className="card-description">{props.description}</Card.Text>
+          <Button className="custom-button" onClick={handleClick}>
             {props.price}
-          </Button>   
-        </Card.Body>        
+          </Button>
+        </Card.Body>
       </Card>
     </div>
   );
