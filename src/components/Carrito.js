@@ -3,7 +3,7 @@ import { CartContext } from '../context/cartContext';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
-import Swal from 'sweetalert';
+import Swal from 'sweetalert2';
 
 import { BsTrash } from 'react-icons/bs';
 
@@ -17,18 +17,21 @@ const Carrito = () => {
   };
 
   const handleClearCart = () => {
-    Swal({
+    Swal.fire({
       title: "¿Estás seguro?",
       text: "Esta acción vaciará el carrito",
       icon: "warning",
-      buttons: ["Cancelar", "Aceptar"],
+      showCancelButton: true,
+      confirmButtonText: "Aceptar",
+      cancelButtonText: "Cancelar",
       dangerMode: true,
-    }).then((willDelete) => {
-      if (willDelete) {
+    }).then((result) => {
+      if (result.isConfirmed) {
         clearCart(); // Vaciar el carrito
       }
     });
   };
+
 
   const handlePlaceOrder = () => {
     const orderData = {
@@ -43,7 +46,7 @@ const Carrito = () => {
       axios.post(`http://127.0.0.1:8000/api/pedirListaProductosPorId/${token}`, { arrayProductosIds: orderData })
         .then(response => {
           console.log(response.data);
-          Swal("¡Oído cocína!", "¡Marchando!", "success");
+          Swal.fire("¡Oído cocina!", "¡Marchando!", "success");
           clearCart();
         })
         .catch(error => {
@@ -72,7 +75,7 @@ const Carrito = () => {
                     <Button className="btn btn-danger bg-transparent border-0 ms-2"
                       onClick={() => handleRemoveFromCart(item.id)}
                     >
-                     <BsTrash className="text-danger"/>
+                      <BsTrash className="text-danger" />
                     </Button>
                   </li>
                 ))}
@@ -86,12 +89,12 @@ const Carrito = () => {
                   <h4>Precio total: {getTotalPrice()} €</h4>
                   <div className='botones'>
                     <Button className="btn btn-warning btn-md" onClick={() => handlePlaceOrder()}>
-                    Hacer pedido
-                  </Button>
-                  <Button className="btn btn-danger btn-md" onClick={() => handleClearCart()}>
-                    Eliminar carrito
-                  </Button>
-                  </div>                  
+                      Hacer pedido
+                    </Button>
+                    <Button className="btn btn-danger btn-md" onClick={() => handleClearCart()}>
+                      Eliminar carrito
+                    </Button>
+                  </div>
                 </div>
               )}
             </Card.Footer>

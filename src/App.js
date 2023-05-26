@@ -12,6 +12,7 @@ import ProductEditor from './components/administrador/ProductEditor';
 import AdminNavegationbar from './components/administrador/AdminNavegationbar';
 import './App.css';
 
+
 function App() {
   const mesa = localStorage.getItem('mesa');
 
