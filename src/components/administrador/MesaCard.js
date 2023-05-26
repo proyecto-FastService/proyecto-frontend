@@ -7,6 +7,8 @@ import { FiArrowLeft } from 'react-icons/fi';
 function MesaCard() {
   const { mesaId } = useParams();
   const [productos, setProductos] = useState([]);
+  const [estadoMesa, setEstadoMesa] = useState(0);
+
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -18,6 +20,7 @@ function MesaCard() {
         );
         const data = response.data;
         setProductos(data.productos);
+        setEstadoMesa(data.estadoMesa); // Actualizar el estado de la mesa
         console.log(data);
       } catch (error) {
         console.error('Error al enviar la información de la mesa:', error);
@@ -29,7 +32,7 @@ function MesaCard() {
 
   const handleLiberarMesa = async () => {
     const token = localStorage.getItem('token');
-  
+
     // Mostrar SweetAlert2 para confirmar la liberación de la mesa
     Swal.fire({
       title: '¿Estás seguro?',
@@ -43,7 +46,7 @@ function MesaCard() {
         try {
           await axios.post(`http://127.0.0.1:8000/api/admLiberarMesa/${token}/${mesaId}`);
           console.log('Mesa liberada exitosamente');
-  
+
           // Mostrar SweetAlert2 para indicar que la mesa ha sido liberada exitosamente
           Swal.fire({
             title: 'Mesa liberada',
@@ -56,9 +59,9 @@ function MesaCard() {
       }
     });
   };
-  
-  
-  
+
+
+
 
   const handleReservarMesa = async () => {
     const token = localStorage.getItem('token');
@@ -83,9 +86,14 @@ function MesaCard() {
       <h2 className="text-center">Mesa {mesaId}</h2>
       <div className="d-flex justify-content-center align-items-center flex-wrap">
         <div className="m-3 container-card" style={{ width: '40rem' }}>
-          <button className="btn-admin" onClick={handleReservarMesa}>
+          <button
+            className="btn-admin"
+            onClick={handleReservarMesa}
+            disabled={estadoMesa === 1}
+          >
             Reservar mesa
           </button>
+
           <button className="btn-admin" onClick={handleLiberarMesa}>
             Liberar mesa
           </button>
