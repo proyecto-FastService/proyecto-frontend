@@ -9,6 +9,7 @@ import logo from '../img/logo fondo blanco.png'; // Ruta de la imagen de tu logo
 import '../App.css';
 import { TbBellRingingFilled } from 'react-icons/tb';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 
 function Navegationbar() {
@@ -20,6 +21,11 @@ function Navegationbar() {
     const token = localStorage.getItem('token');
     try {
       await axios.get(`http://127.0.0.1:8000/api/llamarCamarero/${token}`);
+      Swal.fire({
+        icon: 'success',
+        title: 'Camarero llamado',
+        text: 'En breves se acercará un camarero a su mesa',
+      });
       // Aquí puedes agregar el código adicional para manejar la respuesta de la API después de hacer la llamada
     } catch (error) {
       // Aquí puedes manejar los errores en caso de que ocurra alguno durante la llamada
@@ -51,16 +57,15 @@ function Navegationbar() {
                 <button className="btn btn-light" style={{ marginRight: '0.5rem' }}>MI RECIBO</button>
               </Nav.Link>
 
-              <Nav.Link as={NavLink} to="/" activeClassName="active-link" className="custom-hover-camarero">
+              <div activeClassName="active-link" className="custom-hover-camarero">
                 <button className="btn btn-danger" onClick={handleLlamarCamarero}>
                   <span className="hover-bell">
                     <TbBellRingingFilled className="bell-icon" style={{ marginRight: '0.5rem' }} />
                   </span>
                   CAMARERO
                 </button>
-              </Nav.Link>
+              </div>
             </div>
-
           </Nav>
         </Navbar.Collapse>
       </Container>

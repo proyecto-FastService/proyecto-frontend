@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 
 function Admin() {
   const [mesas, setMesas] = useState([]);
+  const [refresh, setRefresh] = useState(false); // Estado para refrescar el componente
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
 
@@ -37,7 +38,7 @@ function Admin() {
     };
 
     obtenerMesas();
-  }, []);
+  }, [refresh]); // Escucha cambios en el estado 'refresh'
 
   const handleClickMesa = (mesaId) => {
     navigate(`/productos/0/${mesaId}`);
@@ -49,8 +50,8 @@ function Admin() {
 
   const confirmarAtenderMesa = async (mesa) => {
     const result = await Swal.fire({
-      title: 'Confirmar Atender Mesa',
-      text: `¿Estás seguro de que quieres atender la Mesa ${mesa.id}?`,
+      title: 'Confirmar atender mesa',
+      text: `¿Estás seguro de que quieres atender la mesa ${mesa.id}?`,
       icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -66,6 +67,8 @@ function Admin() {
         // Realizar acciones adicionales después de atender la mesa
 
         Swal.fire('Mesa Atendida', 'La mesa ha sido atendida correctamente.', 'success');
+
+        setRefresh(!refresh); // Actualizar el estado 'refresh' para refrescar el componente
       } catch (error) {
         console.error('Error al atender la mesa:', error);
         Swal.fire('Error', 'Ocurrió un error al atender la mesa.', 'error');
