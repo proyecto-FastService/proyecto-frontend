@@ -52,21 +52,22 @@ const Pagar = () => {
           }
         },
       });
-
+  
       if (inputEmail) {
         setEmail(inputEmail);
-
-        // Realizar la petición a la API con el token y el correo electrónico
-        await axios.get(`http://127.0.0.1:8000/api/pagarCarrito/${token}`, {
-          params: { email: inputEmail },
-        });
-
+  
+        // Construir la URL con el token y el correo electrónico
+        const url = `http://127.0.0.1:8000/api/envioCorreo/${token}/${inputEmail}`;
+  
+        // Realizar la petición a la API con la URL construida
+        await axios.get(url);
+  
         clearCart(); // Vaciar el carrito al hacer la solicitud de pago exitosamente
         localStorage.clear(); // Limpiar el localStorage al hacer la solicitud de pago exitosamente
-
+  
         // Mostrar SweetAlert2 de confirmación
         Swal.fire('¡Pago exitoso!', 'El pago se ha realizado correctamente', 'success');
-
+  
         // Aquí puedes agregar el código adicional para manejar la respuesta de la API después de hacer la solicitud
       }
     } catch (error) {
