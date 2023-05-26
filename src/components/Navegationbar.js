@@ -8,12 +8,23 @@ import { FaShoppingCart } from 'react-icons/fa';
 import logo from '../img/logo fondo blanco.png'; // Ruta de la imagen de tu logo
 import '../App.css';
 import { TbBellRingingFilled } from 'react-icons/tb';
+import axios from 'axios';
 
 
 function Navegationbar() {
   const { cart, mesa } = useContext(CartContext);
 
   const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
+
+  const handleLlamarCamarero = async () => {
+    const token = localStorage.getItem('token');
+    try {
+      await axios.get(`http://127.0.0.1:8000/api/llamarCamarero/${token}`);
+      // Aquí puedes agregar el código adicional para manejar la respuesta de la API después de hacer la llamada
+    } catch (error) {
+      // Aquí puedes manejar los errores en caso de que ocurra alguno durante la llamada
+    }
+  };
 
   return (
     <Navbar collapseOnSelect expand="lg" className="custom-navbar ">
@@ -41,7 +52,7 @@ function Navegationbar() {
               </Nav.Link>
 
               <Nav.Link as={NavLink} to="/" activeClassName="active-link" className="custom-hover-camarero">
-                <button className="btn btn-danger">
+                <button className="btn btn-danger" onClick={handleLlamarCamarero}>
                   <span className="hover-bell">
                     <TbBellRingingFilled className="bell-icon" style={{ marginRight: '0.5rem' }} />
                   </span>
