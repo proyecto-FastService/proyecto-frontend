@@ -19,10 +19,11 @@ function ProductList() {
         response = await fetch(`http://127.0.0.1:8000/api/cargar-productos/${numeroMesa}/`);
       }
       const data = await response.json();
-      setProductos(data);
-      console.log(productos);
-      if (token == null) {
+      if (data.token) {
         localStorage.setItem('token', data.token);
+        setProductos(data.productosEnStock)
+      } else {
+        setProductos(data)
       }
       if (numeroMesa) {
         setMesa(numeroMesa); // Actualiza el valor de mesa en el contexto
