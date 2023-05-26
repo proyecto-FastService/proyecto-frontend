@@ -35,15 +35,20 @@ function Navegationbar() {
               {cartItemCount > 0 && <span className="cart-count">({cartItemCount})</span>}
               <FaShoppingCart style={{ marginLeft: '0.5rem' }} className="cart-icon text-ligthl" />
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/pagar" activeClassName="active-link" className="ms-lg-auto">
-              <div className="d-flex align-items-center">
-                <button className="btn btn-light " style={{ marginRight: '0.5rem' }} >MI RECIBO</button>
+            <div className="d-flex align-items-center ms-auto">
+              <Nav.Link as={NavLink} to="/pagar" activeClassName="active-link" className="custom-hover-mi-recibo">
+                <button className="btn btn-light" style={{ marginRight: '0.5rem' }}>MI RECIBO</button>
+              </Nav.Link>
+
+              <Nav.Link as={NavLink} to="/" activeClassName="active-link" className="custom-hover-camarero">
                 <button className="btn btn-danger">
-                  <TbBellRingingFilled style={{ marginRight: '0.5rem' }} />
+                  <span className="hover-bell">
+                    <TbBellRingingFilled className="bell-icon" style={{ marginRight: '0.5rem' }} />
+                  </span>
                   CAMARERO
                 </button>
-              </div>
-            </Nav.Link>
+              </Nav.Link>
+            </div>
 
           </Nav>
         </Navbar.Collapse>

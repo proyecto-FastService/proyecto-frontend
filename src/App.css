@@ -62,6 +62,37 @@ p.card-text {
   position: relative;
 }
 
+.custom-hover-mi-recibo:hover button{
+  color: white !important;
+  -webkit-text-stroke-width: 0px;
+  -webkit-text-stroke-color: #4158D0;
+  background-color: lightgreen;
+}
+
+
+.custom-hover-camarero:hover button{
+  color: white !important;
+  -webkit-text-stroke-width: 0px;
+  -webkit-text-stroke-color: #4158D0;
+}
+
+.custom-hover-camarero:hover .bell-icon {
+  animation: tintinear 0.5s infinite;
+}
+
+@keyframes tintinear {
+  0% {
+    transform: rotate(0);
+  }
+  50% {
+    transform: rotate(35deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+
+
 
 
 
@@ -155,36 +186,28 @@ p.card-text {
 
 /* CSS DEL FOOTER */
 
-.scroll-up-button-container {
-  width: 30px;
-  height: 30px;
-}
 
-.scroll-up-button-transition {
-  width: 30px !important;
-  height: 30px !important;
+.container1 {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .footer {
-  
-  bottom: 0;
-  position: relative;
-  margin-top: 10px;
-  width: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  color: #ffff;
+  color: #ffffff;
   padding: 10px;
 }
 
 .container-footer {
-  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 2px;
 }
+
 
 .social-icons {
   display: flex;
@@ -214,7 +237,7 @@ p.card-text {
 }
 
 .social-icons a:hover {
-  color: #FFCC70;
+  color: #4158D0;
 }
 
 .footer-left,

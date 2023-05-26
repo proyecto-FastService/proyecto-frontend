@@ -4,13 +4,13 @@ import Navbar from './components/Navegationbar';
 import Productos from './components/Productos';
 import Carrito from './components/Carrito';
 import { CartProvider } from './context/cartContext';
-import './App.css';
 import Footer from './components/Footer';
 import Pagar from './components/Pagar';
 import PanelAdmin from './components/administrador/PanelAdmin';
 import MesaCard from './components/administrador/MesaCard';
 import ProductEditor from './components/administrador/ProductEditor';
 import AdminNavegationbar from './components/administrador/AdminNavegationbar';
+import './App.css';
 
 function App() {
   const mesa = localStorage.getItem('mesa');
