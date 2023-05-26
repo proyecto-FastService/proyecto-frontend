@@ -37,6 +37,12 @@ const Pagar = () => {
 
   const handlePagarCarrito = async () => {
     try {
+      if (productosNoPagados.length === 0) {
+        // Mostrar SweetAlert2 de advertencia si no hay productos pendientes de pago
+        Swal.fire('Recibo vacío', 'No hay productos pendientes de pago', 'warning');
+        return; // Salir de la función sin continuar
+      }
+  
       // Mostrar SweetAlert2 para solicitar el correo electrónico
       const { value: inputEmail } = await Swal.fire({
         title: 'Ingrese su correo electrónico',
