@@ -32,8 +32,8 @@ function ProductList() {
   }, [numeroMesa, token, setMesa]);
 
   return (
-    <div className="row no-gutters">
-      <div className="col-md-6">
+    <div className="product-list-container">
+      <div className="product-list-column">
         {Array.isArray(productos) ? (
           productos.slice(0, Math.ceil(productos.length / 2)).map((product) => (
             <ProductCard
@@ -50,7 +50,7 @@ function ProductList() {
           <p>Cargando productos...</p>
         )}
       </div>
-      <div className="col-md-6 col-12">
+      <div className="product-list-column">
         {Array.isArray(productos) ? (
           productos.slice(Math.ceil(productos.length / 2)).map((product) => (
             <ProductCard
