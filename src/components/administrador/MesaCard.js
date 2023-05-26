@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
@@ -6,6 +6,7 @@ import { FiArrowLeft } from 'react-icons/fi';
 
 function MesaCard() {
   const { mesaId } = useParams();
+  const [productos, setProductos] = useState([]);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -16,6 +17,7 @@ function MesaCard() {
           `http://127.0.0.1:8000/api/admComprobarProductosPorMesa/${token}/${mesaId}`
         );
         const data = response.data;
+        setProductos(data.productos);
         // Realiza las acciones necesarias con la respuesta de la API
         console.log(data);
       } catch (error) {
