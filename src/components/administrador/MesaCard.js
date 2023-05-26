@@ -18,7 +18,6 @@ function MesaCard() {
         );
         const data = response.data;
         setProductos(data.productos);
-        // Realiza las acciones necesarias con la respuesta de la API
         console.log(data);
       } catch (error) {
         console.error('Error al enviar la información de la mesa:', error);
