@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Modal, Button, Form } from 'react-bootstrap';
-
+import Swal from 'sweetalert2';
 function ProductEditor() {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
@@ -140,6 +140,24 @@ function ProductEditor() {
     }
   };
 
+  const handleOcultarProduct = async (idProducto) => {
+    try {
+       // Aquí debes proporcionar el token
+  
+      await axios.get(`http://127.0.0.1:8000/api/admOcultarProducto/${token}/${idProducto}`);
+      Swal.fire({
+        icon: 'success',
+        title: 'Producto ocultado',
+        text: 'El producto se ha ocultado correctamente.',
+      });
+      // Realizar cualquier lógica adicional que necesites después de ocultar el producto
+  
+    } catch (error) {
+      console.error('Error al ocultar el producto:', error);
+    }
+  };
+  
+
   return (
     <div className='container-card card'>
       <h1>Editor de Productos</h1>
@@ -161,6 +179,9 @@ function ProductEditor() {
               <td>
                 <Button className='custom-button'variant="primary" onClick={() => handleEditProduct(product)}>
                   Editar
+                </Button>
+                <Button className='custom-button' variant="secondary" onClick={() => handleOcultarProduct(product.id)}>
+                  Ocultar
                 </Button>
               </td>
             </tr>

@@ -86,17 +86,29 @@ function MesaCard() {
       <h2 className="text-center">Mesa {mesaId}</h2>
       <div className="d-flex justify-content-center align-items-center flex-wrap">
         <div className="m-3 container-card" style={{ width: '40rem' }}>
-          <button
-            className="btn-admin"
-            onClick={handleReservarMesa}
-            disabled={estadoMesa === 1}
-          >
-            Reservar mesa
-          </button>
-
-          <button className="btn-admin" onClick={handleLiberarMesa}>
-            Liberar mesa
-          </button>
+          {/* Imprimir la lista de productos */}
+          <div className="mt-4">
+            <h4>Productos:</h4>
+            <ul>
+              {productos.map((producto) => (
+                <li key={producto.id}>{producto.nombre}</li>
+              ))}
+            </ul>
+          </div>
+  
+          <div className="d-flex justify-content-between">
+            <button
+              className="btn-admin"
+              onClick={handleReservarMesa}
+              disabled={estadoMesa === 1}
+            >
+              Reservar mesa
+            </button>
+  
+            <button className="btn-admin" onClick={handleLiberarMesa}>
+              Liberar mesa
+            </button>
+          </div>
         </div>
       </div>
       <div className="text-center">
@@ -104,18 +116,9 @@ function MesaCard() {
           <FiArrowLeft className="mr-1" /> Volver al Panel de Administración
         </Link>
       </div>
-
-      {/* Imprimir la lista de productos */}
-      <div className="mt-4">
-        <h4>Productos:</h4>
-        <ul>
-          {productos.map((producto) => (
-            <li key={producto.id}>{producto.nombre}</li>
-          ))}
-        </ul>
-      </div>
     </div>
   );
+  
 }
 
 export default MesaCard
