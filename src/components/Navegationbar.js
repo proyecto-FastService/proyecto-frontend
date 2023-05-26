@@ -44,8 +44,11 @@ function Navegationbar() {
             <Nav.Link as={NavLink} to={`/productos/${mesa}`} activeClassName="active-link">
               COMIDA
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/bebidas" activeClassName="active-link">
+            <Nav.Link as={NavLink} to={`/bebidas/${mesa}`} activeClassName="active-link">
               BEBIDA
+            </Nav.Link>
+            <Nav.Link as={NavLink} to={`/postres/${mesa}`} activeClassName="active-link">
+              POSTRE
             </Nav.Link>
             <Nav.Link as={NavLink} to="/carrito" className="custom-cart" activeClassName="active-link">
               <span>CARRITO</span>

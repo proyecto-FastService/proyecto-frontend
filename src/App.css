@@ -228,6 +228,12 @@
   line-height: 60px;
 }
 
+
+.card-image{
+  width: 400px;
+  height: 350px;
+}
+
 .ProductCard {
   max-width: 550px;
   border: 0;

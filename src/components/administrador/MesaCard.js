@@ -8,7 +8,7 @@ function MesaCard() {
   const { mesaId } = useParams();
   const [productos, setProductos] = useState([]);
   const [estadoMesa, setEstadoMesa] = useState(0);
-
+  const [refresh, setRefresh] = useState(false); // Estado para refrescar el componente
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -28,7 +28,7 @@ function MesaCard() {
     };
 
     enviarInfoMesa();
-  }, [mesaId]);
+  }, [mesaId, refresh]);
 
   const handleLiberarMesa = async () => {
     const token = localStorage.getItem('token');
@@ -53,6 +53,8 @@ function MesaCard() {
             text: 'La mesa ha sido liberada exitosamente',
             icon: 'success',
           });
+
+          setRefresh(!refresh); // Actualizar el estado de refresh para refrescar el componente
         } catch (error) {
           console.error('Error al liberar la mesa:', error);
         }

@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import ProductCard from './ProductCard';
 import { CartContext } from '../context/cartContext';
 
-function ProductList() {
+function ProductListBebida() {
   const { numeroMesa } = useParams();
   const { onAddToCart, setMesa } = useContext(CartContext);
   const [productos, setProductos] = useState([]);
@@ -31,14 +31,14 @@ function ProductList() {
     fetchData();
   }, [numeroMesa, token, setMesa]);
 
-  // Filtrar los productos por la categoría "plato"
-  const platos = productos.filter((product) => product.categoria === 'plato');
+  // Filtrar los productos por la categoría "bebida"
+  const bebidas = productos.filter((product) => product.categoria === 'bebida');
 
   return (
     <div className="product-list-container">
       <div className="product-list-column">
-        {Array.isArray(platos) ? (
-          platos.slice(0, Math.ceil(platos.length / 2)).map((product) => (
+        {Array.isArray(bebidas) ? (
+          bebidas.slice(0, Math.ceil(bebidas.length / 2)).map((product) => (
             <ProductCard
               key={product.id}
               id={product.id}
@@ -54,8 +54,8 @@ function ProductList() {
         )}
       </div>
       <div className="product-list-column">
-        {Array.isArray(platos) ? (
-          platos.slice(Math.ceil(platos.length / 2)).map((product) => (
+        {Array.isArray(bebidas) ? (
+          bebidas.slice(Math.ceil(bebidas.length / 2)).map((product) => (
             <ProductCard
               key={product.id}
               id={product.id}
@@ -74,5 +74,6 @@ function ProductList() {
   );
 }
 
-export default ProductList;
+export default ProductListBebida;
+
 

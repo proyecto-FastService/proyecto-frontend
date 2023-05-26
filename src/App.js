@@ -12,6 +12,8 @@ import ProductEditor from './components/administrador/ProductEditor';
 import AdminNavegationbar from './components/administrador/AdminNavegationbar';
 import './App.css';
 import fastServiceLogo from './img/logo.png';
+import ProductListBebida from './components/ProductListBebida';
+import ProductListPostre from './components/ProductListPostre';
 
 
 function App() {
@@ -40,6 +42,8 @@ function App() {
         {mesa === '0' ? <AdminNavegationbar /> : <Navbar />}
         <Routes>
           <Route path="/productos/:numeroMesa" element={<Productos />} />
+          <Route path="/bebidas/:numeroMesa" element={<ProductListBebida />} />
+          <Route path="/postres/:numeroMesa" element={<ProductListPostre />} />
           <Route path="/carrito" element={<Carrito />} />
           <Route path="/pagar" element={<Pagar />} />
           <Route path="/productos/0/*" element={<PanelAdmin />} />
