@@ -40,6 +40,16 @@ function Admin() {
     obtenerMesas();
   }, [refresh]); // Escucha cambios en el estado 'refresh'
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRefresh(!refresh);
+    }, 20000); // Recarga los componentes cada 20 segundos
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []); // Se ejecuta solo una vez al montar el componente
+
   const handleClickMesa = (mesaId) => {
     navigate(`/productos/0/${mesaId}`);
   };
@@ -121,15 +131,3 @@ function Admin() {
 }
 
 export default Admin;
-
-
-
-
-
-
-
-
-
-
-
-
