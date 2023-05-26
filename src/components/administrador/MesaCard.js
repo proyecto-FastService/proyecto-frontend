@@ -95,6 +95,16 @@ function MesaCard() {
           <FiArrowLeft className="mr-1" /> Volver al Panel de Administración
         </Link>
       </div>
+
+      {/* Imprimir la lista de productos */}
+      <div className="mt-4">
+        <h4>Productos:</h4>
+        <ul>
+          {productos.map((producto) => (
+            <li key={producto.id}>{producto.nombre}</li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
