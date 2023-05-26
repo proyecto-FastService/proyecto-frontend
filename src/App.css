@@ -187,27 +187,26 @@ p.card-text {
 /* CSS DEL FOOTER */
 
 
-.container1 {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
 .footer {
+  
+  bottom: 0;
+  position: relative;
+  margin-top: 10px;
+  width: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  color: #ffffff;
+  color: #ffff;
   padding: 10px;
 }
 
 .container-footer {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 2px;
 }
-
 
 .social-icons {
   display: flex;
