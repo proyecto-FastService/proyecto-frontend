@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 function ProductEditor() {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
+  const [refresh, setRefresh] = useState(false); // Estado para refrescar el componente
   const [productos, setProductos] = useState([]);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showAddModal, setShowAddModal] = useState(false);
@@ -23,7 +24,7 @@ function ProductEditor() {
 
   useEffect(() => {
     obtenerListadoProducto();
-  }, []);
+  }, [refresh]); // Agrega 'refresh' como dependencia del efecto
 
   const obtenerListadoProducto = async () => {
     try {
@@ -142,21 +143,21 @@ function ProductEditor() {
 
   const handleOcultarProduct = async (idProducto) => {
     try {
-       // Aquí debes proporcionar el token
-  
+      // Aquí debes proporcionar el token
+
       await axios.get(`http://127.0.0.1:8000/api/admOcultarProducto/${token}/${idProducto}`);
+      setRefresh(!refresh);
       Swal.fire({
         icon: 'success',
         title: 'Producto ocultado',
         text: 'El producto se ha ocultado correctamente.',
       });
       // Realizar cualquier lógica adicional que necesites después de ocultar el producto
-  
     } catch (error) {
       console.error('Error al ocultar el producto:', error);
     }
   };
-  
+
 
   return (
     <div className='container-card card'>
@@ -177,7 +178,7 @@ function ProductEditor() {
               <td>{product.existencias}</td>
               <td>{product.precio}</td>
               <td>
-                <Button className='custom-button'variant="primary" onClick={() => handleEditProduct(product)}>
+                <Button className='custom-button' variant="primary" onClick={() => handleEditProduct(product)}>
                   Editar
                 </Button>
                 <Button className='custom-button' variant="secondary" onClick={() => handleOcultarProduct(product.id)}>
@@ -283,8 +284,8 @@ function ProductEditor() {
       <button className='btn-admin' style={{ width: '10rem' }} onClick={handleAddProduct}>Añadir producto</button>
 
     </div>
- 
- );
+
+  );
 
 }
 
