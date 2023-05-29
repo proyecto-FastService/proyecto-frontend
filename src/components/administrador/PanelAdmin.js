@@ -92,7 +92,7 @@ function Admin() {
       <div className='d-flex justify-content-center align-items-center flex-wrap'>
         {mesas.map((mesa) => (
           <div key={mesa.id} className='m-3 container-card' style={{ width: '20rem', position: 'relative' }}>
-            <div className='card-body'>
+            <div className='card-body-admin'>
               <h5 className='card-title'>Mesa {mesa.id}</h5>
               <div
                 className={`badge position-absolute top-0 start-0 p-2 ${

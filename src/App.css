@@ -227,6 +227,9 @@
   font-weight: 600;
   line-height: 60px;
 }
+.card-body {
+  height: 650px; /* Ajusta la altura según tus necesidades */
+}
 
 
 .card-image{
@@ -311,16 +314,30 @@
 }
 
 .card-description {
+  height: 200px;
   font-weight: 600;
   line-height: 32px;
-  color: black;
-  font-size: 16px;
+  color: rgb(0, 0, 0);
+  font-size: 17px;
   max-width: 470px;
-  background: white;
+  /* background: white; */
   padding: 8px 16px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 1);
+  /* border-radius: 8px; */
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 1); */
 
+}
+
+@media (max-width: 991px) {
+  .card-body {
+    height: max-content;
+  }
+  .card-description {
+    height: max-content;
+  }
+}
+
+.card-body-admin{
+  height: max-content;
 }
 
 

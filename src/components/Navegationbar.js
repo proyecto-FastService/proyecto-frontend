@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -10,7 +10,6 @@ import '../App.css';
 import { TbBellRingingFilled } from 'react-icons/tb';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-
 
 function Navegationbar() {
   const { cart, mesa } = useContext(CartContext);
@@ -33,14 +32,14 @@ function Navegationbar() {
   };
 
   return (
-    <Navbar collapseOnSelect expand="lg" className="custom-navbar ">
-      <Container>
+    <Navbar collapseOnSelect expand="lg" className="custom-navbar">
+      <Container fluid>
         <Navbar.Brand as={NavLink} activeClassName="active-link" to={`/productos/${mesa}`}>
           <img src={logo} alt="Logo" className="logo" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" className="navbar-toggler" style={{ backgroundColor: 'white' }} />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="w-100">
+          <Nav className="me-auto">
             <Nav.Link as={NavLink} to={`/productos/${mesa}`} activeClassName="active-link">
               COMIDA
             </Nav.Link>
@@ -55,20 +54,19 @@ function Navegationbar() {
               {cartItemCount > 0 && <span className="cart-count">({cartItemCount})</span>}
               <FaShoppingCart style={{ marginLeft: '0.5rem' }} className="cart-icon text-ligthl" />
             </Nav.Link>
-            <div className="d-flex align-items-center ms-auto">
-              <Nav.Link as={NavLink} to="/pagar" activeClassName="active-link" className="custom-hover-mi-recibo">
-                <button className="btn btn-light" style={{ marginRight: '0.5rem' }}>MI RECIBO</button>
-              </Nav.Link>
-
-              <div activeClassName="active-link" className="custom-hover-camarero">
-                <button className="btn btn-danger" onClick={handleLlamarCamarero}>
-                  <span className="hover-bell">
-                    <TbBellRingingFilled className="bell-icon" style={{ marginRight: '0.5rem' }} />
-                  </span>
-                  CAMARERO
-                </button>
-              </div>
-            </div>
+          </Nav>
+          <Nav>            
+            <Nav.Link as={NavLink} to="/pagar" activeClassName="active-link" className="custom-hover-mi-recibo">
+              <button className="btn btn-light" style={{ marginRight: '0.5rem' }}>MI RECIBO</button>
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/pagar" activeClassName="active-link" className="custom-hover-camarero">
+              <button className="btn btn-danger" onClick={handleLlamarCamarero}>
+                <span className="hover-bell">
+                  <TbBellRingingFilled className="bell-icon" style={{ marginRight: '0.5rem' }} />
+                </span>
+                CAMARERO
+              </button>
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
@@ -77,45 +75,3 @@ function Navegationbar() {
 }
 
 export default Navegationbar;
-
-
-
-
-
-
-
-// function Navegationbar() {
-//   return (
-//     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-//       <Container>
-//         <Navbar.Brand href="#">FASTSERVICE</Navbar.Brand>
-//         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-//         <Navbar.Collapse id="responsive-navbar-nav">
-//           <Nav className="me-auto">
-//             <Nav.Link href="/productos">Productos</Nav.Link>
-//             <Nav.Link href="/carrito">Carrito</Nav.Link>
-//             <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-//               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-//               <NavDropdown.Item href="#action/3.2">
-//                 Another action
-//               </NavDropdown.Item>
-//               <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-//               <NavDropdown.Divider />
-//               <NavDropdown.Item href="#action/3.4">
-//                 Separated link
-//               </NavDropdown.Item>
-//             </NavDropdown>
-//           </Nav>
-//           <Nav>
-//             <Nav.Link href="#deets">More deets</Nav.Link>
-//             <Nav.Link eventKey={2} href="#memes">
-//               Dank memes
-//             </Nav.Link>
-//           </Nav>
-//         </Navbar.Collapse>
-//       </Container>
-//     </Navbar>
-//   );
-// }
-
-// export default Navegationbar;
