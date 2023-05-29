@@ -27,7 +27,7 @@ function ProductCard(props) {
     <div>
       <Card className="container-card shadow-lg rounded mx-auto pb-5" style={{ maxWidth: '30rem' }}>
         <Card.Title className="card-title">{props.title}</Card.Title>
-        <Card.Body>
+        <Card.Body className="card-body">
           <Card.Img className="card-image" variant="top" src={props.image} alt={props.title} />
           <Card.Text className="card-description">{props.description}</Card.Text>
           <Button className="custom-button" onClick={handleClick}>
