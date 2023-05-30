@@ -47,30 +47,29 @@ const Pagar = () => {
   };
 
   const handleEnviarFactura = async () => {
-    // Validar los campos de la factura antes de enviarlos
-
     try {
-      const facturaData = {
-        cif,
-        nombreEmpresa,
-        emailFactura
-      };
-
-      const url = `http://127.0.0.1:8000/api/envioCorreo/${token}/${emailFactura}`;
-
-      await axios.post(url, facturaData);
-
+      if (!nombreEmpresa || !cif) {
+        Swal.fire('Datos incompletos', 'Por favor, ingresa el nombre de la empresa y el CIF', 'warning');
+        return;
+      }
+  
+      const url = `http://127.0.0.1:8000/api/envioCorreo/${token}/${emailFactura}/${nombreEmpresa}/${cif}`;
+      console.log(url);
+  
+      await axios.get(url);
+  
       clearCart();
       localStorage.clear();
       Swal.fire('¡Pago exitoso!', 'El pago se ha realizado correctamente', 'success');
-      await axios.post(`http://127.0.0.1:8000/api/envioFactura/${token}/${emailFactura}`, facturaData);
       await axios.get(`http://127.0.0.1:8000/api/pagarCarrito/${token}`);
-
+  
       // Aquí puedes agregar el código adicional para manejar la respuesta de la API después de hacer la solicitud
     } catch (error) {
       // Aquí puedes manejar los errores en caso de que ocurra alguno durante la solicitud
     }
   };
+  
+  
 
   const handlePagarCarrito = async () => {
     try {
