@@ -12,16 +12,19 @@ const Pagar = () => {
   const [productosNoPagados, setProductosNoPagados] = useState([]);
   const [precioTotal, setPrecioTotal] = useState(0);
   const [email, setEmail] = useState('');
+  const [showFacturaModal, setShowFacturaModal] = useState(false);
+  const [cif, setCif] = useState('');
+  const [nombreEmpresa, setNombreEmpresa] = useState('');
+  const [emailFactura, setEmailFactura] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`http://127.0.0.1:8000/api/devolverProductosPedidosNoPagados/${token}`);
         setProductosNoPagados(response.data.productosNoPagados);
-        
-        // Calcular el precio total sumando los precios de los productos no pagados
+
         const total = response.data.productosNoPagados.reduce((accumulator, producto) => {
-          return accumulator + parseFloat(producto.precio); // Convertir a número usando parseFloat
+          return accumulator + parseFloat(producto.precio);
         }, 0);
         setPrecioTotal(total);
 
@@ -35,50 +38,85 @@ const Pagar = () => {
     fetchData();
   }, [token]);
 
+  const handleAbrirModalFactura = () => {
+    setShowFacturaModal(true);
+  };
+
+  const handleCerrarModalFactura = () => {
+    setShowFacturaModal(false);
+  };
+
+  const handleEnviarFactura = async () => {
+    // Validar los campos de la factura antes de enviarlos
+
+    try {
+      const facturaData = {
+        cif,
+        nombreEmpresa,
+        emailFactura
+      };
+
+      const url = `http://127.0.0.1:8000/api/envioCorreo/${token}/${emailFactura}`;
+
+      await axios.post(url, facturaData);
+
+      clearCart();
+      localStorage.clear();
+      Swal.fire('¡Pago exitoso!', 'El pago se ha realizado correctamente', 'success');
+      await axios.post(`http://127.0.0.1:8000/api/envioFactura/${token}/${emailFactura}`, facturaData);
+      await axios.get(`http://127.0.0.1:8000/api/pagarCarrito/${token}`);
+
+      // Aquí puedes agregar el código adicional para manejar la respuesta de la API después de hacer la solicitud
+    } catch (error) {
+      // Aquí puedes manejar los errores en caso de que ocurra alguno durante la solicitud
+    }
+  };
+
   const handlePagarCarrito = async () => {
     try {
       if (productosNoPagados.length === 0) {
-        // Mostrar SweetAlert2 de advertencia si no hay productos pendientes de pago
         Swal.fire('Recibo vacío', 'No hay productos pendientes de pago', 'warning');
-        return; // Salir de la función sin continuar
+        return;
       }
-  
-      // Mostrar SweetAlert2 para solicitar el correo electrónico
-      const { value: inputEmail } = await Swal.fire({
-        title: 'Ingrese su correo electrónico',
-        input: 'email',
-        inputLabel: 'Correo electrónico',
-        inputPlaceholder: 'Ingrese su correo electrónico para recibir el ticket',
-        showCancelButton: true,
-        confirmButtonText: 'OK',
-        cancelButtonText: 'Cancelar',
-        inputValidator: (value) => {
-          if (!value) {
-            return 'Debe ingresar un correo electrónico';
-          }
-        },
-      });
-  
-      if (inputEmail) {
-        setEmail(inputEmail);
-  
-        // Construir la URL con el token y el correo electrónico
-        const url = `http://127.0.0.1:8000/api/envioCorreo/${token}/${inputEmail}`;
-  
-        // Realizar la petición a la API con la URL construida
-        await axios.get(url);
-  
-        clearCart(); // Vaciar el carrito al hacer la solicitud de pago exitosamente
-        localStorage.clear(); // Limpiar el localStorage al hacer la solicitud de pago exitosamente
-  
-        // Mostrar SweetAlert2 de confirmación
-        Swal.fire('¡Pago exitoso!', 'El pago se ha realizado correctamente', 'success');
-        await axios.get(`http://127.0.0.1:8000/api/pagarCarrito/${token}`);
 
-        // Aquí puedes agregar el código adicional para manejar la respuesta de la API después de hacer la solicitud
+      const { value: facturaOption } = await Swal.fire({
+        title: '¿Deseas recibir factura?',
+        showCancelButton: true,
+        confirmButtonText: 'Sí',
+        cancelButtonText: 'No',
+      });
+
+      if (facturaOption) {
+        handleAbrirModalFactura();
+      } else {
+        const { value: inputEmail } = await Swal.fire({
+          title: 'Ingrese su correo electrónico',
+          input: 'email',
+          inputLabel: 'Correo electrónico',
+          inputPlaceholder: 'Ingrese su correo electrónico para recibir el ticket',
+          showCancelButton: true,
+          confirmButtonText: 'OK',
+          cancelButtonText: 'Cancelar',
+          inputValidator: (value) => {
+            if (!value) {
+              return 'Debe ingresar un correo electrónico';
+            }
+          },
+        });
+
+        if (inputEmail) {
+          setEmail(inputEmail);
+          const url = `http://127.0.0.1:8000/api/envioCorreo/${token}/${inputEmail}`;
+          await axios.get(url);
+
+          clearCart();
+          localStorage.clear();
+          Swal.fire('¡Pago exitoso!', 'El pago se ha realizado correctamente', 'success');
+          await axios.get(`http://127.0.0.1:8000/api/pagarCarrito/${token}`);
+        }
       }
     } catch (error) {
-      // Aquí puedes manejar los errores en caso de que ocurra alguno durante la solicitud
+      console.error(error);
     }
   };
 
@@ -98,7 +136,6 @@ const Pagar = () => {
                   </li>
                 ))}
               </ul>
-              
             </div>
           </Card.Body>
           <h4>Precio total: {precioTotal} €</h4>
@@ -107,6 +144,33 @@ const Pagar = () => {
           </div>
         </Card>
       </div>
+      {showFacturaModal && (
+        <div className="modal-overlay">
+          <div className="modal-container">
+            <h3>Factura</h3>
+            <Form>
+              <Form.Group controlId="formCif">
+                <Form.Label>CIF</Form.Label>
+                <Form.Control type="text" value={cif} onChange={(e) => setCif(e.target.value)} />
+              </Form.Group>
+              <Form.Group controlId="formNombreEmpresa">
+                <Form.Label>Nombre de la empresa</Form.Label>
+                <Form.Control type="text" value={nombreEmpresa} onChange={(e) => setNombreEmpresa(e.target.value)} />
+              </Form.Group>
+              <Form.Group controlId="formEmailFactura">
+                <Form.Label>Correo electrónico</Form.Label>
+                <Form.Control type="email" value={emailFactura} onChange={(e) => setEmailFactura(e.target.value)} />
+              </Form.Group>
+              <Button variant="primary" onClick={handleEnviarFactura}>
+                Enviar Factura
+              </Button>
+              <Button variant="secondary" onClick={handleCerrarModalFactura}>
+                Cerrar
+              </Button>
+            </Form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
