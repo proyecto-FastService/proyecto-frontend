@@ -38,9 +38,6 @@
   }
 }
 
-
-
-
 /* CSS DE LA LISTA DE PRODUCTO */
 
 .product-list {
@@ -177,9 +174,6 @@
   --bg: red !important;
 }
 
-
-
-
 .container {
   width: 1200px !important;
   padding: 0 !important;
@@ -230,7 +224,6 @@
 .card-body {
   height: 650px; /* Ajusta la altura según tus necesidades */
 }
-
 
 .card-image{
   width: 400px;
@@ -310,7 +303,6 @@
   padding: 8px 16px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 1);
-
 }
 
 .card-description {
@@ -340,10 +332,7 @@
   height: max-content;
 }
 
-
-
 /* CSS DEL NAVBAR */
-
 
 .logo {
   width: 80px;
@@ -359,12 +348,11 @@
 }
 
 .custom-hover-mi-recibo:hover button {
-  color: black !important;
+  color: white;
   -webkit-text-stroke-width: 0px;
-    background-color: #F9BF7B;
+    background-color: #4158D0;
     border: 0px;
 }
-
 
 .custom-hover-camarero:hover button {
   color: white !important;
@@ -390,19 +378,15 @@
   }
 }
 
+/* .nav-link.active {
+  color: #f30000 ;
 
+} */
 
-
-
-.nav-link.active {
-  color: #FFCC70 !important;
-
-}
-
-.navbar-brand.active {
+/* .navbar-brand.active {
   color: yellow !important;
 
-}
+} */
 
 .navbar-toggler {
   background-color: #FFCC70;
@@ -410,19 +394,22 @@
 }
 
 .custom-navbar a {
-  color: whitesmoke;
-  text-shadow: -0.5px -0.5px 0 black, 0.5px -0.5px 0 black, -0.5px 0.5px 0 black, 0.5px 0.5px 0 black;
+  color: rgb(6, 6, 6);
+  /* text-shadow: -0.5px -0.5px 0 black, 0.5px -0.5px 0 black, -0.5px 0.5px 0 black, 0.5px 0.5px 0 black; */
 }
 
+.active-link{
+  color: white ;
+}
 
-
-.custom-navbar a:hover {
-  color: #4158D0;
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: #4158D0;
+ .custom-navbar a:hover {
+  color: white;
+  /* -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #4158D0; */
 }
 
 .nav-link:active {
+  
   text-decoration: underline;
 }
 
@@ -444,7 +431,6 @@
     margin: 3px 0;
   }
 }
-
 
 .custom-cart {
   right: 0;
@@ -484,7 +470,6 @@
 
 /* CSS DEL FOOTER */
 
-
 .footer {
 
   bottom: 0;
@@ -494,7 +479,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  color: #ffff;
+  color: black;
   padding: 10px;
 }
 
@@ -529,12 +514,12 @@
 }
 
 .social-icons a {
-  color: #ffff;
+  color: black;
   font-size: 24px;
 }
 
 .social-icons a:hover {
-  color: #4158D0;
+  color: white;
 }
 
 .footer-left,
@@ -553,8 +538,6 @@
 .admin {
   height: 100%;
 }
-
-
 
 .card-container {
   display: grid;
