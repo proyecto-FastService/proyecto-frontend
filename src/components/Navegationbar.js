@@ -5,7 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { CartContext } from '../context/cartContext';
 import { FaShoppingCart } from 'react-icons/fa';
-import logo from '../img/logo fondo blanco.png'; // Ruta de la imagen de tu logo
+import logo from '../img/logo-fondo-blanco.png'; // Ruta de la imagen de tu logo
 import '../App.css';
 import { TbBellRingingFilled } from 'react-icons/tb';
 import axios from 'axios';
@@ -34,32 +34,32 @@ function Navegationbar() {
   return (
     <Navbar collapseOnSelect expand="lg" className="custom-navbar">
       <Container fluid>
-        <Navbar.Brand as={NavLink} activeClassName="active-link" to={`/productos/${mesa}`}>
+        <Navbar.Brand as={NavLink} to={`/productos/${mesa}`}>
           <img src={logo} alt="Logo" className="logo" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" className="navbar-toggler" style={{ backgroundColor: 'white' }} />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link as={NavLink} to={`/productos/${mesa}`} activeClassName="active-link">
+            <Nav.Link as={NavLink} to={`/productos/${mesa}`} className="custom-nav-link">
               COMIDA
             </Nav.Link>
-            <Nav.Link as={NavLink} to={`/bebidas/${mesa}`} activeClassName="active-link">
+            <Nav.Link as={NavLink} to={`/bebidas/${mesa}`} className="custom-nav-link">
               BEBIDA
             </Nav.Link>
-            <Nav.Link as={NavLink} to={`/postres/${mesa}`} activeClassName="active-link">
+            <Nav.Link as={NavLink} to={`/postres/${mesa}`} className="custom-nav-link">
               POSTRE
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/carrito" className="custom-cart" activeClassName="active-link">
+            <Nav.Link as={NavLink} to="/carrito" className=" custom-nav-link">
               <span>CARRITO</span>
               {cartItemCount > 0 && <span className="cart-count">({cartItemCount})</span>}
               <FaShoppingCart style={{ marginLeft: '0.5rem' }} className="cart-icon text-ligthl" />
             </Nav.Link>
           </Nav>
-          <Nav>            
-            <Nav.Link as={NavLink} to="/pagar" activeClassName="active-link" className="custom-hover-mi-recibo">
+          <Nav>
+            <Nav.Link as={NavLink} to="/pagar" className="custom-hover-mi-recibo">
               <button className="btn btn-light" style={{ marginRight: '0.5rem' }}>MI RECIBO</button>
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/pagar" activeClassName="active-link" className="custom-hover-camarero">
+            <Nav.Link as={NavLink} to="/pagar" className="custom-hover-camarero">
               <button className="btn btn-danger" onClick={handleLlamarCamarero}>
                 <span className="hover-bell">
                   <TbBellRingingFilled className="bell-icon" style={{ marginRight: '0.5rem' }} />

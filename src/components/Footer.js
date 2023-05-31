@@ -10,7 +10,7 @@ function Footer() {
           <span>&copy; Todos los derechos reservados</span>
         </div>
         <div className="footer-center">
-          <span>- Proyecto final DAW Medac Arena-</span>
+          <span>proyecto2.medacarena.es</span>
         </div>
         <div className="footer-right">
           <ul className="social-icons">

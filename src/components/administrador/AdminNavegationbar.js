@@ -5,7 +5,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import { CartContext } from '../../context/cartContext';
 import { FaShoppingCart } from 'react-icons/fa';
-import logo from '../../img/logo fondo blanco.png'; // Ruta de la imagen de tu logo
+import logo from '../../img/logo-fondo-blanco.png'; // Ruta de la imagen de tu logo
 import '../../App.css';
 
 function AdminNavegationbar() {
@@ -16,15 +16,15 @@ function AdminNavegationbar() {
   return (
     <Navbar collapseOnSelect expand="lg" className="custom-navbar ">
       <Container>
-        <Navbar.Brand as={NavLink} activeClassName="active-link" to={`/productos/${mesa}`}>
+        <Navbar.Brand as={NavLink}  to={`/productos/${mesa}`}>
           <img src={logo} alt="Logo" className="logo" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" className="navbar-toggler" style={{ backgroundColor: 'white' }} />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <NavLink to={`/productos/${mesa}`} className="nav-link" activeClassName="active-link" style={{ marginRight:'10px' }}>
+          <NavLink to={`/productos/${mesa}`} className="nav-link"  style={{ marginRight:'10px' }}>
               MESAS
           </NavLink>
-          <Nav.Link as={NavLink} to="/0/editar-productos" activeClassName="active-link" >
+          <Nav.Link as={NavLink} to="/0/editar-productos"  >
             EDITOR DE PRODUCTOS
           </Nav.Link>
         </Navbar.Collapse>

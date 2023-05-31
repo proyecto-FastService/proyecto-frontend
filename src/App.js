@@ -11,7 +11,7 @@ import MesaCard from './components/administrador/MesaCard';
 import ProductEditor from './components/administrador/ProductEditor';
 import AdminNavegationbar from './components/administrador/AdminNavegationbar';
 import './App.css';
-import fastServiceLogo from './img/logo.png';
+import fastServiceLogo from './img/logo-fondo-blanco.png';
 import ProductListBebida from './components/ProductListBebida';
 import ProductListPostre from './components/ProductListPostre';
 
