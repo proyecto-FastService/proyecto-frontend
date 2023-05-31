@@ -4,7 +4,6 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
 
 const Pagar = () => {
   const { cart, getTotalPrice, clearCart } = useContext(CartContext);
@@ -12,10 +11,6 @@ const Pagar = () => {
   const [productosNoPagados, setProductosNoPagados] = useState([]);
   const [precioTotal, setPrecioTotal] = useState(0);
   const [email, setEmail] = useState('');
-  const [showFacturaModal, setShowFacturaModal] = useState(false);
-  const [cif, setCif] = useState('');
-  const [nombreEmpresa, setNombreEmpresa] = useState('');
-  const [emailFactura, setEmailFactura] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,39 +33,6 @@ const Pagar = () => {
     fetchData();
   }, [token]);
 
-  const handleAbrirModalFactura = () => {
-    setShowFacturaModal(true);
-  };
-
-  const handleCerrarModalFactura = () => {
-    setShowFacturaModal(false);
-  };
-
-  const handleEnviarFactura = async () => {
-    try {
-      if (!nombreEmpresa || !cif) {
-        Swal.fire('Datos incompletos', 'Por favor, ingresa el nombre de la empresa y el CIF', 'warning');
-        return;
-      }
-  
-      const url = `http://127.0.0.1:8000/api/envioCorreo/${token}/${emailFactura}/${nombreEmpresa}/${cif}`;
-      console.log(url);
-  
-      await axios.get(url);
-  
-      clearCart();
-      localStorage.clear();
-      Swal.fire('¡Pago exitoso!', 'El pago se ha realizado correctamente', 'success');
-      await axios.get(`http://127.0.0.1:8000/api/pagarCarrito/${token}`);
-  
-      // Aquí puedes agregar el código adicional para manejar la respuesta de la API después de hacer la solicitud
-    } catch (error) {
-      // Aquí puedes manejar los errores en caso de que ocurra alguno durante la solicitud
-    }
-  };
-  
-  
-
   const handlePagarCarrito = async () => {
     try {
       if (productosNoPagados.length === 0) {
@@ -86,7 +48,51 @@ const Pagar = () => {
       });
 
       if (facturaOption) {
-        handleAbrirModalFactura();
+        const { value: formValues } = await Swal.fire({
+          title: 'Factura',
+          html:
+            '<input id="swal-input1" class="swal2-input" placeholder="CIF">' +
+            '<input id="swal-input2" class="swal2-input" placeholder="Nombre de la empresa">',
+          focusConfirm: false,
+          preConfirm: () => {
+            return [
+              document.getElementById('swal-input1').value,
+              document.getElementById('swal-input2').value
+            ];
+          }
+        });
+
+        if (formValues) {
+          const [cif, nombreEmpresa] = formValues;
+          const { value: inputEmail } = await Swal.fire({
+            title: 'Ingrese su correo electrónico',
+            input: 'email',
+            inputLabel: 'Correo electrónico',
+            inputPlaceholder: 'Ingrese su correo electrónico para recibir la factura',
+            showCancelButton: true,
+            confirmButtonText: 'OK',
+            cancelButtonText: 'Cancelar',
+            inputValidator: (value) => {
+              if (!value) {
+                return 'Debe ingresar un correo electrónico';
+              }
+            },
+          });
+
+          if (inputEmail) {
+            setEmail(inputEmail);
+            const url = `http://127.0.0.1:8000/api/envioCorreo/${token}/${inputEmail}/${nombreEmpresa}/${cif}`;
+            console.log(url);
+
+            await axios.get(url);
+
+            clearCart();
+            localStorage.clear();
+            Swal.fire('¡Pago exitoso!', 'El pago se ha realizado correctamente', 'success');
+            await axios.get(`http://127.0.0.1:8000/api/pagarCarrito/${token}`);
+            window.location.href = 'http://localhost:3000';
+          }
+        }
       } else {
         const { value: inputEmail } = await Swal.fire({
           title: 'Ingrese su correo electrónico',
@@ -112,6 +118,7 @@ const Pagar = () => {
           localStorage.clear();
           Swal.fire('¡Pago exitoso!', 'El pago se ha realizado correctamente', 'success');
           await axios.get(`http://127.0.0.1:8000/api/pagarCarrito/${token}`);
+          window.location.href = 'http://localhost:3000';
         }
       }
     } catch (error) {
@@ -143,35 +150,9 @@ const Pagar = () => {
           </div>
         </Card>
       </div>
-      {showFacturaModal && (
-        <div className="modal-overlay">
-          <div className="modal-container">
-            <h3>Factura</h3>
-            <Form>
-              <Form.Group controlId="formCif">
-                <Form.Label>CIF</Form.Label>
-                <Form.Control type="text" value={cif} onChange={(e) => setCif(e.target.value)} />
-              </Form.Group>
-              <Form.Group controlId="formNombreEmpresa">
-                <Form.Label>Nombre de la empresa</Form.Label>
-                <Form.Control type="text" value={nombreEmpresa} onChange={(e) => setNombreEmpresa(e.target.value)} />
-              </Form.Group>
-              <Form.Group controlId="formEmailFactura">
-                <Form.Label>Correo electrónico</Form.Label>
-                <Form.Control type="email" value={emailFactura} onChange={(e) => setEmailFactura(e.target.value)} />
-              </Form.Group>
-              <Button variant="primary" onClick={handleEnviarFactura}>
-                Enviar Factura
-              </Button>
-              <Button variant="secondary" onClick={handleCerrarModalFactura}>
-                Cerrar
-              </Button>
-            </Form>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
 
 export default Pagar;
+

@@ -7,7 +7,7 @@ function Footer() {
     <footer className="footer">
       <div className="container-footer">
         <div className="footer-left">
-          <span>&copy; Todos los derechos reservados</span>
+          <span>FastService 2023 &copy; Todos los derechos reservados</span>
         </div>
         <div className="footer-center">
           <span>proyecto2.medacarena.es</span>

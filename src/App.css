@@ -418,6 +418,10 @@
 
 }
 
+#responsive-navbar-nav{
+  color: white !important;
+}
+
 
 
 /* CSS DEL CARRITO*/
@@ -474,6 +478,11 @@
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
 }
+/* CSS DE HOME  */
+
+
+
+
 
 /* CSS DEL FOOTER */
 
@@ -494,7 +503,7 @@
 .container-footer {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   padding: 2px;
 }
@@ -530,16 +539,7 @@
   color: orange;
 }
 
-.footer-left,
-.footer-center,
-.footer-right {
-  flex-grow: 1;
-  text-align: center;
-}
 
-.footer-center {
-  flex-grow: 2;
-}
 
 /* CSS CARD ADMIN */
 

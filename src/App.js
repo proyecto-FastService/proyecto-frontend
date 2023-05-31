@@ -14,12 +14,12 @@ import './App.css';
 import fastServiceLogo from './img/logo-fondo-blanco.png';
 import ProductListBebida from './components/ProductListBebida';
 import ProductListPostre from './components/ProductListPostre';
+import Home from './components/Home';
 
 
 function App() {
   const [loading, setLoading] = useState(true);
   const mesa = localStorage.getItem('mesa');
-
   useEffect(() => {
     // Simula una carga de datos o procesamiento
     setTimeout(() => {
@@ -34,13 +34,14 @@ function App() {
       </div>
     );
   }
-  
+
 
   return (
     <BrowserRouter>
       <CartProvider>
         {mesa === '0' ? <AdminNavegationbar /> : <Navbar />}
         <Routes>
+          <Route path="/" element={<Home />} />
           <Route path="/productos/:numeroMesa" element={<Productos />} />
           <Route path="/bebidas/:numeroMesa" element={<ProductListBebida />} />
           <Route path="/postres/:numeroMesa" element={<ProductListPostre />} />
