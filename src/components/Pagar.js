@@ -116,9 +116,12 @@ const Pagar = () => {
 
           clearCart();
           localStorage.clear();
-          Swal.fire('¡Pago exitoso!', 'El pago se ha realizado correctamente', 'success');
-          await axios.get(`http://127.0.0.1:8000/api/pagarCarrito/${token}`);
-          window.location.href = 'http://localhost:3000';
+
+          Swal.fire('¡Pago exitoso!', 'El pago se ha realizado correctamente', 'success')
+            .then(() => {
+              axios.get(`http://127.0.0.1:8000/api/pagarCarrito/${token}`);
+              window.location.href = 'http://localhost:3000';
+            });
         }
       }
     } catch (error) {

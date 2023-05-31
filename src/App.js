@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route, useParams } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navegationbar';
 import Productos from './components/Productos';
 import Carrito from './components/Carrito';
@@ -16,15 +16,20 @@ import ProductListBebida from './components/ProductListBebida';
 import ProductListPostre from './components/ProductListPostre';
 import Home from './components/Home';
 
-
 function App() {
   const [loading, setLoading] = useState(true);
   const mesa = localStorage.getItem('mesa');
+  const [isHomePage, setIsHomePage] = useState(false);
+
   useEffect(() => {
     // Simula una carga de datos o procesamiento
     setTimeout(() => {
       setLoading(false);
     }, 3500);
+  }, []);
+
+  useEffect(() => {
+    setIsHomePage(window.location.pathname === '/');
   }, []);
 
   if (loading) {
@@ -35,11 +40,10 @@ function App() {
     );
   }
 
-
   return (
     <BrowserRouter>
       <CartProvider>
-        {mesa === '0' ? <AdminNavegationbar /> : <Navbar />}
+        {!isHomePage && (mesa === '0' ? <AdminNavegationbar /> : <Navbar />)}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/productos/:numeroMesa" element={<Productos />} />
@@ -51,12 +55,13 @@ function App() {
           <Route path="/productos/0/:mesaId" element={<MesaCard />} />
           <Route path="/0/editar-productos" element={<ProductEditor />} />
         </Routes>
-        {mesa !== '0' && <Footer />} {/* Renderizar el footer solo si mesa no es 0 */}
+        {mesa !== '0' && !isHomePage && <Footer />} {/* Renderizar el footer solo si mesa no es 0 y no estamos en la página de inicio */}
       </CartProvider>
     </BrowserRouter>
   );
 }
 
 export default App;
+
 
 

@@ -43,38 +43,38 @@ const Carrito = () => {
       mesa: mesa,
       // Otros datos que necesites enviar con el pedido
     };
-
+  
     if (token && mesa) {
       Swal.fire({
         title: '¡Marchando! Estamos enviando tu pedido a la cocina',
         allowOutsideClick: false,
         showConfirmButton: false,
-        onBeforeOpen: () => {
+        didOpen: () => {
           Swal.showLoading();
+          axios
+            .post(`http://127.0.0.1:8000/api/pedirListaProductosPorId/${token}`, { arrayProductosIds: orderData })
+            .then(response => {
+              console.log(response.data);
+              setTimeout(() => {
+                Swal.fire("¡Oído cocina!", "¡Marchando!", "success").then(() => {
+                  clearCart();
+                  navigate(`/productos/${mesa}`); // Redireccionar a "/productos/${mesa}"
+                });
+              }, 500); // Retraso de 1 segundo antes de mostrar la segunda alerta
+            })
+            .catch(error => {
+              console.error(error);
+            })
+            .finally(() => {
+              Swal.close();
+            });
         },
       });
-
-      axios
-        .post(`http://127.0.0.1:8000/api/pedirListaProductosPorId/${token}`, { arrayProductosIds: orderData })
-        .then(response => {
-          console.log(response.data);
-          setTimeout(() => {
-            Swal.fire("¡Oído cocina!", "¡Marchando!", "success").then(() => {
-              clearCart();
-              navigate(`/productos/${mesa}`); // Redireccionar a "/productos/${mesa}"
-            });
-          }, 1000); // Retraso de 1 segundo antes de mostrar la segunda alerta
-        })
-        .catch(error => {
-          console.error(error);
-        })
-        .finally(() => {
-          Swal.close();
-        });
     } else {
       console.log('Token o número de mesa no disponibles');
     }
   };
+  
 
 
   return (
