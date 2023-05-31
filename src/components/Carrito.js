@@ -45,25 +45,42 @@ const Carrito = () => {
     };
 
     if (token && mesa) {
-      axios.post(`http://127.0.0.1:8000/api/pedirListaProductosPorId/${token}`, { arrayProductosIds: orderData })
+      Swal.fire({
+        title: '¡Marchando! Estamos enviando tu pedido a la cocina',
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        onBeforeOpen: () => {
+          Swal.showLoading();
+        },
+      });
+
+      axios
+        .post(`http://127.0.0.1:8000/api/pedirListaProductosPorId/${token}`, { arrayProductosIds: orderData })
         .then(response => {
           console.log(response.data);
-          Swal.fire("¡Oído cocina!", "¡Marchando!", "success");
-          clearCart();
-          navigate(`/productos/${mesa}`); // Redireccionar a "/productos/${mesa}"
+          setTimeout(() => {
+            Swal.fire("¡Oído cocina!", "¡Marchando!", "success").then(() => {
+              clearCart();
+              navigate(`/productos/${mesa}`); // Redireccionar a "/productos/${mesa}"
+            });
+          }, 1000); // Retraso de 1 segundo antes de mostrar la segunda alerta
         })
         .catch(error => {
           console.error(error);
+        })
+        .finally(() => {
+          Swal.close();
         });
     } else {
       console.log('Token o número de mesa no disponibles');
     }
   };
 
+
   return (
     <div className='Body-Carrito d-flex flex-column flex-grow-1 pb-5'>
       <div className='d-flex justify-content-center'>
-        <Card className="Card-Carrito w-50 mt-5 container-card">
+        <Card className="Card-Carrito w-full mt-5 container-card">
           <Card.Header>
             <h1 className='text-center text-carrito-header '>Carrito</h1>
           </Card.Header>
