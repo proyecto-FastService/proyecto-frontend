@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
-import { BsTrash } from 'react-icons/bs';
+import { TiDelete } from 'react-icons/ti';
 
 const Carrito = () => {
   const { cart, removeFromCart, clearCart, getTotalPrice } = useContext(CartContext);
@@ -82,21 +82,25 @@ const Carrito = () => {
       <div className='d-flex justify-content-center'>
         <Card className="Card-Carrito w-full mt-5 container-card">
           <Card.Header>
-            <h1 className='text-center text-carrito-header '>Carrito</h1>
+            <h1 className='text-center text-carrito-header'>Carrito</h1>
           </Card.Header>
-          <Card.Body className='body-body-carrito '>
+          <Card.Body className='body-body-carrito'>
             {cart.length === 0 ? (
               <p>No hay productos en el carrito.</p>
             ) : (
               <ul>
                 {cart.map((item) => (
                   <li key={item.id}>
-                    {item.title} - {item.price}
-                    <Button className="btn btn-danger bg-transparent border-0 ms-2"
-                      onClick={() => handleRemoveFromCart(item.id)}
-                    >
-                      <BsTrash className="text-danger" />
-                    </Button>
+                    <div className="product-container">
+                      <Button
+                        className="btn btn-danger bg-transparent border-0 mr-2"
+                        onClick={() => handleRemoveFromCart(item.id)}
+                      >
+                        <TiDelete className="text-danger" />
+                      </Button>
+                      <img src={item.image} alt={item.title} className="product-image" />
+                      <p>{item.title} - {item.price}</p>
+                    </div>
                   </li>
                 ))}
               </ul>
@@ -123,6 +127,7 @@ const Carrito = () => {
       </div>
     </div>
   );
+  
 };
 
 export default Carrito;

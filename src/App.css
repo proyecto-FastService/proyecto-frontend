@@ -425,6 +425,28 @@
 
 
 /* CSS DEL CARRITO*/
+
+
+.product-container {
+  display: flex;
+  align-items: center;
+}
+
+.product-image {
+  width: 60px; /* Ajusta el tamaño de la imagen según sea necesario */
+  height: 60px;
+  margin-right: 10px; /* Espacio entre la imagen y el texto del producto */
+}
+
+.product-container p {
+  margin-bottom: 0;
+}
+
+.card-body li {
+  list-style-type: none; /* Quita la viñeta de la lista */
+  margin-top: 10px; /* Ajusta el margen superior según sea necesario */
+}
+
 .botones {
   display: flex;
   flex-wrap: wrap;
@@ -453,7 +475,6 @@
 
 .card-body li {
   margin-top: 5px;
-  list-style-type: circle;
 }
 
 
