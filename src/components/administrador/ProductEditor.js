@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { Modal, Button, Form } from 'react-bootstrap';
+import { Modal, Button, Form, Table } from 'react-bootstrap';
 import Swal from 'sweetalert2';
+import { saveAs } from 'file-saver';
+
+
 function ProductEditor() {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
@@ -88,6 +91,10 @@ function ProductEditor() {
   };
 
   const handleSaveChanges = async () => {
+    if (!validateForm()) {
+      return;
+    }
+
     try {
       const formData = new FormData();
       formData.append('nombre', editedProduct.nombre);
@@ -117,6 +124,10 @@ function ProductEditor() {
   };
 
   const handleAddNewProduct = async () => {
+    if (!validateForm()) {
+      return;
+    }
+
     try {
       const formData = new FormData();
       formData.append('nombre', editedProduct.nombre);
@@ -126,6 +137,7 @@ function ProductEditor() {
       formData.append('ingredientes', editedProduct.ingredientes);
       formData.append('alergenos', editedProduct.alergenos);
       formData.append('imagen', editedProduct.imagen);
+      formData.append('categoria', editedProduct.categoria);
 
       await axios.post(`http://127.0.0.1:8000/api/admAddProducto/${token}`, formData, {
         headers: {
@@ -143,8 +155,6 @@ function ProductEditor() {
 
   const handleOcultarProduct = async (idProducto) => {
     try {
-      // Aquí debes proporcionar el token
-
       await axios.get(`http://127.0.0.1:8000/api/admOcultarProducto/${token}/${idProducto}`);
       setRefresh(!refresh);
       Swal.fire({
@@ -158,11 +168,23 @@ function ProductEditor() {
     }
   };
 
+  const validateForm = () => {
+    if (!editedProduct.nombre || !editedProduct.existencias || !editedProduct.precio) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Todos los campos deben ser completados',
+      });
+      return false;
+    }
+
+    return true;
+  };
 
   return (
     <div className='container-card card'>
       <h1>Editor de Productos</h1>
-      <table>
+      <Table striped bordered>
         <thead>
           <tr>
             <th>Nombre</th>
@@ -188,39 +210,74 @@ function ProductEditor() {
             </tr>
           ))}
         </tbody>
-      </table>
+      </Table>
 
+      <Button className='custom-button' variant="success" onClick={handleAddProduct}>
+        Añadir
+      </Button>
+
+      {/* Modal de Edición */}
       <Modal show={showEditModal} onHide={handleCloseEditModal}>
         <Modal.Header closeButton>
           <Modal.Title>Editar Producto</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group controlId="formNombre">
+            <Form.Group>
               <Form.Label>Nombre</Form.Label>
-              <Form.Control type="text" name="nombre" value={editedProduct.nombre} onChange={handleInputChange} />
+              <Form.Control
+                type="text"
+                name="nombre"
+                value={editedProduct.nombre}
+                onChange={handleInputChange}
+              />
             </Form.Group>
-            <Form.Group controlId="formExistencias">
+            <Form.Group>
               <Form.Label>Existencias</Form.Label>
-              <Form.Control type="number" name="existencias" value={editedProduct.existencias} onChange={handleInputChange} />
+              <Form.Control
+                type="number"
+                name="existencias"
+                value={editedProduct.existencias}
+                onChange={handleInputChange}
+              />
             </Form.Group>
-            <Form.Group controlId="formPrecio">
+            <Form.Group>
               <Form.Label>Precio</Form.Label>
-              <Form.Control type="number" name="precio" value={editedProduct.precio} onChange={handleInputChange} />
+              <Form.Control
+                type="number"
+                name="precio"
+                value={editedProduct.precio}
+                onChange={handleInputChange}
+              />
             </Form.Group>
-            <Form.Group controlId="formDescripcion">
+            <Form.Group>
               <Form.Label>Descripción</Form.Label>
-              <Form.Control as="textarea" name="descripcion" value={editedProduct.descripcion} onChange={handleInputChange} />
+              <Form.Control
+                as="textarea"
+                name="descripcion"
+                value={editedProduct.descripcion}
+                onChange={handleInputChange}
+              />
             </Form.Group>
-            <Form.Group controlId="formIngredientes">
+            <Form.Group>
               <Form.Label>Ingredientes</Form.Label>
-              <Form.Control as="textarea" name="ingredientes" value={editedProduct.ingredientes} onChange={handleInputChange} />
+              <Form.Control
+                as="textarea"
+                name="ingredientes"
+                value={editedProduct.ingredientes}
+                onChange={handleInputChange}
+              />
             </Form.Group>
-            <Form.Group controlId="formAlergenos">
+            <Form.Group>
               <Form.Label>Alergenos</Form.Label>
-              <Form.Control as="textarea" name="alergenos" value={editedProduct.alergenos} onChange={handleInputChange} />
+              <Form.Control
+                as="textarea"
+                name="alergenos"
+                value={editedProduct.alergenos}
+                onChange={handleInputChange}
+              />
             </Form.Group>
-            <Form.Group controlId="formImagen">
+            <Form.Group>
               <Form.Label>Imagen</Form.Label>
               <Form.Control type="file" name="imagen" onChange={handleInputChange} />
             </Form.Group>
@@ -228,7 +285,7 @@ function ProductEditor() {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseEditModal}>
-            Cancelar
+            Cerrar
           </Button>
           <Button variant="primary" onClick={handleSaveChanges}>
             Guardar Cambios
@@ -236,37 +293,78 @@ function ProductEditor() {
         </Modal.Footer>
       </Modal>
 
+      {/* Modal de Agregar */}
       <Modal show={showAddModal} onHide={handleCloseAddModal}>
         <Modal.Header closeButton>
-          <Modal.Title>Añadir Producto</Modal.Title>
+          <Modal.Title>Agregar Producto</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group controlId="formNombre">
+            <Form.Group>
               <Form.Label>Nombre</Form.Label>
-              <Form.Control type="text" name="nombre" value={editedProduct.nombre} onChange={handleInputChange} />
+              <Form.Control
+                type="text"
+                name="nombre"
+                value={editedProduct.nombre}
+                onChange={handleInputChange}
+              />
             </Form.Group>
-            <Form.Group controlId="formExistencias">
+            <Form.Group>
               <Form.Label>Existencias</Form.Label>
-              <Form.Control type="number" name="existencias" value={editedProduct.existencias} onChange={handleInputChange} />
+              <Form.Control
+                type="number"
+                name="existencias"
+                value={editedProduct.existencias}
+                onChange={handleInputChange}
+              />
             </Form.Group>
-            <Form.Group controlId="formPrecio">
+            <Form.Group>
               <Form.Label>Precio</Form.Label>
-              <Form.Control type="number" name="precio" value={editedProduct.precio} onChange={handleInputChange} />
+              <Form.Control
+                type="number"
+                name="precio"
+                value={editedProduct.precio}
+                onChange={handleInputChange}
+              />
             </Form.Group>
-            <Form.Group controlId="formDescripcion">
+            <Form.Group>
               <Form.Label>Descripción</Form.Label>
-              <Form.Control as="textarea" name="descripcion" value={editedProduct.descripcion} onChange={handleInputChange} />
+              <Form.Control
+                as="textarea"
+                name="descripcion"
+                value={editedProduct.descripcion}
+                onChange={handleInputChange}
+              />
             </Form.Group>
-            <Form.Group controlId="formIngredientes">
+            <Form.Group>
               <Form.Label>Ingredientes</Form.Label>
-              <Form.Control as="textarea" name="ingredientes" value={editedProduct.ingredientes} onChange={handleInputChange} />
+              <Form.Control
+                as="textarea"
+                name="ingredientes"
+                value={editedProduct.ingredientes}
+                onChange={handleInputChange}
+              />
             </Form.Group>
-            <Form.Group controlId="formAlergenos">
+            <Form.Group>
               <Form.Label>Alergenos</Form.Label>
-              <Form.Control as="textarea" name="alergenos" value={editedProduct.alergenos} onChange={handleInputChange} />
+              <Form.Control
+                as="textarea"
+                name="alergenos"
+                value={editedProduct.alergenos}
+                onChange={handleInputChange}
+              />
             </Form.Group>
-            <Form.Group controlId="formImagen">
+            <Form.Group>
+              <Form.Label>Categoría</Form.Label>
+              <Form.Control
+                as="textarea"
+                name="categoria"
+                value={editedProduct.categoria}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+            
+            <Form.Group>
               <Form.Label>Imagen</Form.Label>
               <Form.Control type="file" name="imagen" onChange={handleInputChange} />
             </Form.Group>
@@ -274,19 +372,15 @@ function ProductEditor() {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseAddModal}>
-            Cancelar
+            Cerrar
           </Button>
           <Button variant="primary" onClick={handleAddNewProduct}>
-            Añadir Producto
+            Agregar
           </Button>
         </Modal.Footer>
       </Modal>
-      <button className='btn-admin' style={{ width: '10rem' }} onClick={handleAddProduct}>Añadir producto</button>
-
     </div>
-
   );
-
 }
 
 export default ProductEditor;
