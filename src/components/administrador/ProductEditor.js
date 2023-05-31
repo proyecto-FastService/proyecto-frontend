@@ -3,7 +3,6 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Modal, Button, Form, Table } from 'react-bootstrap';
 import Swal from 'sweetalert2';
-import { saveAs } from 'file-saver';
 
 
 function ProductEditor() {
