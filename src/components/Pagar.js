@@ -15,7 +15,7 @@ const Pagar = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://127.0.0.1:8000/api/devolverProductosPedidosNoPagados/${token}`);
+        const response = await axios.get(`https://daw206.medacarena.es/public/api/devolverProductosPedidosNoPagados/${token}`);
         setProductosNoPagados(response.data.productosNoPagados);
 
         const total = response.data.productosNoPagados.reduce((accumulator, producto) => {
@@ -81,7 +81,7 @@ const Pagar = () => {
 
           if (inputEmail) {
             setEmail(inputEmail);
-            const url = `http://127.0.0.1:8000/api/envioCorreo/${token}/${inputEmail}/${nombreEmpresa}/${cif}`;
+            const url = `https://daw206.medacarena.es/public/api/envioCorreo/${token}/${inputEmail}/${nombreEmpresa}/${cif}`;
             console.log(url);
 
             await axios.get(url);
@@ -89,7 +89,7 @@ const Pagar = () => {
             clearCart();
             localStorage.clear();
             Swal.fire('¡Pago exitoso!', 'El pago se ha realizado correctamente', 'success');
-            await axios.get(`http://127.0.0.1:8000/api/pagarCarrito/${token}`);
+            await axios.get(`https://daw206.medacarena.es/public/api/pagarCarrito/${token}`);
             window.location.href = 'http://localhost:3000';
           }
         }
@@ -111,7 +111,7 @@ const Pagar = () => {
 
         if (inputEmail) {
           setEmail(inputEmail);
-          const url = `http://127.0.0.1:8000/api/envioCorreo/${token}/${inputEmail}`;
+          const url = `https://daw206.medacarena.es/public/api/envioCorreo/${token}/${inputEmail}`;
           await axios.get(url);
 
           clearCart();
@@ -119,7 +119,7 @@ const Pagar = () => {
 
           Swal.fire('¡Pago exitoso!', 'El pago se ha realizado correctamente', 'success')
             .then(() => {
-              axios.get(`http://127.0.0.1:8000/api/pagarCarrito/${token}`);
+              axios.get(`https://daw206.medacarena.es/public/api/pagarCarrito/${token}`);
               window.location.href = 'http://localhost:3000';
             });
         }

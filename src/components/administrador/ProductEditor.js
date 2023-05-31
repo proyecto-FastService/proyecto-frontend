@@ -30,7 +30,7 @@ function ProductEditor() {
 
   const obtenerListadoProducto = async () => {
     try {
-      const response = await axios.get(`http://127.0.0.1:8000/api/admObtenerListadoProducto/${token}`);
+      const response = await axios.get(`https://daw206.medacarena.es/public/api/admObtenerListadoProducto/${token}`);
       const data = response.data.productos;
       setProductos(data);
     } catch (error) {
@@ -105,7 +105,7 @@ function ProductEditor() {
       formData.append('imagen', editedProduct.imagen);
 
       await axios.post(
-        `http://127.0.0.1:8000/api/admEditarProducto/${token}/${selectedProduct.id}`,
+        `https://daw206.medacarena.es/public/api/admEditarProducto/${token}/${selectedProduct.id}`,
         formData,
         {
           headers: {
@@ -138,7 +138,7 @@ function ProductEditor() {
       formData.append('imagen', editedProduct.imagen);
       formData.append('categoria', editedProduct.categoria);
 
-      await axios.post(`http://127.0.0.1:8000/api/admAddProducto/${token}`, formData, {
+      await axios.post(`https://daw206.medacarena.es/public/api/admAddProducto/${token}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -154,7 +154,7 @@ function ProductEditor() {
 
   const handleOcultarProduct = async (idProducto) => {
     try {
-      await axios.get(`http://127.0.0.1:8000/api/admOcultarProducto/${token}/${idProducto}`);
+      await axios.get(`https://daw206.medacarena.es/public/api/admOcultarProducto/${token}/${idProducto}`);
       setRefresh(!refresh);
       Swal.fire({
         icon: 'success',

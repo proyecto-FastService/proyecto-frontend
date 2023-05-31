@@ -52,7 +52,7 @@ const Carrito = () => {
         didOpen: () => {
           Swal.showLoading();
           axios
-            .post(`http://127.0.0.1:8000/api/pedirListaProductosPorId/${token}`, { arrayProductosIds: orderData })
+            .post(`https://daw206.medacarena.es/public/api/pedirListaProductosPorId/${token}`, { arrayProductosIds: orderData })
             .then(response => {
               console.log(response.data);
               setTimeout(() => {

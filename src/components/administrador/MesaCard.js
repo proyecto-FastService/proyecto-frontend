@@ -16,7 +16,7 @@ function MesaCard() {
     const enviarInfoMesa = async () => {
       try {
         const response = await axios.post(
-          `http://127.0.0.1:8000/api/admComprobarProductosPorMesa/${token}/${mesaId}`
+          `https://daw206.medacarena.es/public/api/admComprobarProductosPorMesa/${token}/${mesaId}`
         );
         const data = response.data;
         setProductos(data.productos);
@@ -44,7 +44,7 @@ function MesaCard() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.post(`http://127.0.0.1:8000/api/admLiberarMesa/${token}/${mesaId}`);
+          await axios.post(`https://daw206.medacarena.es/public/api/admLiberarMesa/${token}/${mesaId}`);
           console.log('Mesa liberada exitosamente');
 
           // Mostrar SweetAlert2 para indicar que la mesa ha sido liberada exitosamente
@@ -69,7 +69,7 @@ function MesaCard() {
     const token = localStorage.getItem('token');
 
     try {
-      await axios.post(`http://127.0.0.1:8000/api/admReservarMesa/${token}/${mesaId}`);
+      await axios.post(`https://daw206.medacarena.es/public/api/admReservarMesa/${token}/${mesaId}`);
       console.log('Mesa reservada exitosamente');
 
       // Mostrar SweetAlert de confirmación

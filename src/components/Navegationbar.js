@@ -19,7 +19,7 @@ function Navegationbar() {
   const handleLlamarCamarero = async () => {
     const token = localStorage.getItem('token');
     try {
-      await axios.get(`http://127.0.0.1:8000/api/llamarCamarero/${token}`);
+      await axios.get(`https://daw206.medacarena.es/public/api/llamarCamarero/${token}`);
       Swal.fire({
         icon: 'success',
         title: 'Camarero llamado',
@@ -40,7 +40,7 @@ function Navegationbar() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" className="navbar-toggler" style={{ backgroundColor: 'white' }} />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link as={NavLink} to={`/productos/${mesa}`} className="custom-nav-link">
+            <Nav.Link as={NavLink} to={``} className="custom-nav-link">
               COMIDA
             </Nav.Link>
             <Nav.Link as={NavLink} to={`/bebidas/${mesa}`} className="custom-nav-link">
@@ -59,7 +59,7 @@ function Navegationbar() {
             <Nav.Link as={NavLink} to="/pagar" className="custom-hover-mi-recibo">
               <button className="btn btn-light" style={{ marginRight: '0.5rem' }}>MI RECIBO</button>
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/pagar" className="custom-hover-camarero">
+            <Nav.Link as={NavLink} className="custom-hover-camarero">
               <button className="btn btn-danger" onClick={handleLlamarCamarero}>
                 <span className="hover-bell">
                   <TbBellRingingFilled className="bell-icon" style={{ marginRight: '0.5rem' }} />

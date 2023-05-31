@@ -17,11 +17,11 @@ function Admin() {
         const token = localStorage.getItem('token');
 
         if (token != null) {
-          let ruta = `http://127.0.0.1:8000/api/admObtenerToken/0/${token}`;
+          let ruta = `https://daw206.medacarena.es/public/api/admObtenerToken/0/${token}`;
           response2 = await fetch(ruta);
           console.log(mesas);
         } else {
-          response2 = await fetch(`http://127.0.0.1:8000/api/admObtenerToken/0/`);
+          response2 = await fetch(`https://daw206.medacarena.es/public/api/admObtenerToken/0/`);
         }
 
         const data2 = await response2.json();
@@ -29,7 +29,7 @@ function Admin() {
           localStorage.setItem('token', data2.token);
         }
 
-        const response = await axios.get(`http://127.0.0.1:8000/api/admObtenerTodasMesas/${token}`);
+        const response = await axios.get(`https://daw206.medacarena.es/public/api/admObtenerTodasMesas/${token}`);
         setMesas(response.data.mesas);
         console.log(mesas);
       } catch (error) {
@@ -72,7 +72,7 @@ function Admin() {
 
     if (result.isConfirmed) {
       try {
-        const response = await axios.get(`http://127.0.0.1:8000/api/mesaAtendida/${mesa.codigo}`);
+        const response = await axios.get(`https://daw206.medacarena.es/public/api/mesaAtendida/${mesa.codigo}`);
         console.log(response.data);
         // Realizar acciones adicionales después de atender la mesa
 
