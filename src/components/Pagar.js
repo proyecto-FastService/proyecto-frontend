@@ -33,6 +33,40 @@ const Pagar = () => {
     fetchData();
   }, [token]);
 
+  const handleAbrirModalFactura = () => {
+    setShowFacturaModal(true);
+  };
+
+  const handleCerrarModalFactura = () => {
+    setShowFacturaModal(false);
+  };
+
+  const handleEnviarFactura = async () => {
+    // Validar los campos de la factura antes de enviarlos
+
+    try {
+      const facturaData = {
+        cif,
+        nombreEmpresa,
+        emailFactura
+      };
+
+      const url = `http://127.0.0.1:8000/api/envioCorreo/${token}/${emailFactura}`;
+
+      await axios.post(url, facturaData);
+
+      clearCart();
+      localStorage.clear();
+      Swal.fire('¡Pago exitoso!', 'El pago se ha realizado correctamente', 'success');
+      await axios.post(`http://127.0.0.1:8000/api/envioFactura/${token}/${emailFactura}`, facturaData);
+      await axios.get(`http://127.0.0.1:8000/api/pagarCarrito/${token}`);
+
+      // Aquí puedes agregar el código adicional para manejar la respuesta de la API después de hacer la solicitud
+    } catch (error) {
+      // Aquí puedes manejar los errores en caso de que ocurra alguno durante la solicitud
+    }
+  };
+
   const handlePagarCarrito = async () => {
     try {
       if (productosNoPagados.length === 0) {
