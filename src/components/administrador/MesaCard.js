@@ -12,7 +12,7 @@ function MesaCard() {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-
+  
     const enviarInfoMesa = async () => {
       try {
         const response = await axios.post(
@@ -26,9 +26,18 @@ function MesaCard() {
         console.error('Error al enviar la información de la mesa:', error);
       }
     };
-
+  
     enviarInfoMesa();
+  
+    const interval = setInterval(() => {
+      enviarInfoMesa();
+    }, 10000); // 10 seconds in milliseconds
+  
+    return () => {
+      clearInterval(interval); // Clear the interval on component unmount
+    };
   }, [mesaId, refresh]);
+  
 
   const handleLiberarMesa = async () => {
     const token = localStorage.getItem('token');

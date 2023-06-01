@@ -21,7 +21,7 @@ function Admin() {
           response2 = await fetch(ruta);
           console.log(mesas);
         } else {
-          response2 = await fetch(`https://daw206.medacarena.es/public/api/admObtenerToken/0/`);
+          response2 = await fetch(`https://daw206.medacarena.es/public/api/admObtenerToken/0`);
         }
 
         const data2 = await response2.json();
@@ -43,7 +43,7 @@ function Admin() {
   useEffect(() => {
     const interval = setInterval(() => {
       setRefresh(!refresh);
-    }, 20000); // Recarga los componentes cada 20 segundos
+    }, 10000); // Recarga los componentes cada 20 segundos
 
     return () => {
       clearInterval(interval);

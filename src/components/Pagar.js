@@ -55,11 +55,21 @@ const Pagar = () => {
             '<input id="swal-input2" class="swal2-input" placeholder="Nombre de la empresa">',
           focusConfirm: false,
           preConfirm: () => {
-            return [
-              document.getElementById('swal-input1').value,
-              document.getElementById('swal-input2').value
-            ];
-          }
+            const cif = document.getElementById('swal-input1').value;
+            const nombreEmpresa = document.getElementById('swal-input2').value;
+          
+            // CIF validation regex pattern
+            const cifRegex = /^[ABCDEFGHJKLMNPQRSUVW]{1}\d{7}[0-9A-J]$/;
+          
+            if (!cif || !nombreEmpresa) {
+              Swal.showValidationMessage('Debe completar todos los campos');
+            } else if (!cifRegex.test(cif)) {
+              Swal.showValidationMessage('Debe ingresar un CIF válido');
+            }
+          
+            return [cif, nombreEmpresa];
+          },
+          
         });
 
         if (formValues) {
@@ -76,6 +86,10 @@ const Pagar = () => {
               if (!value) {
                 return 'Debe ingresar un correo electrónico';
               }
+          
+              if (!/\S+@\S+\.\S+/.test(value)) {
+                return 'Debe ingresar un correo electrónico válido';
+              }
             },
           });
 
@@ -90,7 +104,7 @@ const Pagar = () => {
             localStorage.clear();
             Swal.fire('¡Pago exitoso!', 'El pago se ha realizado correctamente', 'success');
             await axios.get(`https://daw206.medacarena.es/public/api/pagarCarrito/${token}`);
-            window.location.href = 'http://localhost:3000';
+            window.location.href = 'https://proyecto2.medacarena.es';
           }
         }
       } else {
@@ -106,12 +120,17 @@ const Pagar = () => {
             if (!value) {
               return 'Debe ingresar un correo electrónico';
             }
+        
+            if (!/\S+@\S+\.\S+/.test(value)) {
+              return 'Debe ingresar un correo electrónico válido';
+            }
           },
         });
+        
 
         if (inputEmail) {
           setEmail(inputEmail);
-          const url = `https://daw206.medacarena.es/public/api/envioCorreo/${token}/${inputEmail}`;
+          const url = `https://daw206.medacarena.es/public/api/envioCorreo/${token}/${inputEmail}/null/null`;
           await axios.get(url);
 
           clearCart();
@@ -120,7 +139,7 @@ const Pagar = () => {
           Swal.fire('¡Pago exitoso!', 'El pago se ha realizado correctamente', 'success')
             .then(() => {
               axios.get(`https://daw206.medacarena.es/public/api/pagarCarrito/${token}`);
-              window.location.href = 'http://localhost:3000';
+              window.location.href = 'https://proyecto2.medacarena.es';
             });
         }
       }

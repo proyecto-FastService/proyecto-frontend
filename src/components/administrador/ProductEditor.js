@@ -25,8 +25,13 @@ function ProductEditor() {
   });
 
   useEffect(() => {
-    obtenerListadoProducto();
-  }, [refresh]); // Agrega 'refresh' como dependencia del efecto
+    const interval = setInterval(() => {
+      obtenerListadoProducto();
+    }, 10000); // 10 seconds in milliseconds
+  
+    return () => clearInterval(interval); // Clear the interval on component unmount
+  }, [refresh]);
+   // Agrega 'refresh' como dependencia del efecto
 
   const obtenerListadoProducto = async () => {
     try {
@@ -156,6 +161,7 @@ function ProductEditor() {
     try {
       await axios.get(`https://daw206.medacarena.es/public/api/admOcultarProducto/${token}/${idProducto}`);
       setRefresh(!refresh);
+      obtenerListadoProducto();
       Swal.fire({
         icon: 'success',
         title: 'Producto ocultado',
