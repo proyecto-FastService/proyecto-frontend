@@ -40,7 +40,7 @@ function Navegationbar() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" className="navbar-toggler" style={{ backgroundColor: 'white' }} />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link as={NavLink} to={``} className="custom-nav-link">
+            <Nav.Link as={NavLink} to={`/productos/${mesa}`} className="custom-nav-link">
               COMIDA
             </Nav.Link>
             <Nav.Link as={NavLink} to={`/bebidas/${mesa}`} className="custom-nav-link">
