@@ -3,12 +3,21 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { FaUser } from 'react-icons/fa';
 import Swal from 'sweetalert2';
+import { useParams } from 'react-router-dom';
+
 
 function Admin() {
   const [mesas, setMesas] = useState([]);
   const [refresh, setRefresh] = useState(false); // Estado para refrescar el componente
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
+  const { numeroMesa } = useParams();
+
+  useEffect(() => {
+    if (numeroMesa) {
+      localStorage.setItem('mesa', numeroMesa);
+    }
+  }, [numeroMesa]);
 
   useEffect(() => {
     const obtenerMesas = async () => {

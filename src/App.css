@@ -649,18 +649,38 @@
 }
 
 /* Estilos específicos para dispositivos móviles */
+/* Estilos generales para todos los SweetAlerts */
+.swal2-container {
+  font-family: inherit;
+  font-size: 16px;
+}
+
+/* Estilos específicos para dispositivos móviles */
+/* Estilos generales para todos los SweetAlerts */
+.swal2-container {
+  font-family: inherit;
+  font-size: 16px;
+}
+
+/* Estilos específicos para dispositivos móviles */
 @media (max-width: 767px) {
   .swal2-popup {
-    width: 90%;
+    width: 80%;
     max-width: 300px;
+    overflow-x: hidden; /* Evita la barra de desplazamiento horizontal */
   }
 
   .swal2-title {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .swal2-content {
     font-size: 14px;
+  }
+
+  .swal2-input-cif {
+    width: 220px !important;
+    margin-top: 10px;
   }
 }
 
@@ -678,4 +698,10 @@
   .swal2-content {
     font-size: 16px;
   }
+
+  .swal2-input {
+    width: 80%;
+  }
 }
+
+

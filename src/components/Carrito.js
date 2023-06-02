@@ -56,7 +56,7 @@ const Carrito = () => {
             .then(response => {
               console.log(response.data);
               setTimeout(() => {
-                Swal.fire("¡Oído cocina!", "¡Marchando!", "success").then(() => {
+                Swal.fire("¡Oído cocina!","success").then(() => {
                   clearCart();
                   navigate(`/productos/${mesa}`); // Redireccionar a "/productos/${mesa}"
                 });

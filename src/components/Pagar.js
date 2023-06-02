@@ -51,8 +51,8 @@ const Pagar = () => {
         const { value: formValues } = await Swal.fire({
           title: 'Factura',
           html:
-            '<input id="swal-input1" class="swal2-input" placeholder="CIF">' +
-            '<input id="swal-input2" class="swal2-input" placeholder="Nombre de la empresa">',
+            '<input id="swal-input1" class="swal2-input-cif" placeholder="CIF">' +
+            '<input id="swal-input2" class="swal2-input-cif" placeholder="Nombre de la empresa">',
           focusConfirm: false,
           preConfirm: () => {
             const cif = document.getElementById('swal-input1').value;
@@ -75,10 +75,10 @@ const Pagar = () => {
         if (formValues) {
           const [cif, nombreEmpresa] = formValues;
           const { value: inputEmail } = await Swal.fire({
-            title: 'Ingrese su correo electrónico',
+            title: 'Ingrese su correo electrónico para recibir la factura',
             input: 'email',
-            inputLabel: 'Correo electrónico',
-            inputPlaceholder: 'Ingrese su correo electrónico para recibir la factura',
+            inputLabel: '',
+            inputPlaceholder: 'Correo electrónico',
             showCancelButton: true,
             confirmButtonText: 'OK',
             cancelButtonText: 'Cancelar',
@@ -109,10 +109,10 @@ const Pagar = () => {
         }
       } else {
         const { value: inputEmail } = await Swal.fire({
-          title: 'Ingrese su correo electrónico',
+          title: 'Ingrese su correo electrónico para recibir el ticket',
           input: 'email',
-          inputLabel: 'Correo electrónico',
-          inputPlaceholder: 'Ingrese su correo electrónico para recibir el ticket',
+          inputLabel: '',
+          inputPlaceholder: 'Correo electrónico',
           showCancelButton: true,
           confirmButtonText: 'OK',
           cancelButtonText: 'Cancelar',
