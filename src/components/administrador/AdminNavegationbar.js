@@ -15,7 +15,7 @@ function AdminNavegationbar() {
 
   return (
     <Navbar collapseOnSelect expand="lg" className="custom-navbar">
-      <Container>
+      <Container fluid>
         <Navbar.Brand as={NavLink}  to={`/productos/admin/${mesa}`}>
           <img src={logo} alt="Logo" className="logo" />
         </Navbar.Brand>
