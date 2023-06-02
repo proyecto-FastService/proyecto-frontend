@@ -639,3 +639,43 @@
 .btn-admin:hover {
   background-color: rgb(191, 156, 252) !important;
 }
+
+/* CSS SWEETALERT2 */
+
+/* Estilos generales para todos los SweetAlerts */
+.swal2-container {
+  font-family: inherit;
+  font-size: 16px;
+}
+
+/* Estilos específicos para dispositivos móviles */
+@media (max-width: 767px) {
+  .swal2-popup {
+    width: 90%;
+    max-width: 300px;
+  }
+
+  .swal2-title {
+    font-size: 18px;
+  }
+
+  .swal2-content {
+    font-size: 14px;
+  }
+}
+
+/* Estilos específicos para tabletas y dispositivos con pantalla más grande */
+@media (min-width: 768px) {
+  .swal2-popup {
+    width: 60%;
+    max-width: 500px;
+  }
+
+  .swal2-title {
+    font-size: 24px;
+  }
+
+  .swal2-content {
+    font-size: 16px;
+  }
+}
