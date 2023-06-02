@@ -51,12 +51,9 @@ function Admin() {
   }, []); // Se ejecuta solo una vez al montar el componente
 
   const handleClickMesa = (mesaId) => {
-    navigate(`/productos/0/${mesaId}`);
+    navigate(`/productos/admin/0/${mesaId}`);
   };
-
-  const handleEditarProductos = () => {
-    navigate('/0/editar-productos');
-  };
+  
 
   const confirmarAtenderMesa = async (mesa) => {
     const result = await Swal.fire({
@@ -88,7 +85,7 @@ function Admin() {
 
   return (
     <div className='d-flex' style={{ flexDirection: 'column' }}>
-      <h1 className='text-center'>Panel de Administrador</h1>
+      <h1 className='text-center card-title-admin mt-5'>Panel de Administrador</h1>
       <div className='d-flex justify-content-center align-items-center flex-wrap'>
         {mesas.map((mesa) => (
           <div key={mesa.id} className='m-3 container-card' style={{ width: '20rem', position: 'relative' }}>

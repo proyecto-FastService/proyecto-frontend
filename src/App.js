@@ -51,9 +51,9 @@ function App() {
           <Route path="/postres/:numeroMesa" element={<ProductListPostre />} />
           <Route path="/carrito" element={<Carrito />} />
           <Route path="/pagar" element={<Pagar />} />
-          <Route path="/productos/0/*" element={<PanelAdmin />} />
-          <Route path="/productos/0/:mesaId" element={<MesaCard />} />
-          <Route path="/0/editar-productos" element={<ProductEditor />} />
+          <Route path="/productos/admin/:numeroMesa/*" element={<PanelAdmin />} />
+          <Route path="/productos/admin/:numeroMesa/:mesaId" element={<MesaCard />} />
+          <Route path="/:numeroMesa/admin/editar-productos" element={<ProductEditor />} />
         </Routes>
         {mesa !== '0' && !isHomePage && <Footer />} {/* Renderizar el footer solo si mesa no es 0 y no estamos en la página de inicio */}
       </CartProvider>

@@ -1,6 +1,6 @@
 * {
 
-  font-family: 'Concert One', cursive;
+  font-family: 'Poltawski Nowy';
 }
 
 /* #root {
@@ -235,13 +235,29 @@
   height: 650px; /* Ajusta la altura según tus necesidades */
 }
 
-.card-image{
+.card-image {
   width: 400px;
   height: 350px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 1);
-
 }
+
+/* Media query para iPad */
+@media (max-width: 1024px) {
+  .card-image {
+    width: 300px;
+    height: 250px;
+  }
+}
+
+/* Media query para dispositivos móviles */
+@media (max-width: 767px) {
+  .card-image {
+    width: 250px;
+    height: 200px;
+  }
+}
+
 
 .ProductCard {
   max-width: 550px;
@@ -304,7 +320,7 @@
 .card-title {
   font-weight: 600;
   color: black;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.02rem;
   line-height: 40px;
   font-style: normal;
   font-size: 28px;
@@ -314,6 +330,30 @@
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 1);
 }
+
+.card-title-admin {
+  font-weight: 600;
+  color: black;
+  letter-spacing: -0.02rem;
+  line-height: 40px;
+  font-style: normal;
+  font-size: 28px;
+  padding-bottom: 8px;
+  background: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 1);
+  
+  /* Centrar horizontalmente */
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%; /* Ajusta el porcentaje según tus necesidades */
+  display: inline-block;
+  word-wrap: break-word;
+}
+
+  
+
 
 .card-description {
   height: 200px;
@@ -490,12 +530,11 @@
   border-radius: 0.3rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+
 }
 
 .text-carrito-header {
-  color: #FFCC70;
+
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
 }

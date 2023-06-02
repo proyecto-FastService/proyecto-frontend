@@ -12,7 +12,7 @@ function MesaCard() {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-  
+
     const enviarInfoMesa = async () => {
       try {
         const response = await axios.post(
@@ -26,18 +26,18 @@ function MesaCard() {
         console.error('Error al enviar la información de la mesa:', error);
       }
     };
-  
+
     enviarInfoMesa();
-  
+
     const interval = setInterval(() => {
       enviarInfoMesa();
     }, 10000); // 10 seconds in milliseconds
-  
+
     return () => {
       clearInterval(interval); // Clear the interval on component unmount
     };
   }, [mesaId, refresh]);
-  
+
 
   const handleLiberarMesa = async () => {
     const token = localStorage.getItem('token');
@@ -93,8 +93,8 @@ function MesaCard() {
   };
 
   return (
-    <div>
-      <h2 className="text-center">Mesa {mesaId}</h2>
+    <div className='d-flex' style={{ flexDirection: 'column' }}>
+      <h2 className="text-center card-title-admin mt-5">Mesa {mesaId}</h2>
       <div className="d-flex justify-content-center align-items-center flex-wrap">
         <div className="m-3 container-card" style={{ width: '40rem' }}>
           {/* Imprimir la lista de productos */}
@@ -106,7 +106,7 @@ function MesaCard() {
               ))}
             </ul>
           </div>
-  
+
           <div className="d-flex justify-content-between">
             <button
               className="btn-admin"
@@ -115,7 +115,7 @@ function MesaCard() {
             >
               Reservar mesa
             </button>
-  
+
             <button className="btn-admin" onClick={handleLiberarMesa}>
               Liberar mesa
             </button>
@@ -123,13 +123,13 @@ function MesaCard() {
         </div>
       </div>
       <div className="text-center">
-        <Link to="/productos/0" className="text-black">
+        <Link to="/productos/admin/0" className="text-black card-title-admin">
           <FiArrowLeft className="mr-1" /> Volver al Panel de Administración
         </Link>
       </div>
     </div>
   );
-  
+
 }
 
 export default MesaCard

@@ -16,15 +16,15 @@ function AdminNavegationbar() {
   return (
     <Navbar collapseOnSelect expand="lg" className="custom-navbar">
       <Container>
-        <Navbar.Brand as={NavLink}  to={`/productos/${mesa}`}>
+        <Navbar.Brand as={NavLink}  to={`/productos/admin/${mesa}`}>
           <img src={logo} alt="Logo" className="logo" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" className="navbar-toggler" style={{ backgroundColor: 'white' }} />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <NavLink to={`/productos/${mesa}`} className="nav-link"  style={{ marginRight:'10px' }}>
+          <NavLink to={`/productos/admin/${mesa}`} className="nav-link"  style={{ marginRight:'10px' }}>
               MESAS
           </NavLink>
-          <Nav.Link as={NavLink} to="/0/editar-productos"  >
+          <Nav.Link as={NavLink} to={`/${mesa}/admin/editar-productos`}  >
             EDITOR DE PRODUCTOS
           </Nav.Link>
         </Navbar.Collapse>
