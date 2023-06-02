@@ -51,18 +51,19 @@ function Admin() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setRefresh(!refresh);
-    }, 10000); // Recarga los componentes cada 20 segundos
+      setRefresh((prevRefresh) => !prevRefresh);
+      console.log("Me recargo");
+    }, 5000); // Recarga los componentes cada segundo
 
     return () => {
       clearInterval(interval);
     };
-  }, []); // Se ejecuta solo una vez al montar el componente
+  }, [refresh]); // Escucha cambios en el estado 'refresh'
 
   const handleClickMesa = (mesaId) => {
     navigate(`/productos/admin/0/${mesaId}`);
   };
-  
+
 
   const confirmarAtenderMesa = async (mesa) => {
     const result = await Swal.fire({
@@ -101,9 +102,8 @@ function Admin() {
             <div className='card-body-admin'>
               <h5 className='card-title'>Mesa {mesa.id}</h5>
               <div
-                className={`badge position-absolute top-0 start-0 p-2 ${
-                  mesa.avisoCamarero ? 'aviso-camarero-badge' : 'd-none'
-                }`}
+                className={`badge position-absolute top-0 start-0 p-2 ${mesa.avisoCamarero ? 'aviso-camarero-badge' : 'd-none'
+                  }`}
                 style={{
                   backgroundColor: 'yellow',
                   color: 'black',
@@ -114,9 +114,8 @@ function Admin() {
                 <FaUser />
               </div>
               <div
-                className={`badge position-absolute top-0 end-0 translate-middle p-2 ${
-                  mesa.ocupada ? 'ocupada-badge' : 'libre-badge'
-                }`}
+                className={`badge position-absolute top-0 end-0 translate-middle p-2 ${mesa.ocupada ? 'ocupada-badge' : 'libre-badge'
+                  }`}
                 style={{
                   transform: 'translate(-50%, -50%)',
                   backgroundColor: mesa.ocupada ? 'red' : 'green',
