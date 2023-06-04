@@ -64,7 +64,7 @@ function Admin() {
 
       // Realizar la recarga de la página
       setReloadPage(true);
-      // window.location.reload();
+
     }
   }, [loaded, reloadPage, token, numeroMesa]);
 
@@ -73,7 +73,7 @@ function Admin() {
       const interval = setInterval(() => {
         setRefresh((prevRefresh) => !prevRefresh);
         console.log('Me recargo');
-      }, 40000);
+      }, 1000);
 
       return () => {
         clearInterval(interval);
