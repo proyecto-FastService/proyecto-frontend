@@ -49,13 +49,15 @@ function Navegationbar() {
             <Nav.Link as={NavLink} to={`/postres/${mesa}`} className="custom-nav-link">
               POSTRE
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/carrito" className=" custom-nav-link">
-              <span>CARRITO</span>
-              {cartItemCount > 0 && <span className="cart-count">({cartItemCount})</span>}
-              <FaShoppingCart style={{ marginLeft: '0.5rem' }} className="cart-icon text-ligthl" />
-            </Nav.Link>
           </Nav>
           <Nav>
+            <Nav.Link as={NavLink} to="/carrito" className="custom-hover-mi-recibo">
+              <button className="btn btn-light">
+                <FaShoppingCart style={{ marginRight: '0.5rem' }} className="cart-icon text-dark mb-1" />
+                <span>CARRITO</span>
+                {cartItemCount > 0 && <span className="cart-count">({cartItemCount})</span>}
+              </button>
+            </Nav.Link>
             <Nav.Link as={NavLink} to="/pagar" className="custom-hover-mi-recibo">
               <button className="btn btn-light" style={{ marginRight: '0.5rem' }}>MI RECIBO</button>
             </Nav.Link>
@@ -67,6 +69,7 @@ function Navegationbar() {
                 CAMARERO
               </button>
             </Nav.Link>
+
           </Nav>
         </Navbar.Collapse>
       </Container>

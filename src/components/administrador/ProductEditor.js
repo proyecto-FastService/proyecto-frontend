@@ -27,7 +27,7 @@ function ProductEditor() {
   useEffect(() => {
     const interval = setInterval(() => {
       obtenerListadoProducto();
-    }, 10000); // 10 seconds in milliseconds
+    }, 3000); // 10 seconds in milliseconds
   
     return () => clearInterval(interval); // Clear the interval on component unmount
   }, [refresh]);

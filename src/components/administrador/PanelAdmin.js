@@ -73,7 +73,7 @@ function Admin() {
       const interval = setInterval(() => {
         setRefresh((prevRefresh) => !prevRefresh);
         console.log('Me recargo');
-      }, 1000);
+      }, 10000);
 
       return () => {
         clearInterval(interval);
@@ -131,6 +131,7 @@ function Admin() {
         console.log(response.data);
         // Limpiar el token del localStorage
         localStorage.removeItem('token');
+        localStorage.removeItem('mesa');
 
         Swal.fire('Sesión cerrada', 'La sesión ha sido cerrada correctamente.', 'success');
 
@@ -210,14 +211,20 @@ function Admin() {
           </div>
         ))}
       </div>
-      <button className='btn-admin mt-3' onClick={handleCerrarSesion}>
-        Cerrar sesión
-      </button>
-      <button className='btn-admin mt-3' onClick={handleLimpiarMesas}>
-        Limpiar Mesas
-      </button>
+      <div className='card' style={{ bottom: '0', left: '0', width: "300px", height: "200px", background: "linear-gradient(135deg, #FF94B4 0%, #FFD291 50%, #96CFFF 100%)", borderRadius: "10%" }}>
+        <div className='card-body d-flex flex-column justify-content-center'>
+          <h2>Demo zone</h2>
+          <button className='btn-admin mt-3 w-100' onClick={handleCerrarSesion}>
+            Cerrar sesión admin
+          </button>
+          <button className='btn-admin mt-3 w-100' onClick={handleLimpiarMesas}>
+            Resetear todas las mesas
+          </button>
+        </div>
+      </div>
     </div>
   );
+
 }
 
 export default Admin;

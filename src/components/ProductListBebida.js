@@ -38,7 +38,7 @@ function ProductListBebida() {
     <div className="product-list-container">
       <div className="product-list-column">
         {Array.isArray(bebidas) ? (
-          bebidas.slice(0, Math.ceil(bebidas.length / 2)).map((product) => (
+          bebidas.slice(0, Math.ceil(bebidas.length / 3)).map((product) => (
             <ProductCard
               key={product.id}
               id={product.id}
@@ -55,7 +55,26 @@ function ProductListBebida() {
       </div>
       <div className="product-list-column">
         {Array.isArray(bebidas) ? (
-          bebidas.slice(Math.ceil(bebidas.length / 2)).map((product) => (
+          bebidas
+            .slice(Math.ceil(bebidas.length / 3), Math.ceil((bebidas.length / 3) * 2))
+            .map((product) => (
+              <ProductCard
+                key={product.id}
+                id={product.id}
+                title={product.nombre}
+                description={product.descripcion}
+                price={`${product.precio}€`}
+                image={`../${product.imagen}`}
+                onAddToCart={() => onAddToCart(product)}
+              />
+            ))
+        ) : (
+          <p>Cargando productos...</p>
+        )}
+      </div>
+      <div className="product-list-column">
+        {Array.isArray(bebidas) ? (
+          bebidas.slice(Math.ceil((bebidas.length / 3) * 2)).map((product) => (
             <ProductCard
               key={product.id}
               id={product.id}
@@ -71,7 +90,7 @@ function ProductListBebida() {
         )}
       </div>
     </div>
-  );
+  );  
 }
 
 export default ProductListBebida;

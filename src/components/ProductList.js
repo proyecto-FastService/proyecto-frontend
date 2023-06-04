@@ -36,43 +36,62 @@ function ProductList() {
   const platos = productos.filter((product) => product.categoria === 'plato');
 
   return (
-    <div className="product-list-container">
-      <div className="product-list-column">
-        {Array.isArray(platos) ? (
-          platos.slice(0, Math.ceil(platos.length / 2)).map((product) => (
-            <ProductCard
-              key={product.id}
-              id={product.id}
-              title={product.nombre}
-              description={product.descripcion}
-              price={`${product.precio}€`}
-              image={`../${product.imagen}`}
-              onAddToCart={() => onAddToCart(product)}
-            />
-          ))
-        ) : (
-          <p>Cargando productos...</p>
-        )}
-      </div>
-      <div className="product-list-column">
-        {Array.isArray(platos) ? (
-          platos.slice(Math.ceil(platos.length / 2)).map((product) => (
-            <ProductCard
-              key={product.id}
-              id={product.id}
-              title={product.nombre}
-              description={product.descripcion}
-              price={`${product.precio}€`}
-              image={`../${product.imagen}`}
-              onAddToCart={() => onAddToCart(product)}
-            />
-          ))
-        ) : (
-          <p>Cargando productos...</p>
-        )}
-      </div>
+  <div className="product-list-container">
+    <div className="product-list-column">
+      {Array.isArray(platos) ? (
+        platos.slice(0, Math.ceil(platos.length / 3)).map((product) => (
+          <ProductCard
+            key={product.id}
+            id={product.id}
+            title={product.nombre}
+            description={product.descripcion}
+            price={`${product.precio}€`}
+            image={`../${product.imagen}`}
+            onAddToCart={() => onAddToCart(product)}
+          />
+        ))
+      ) : (
+        <p>Cargando productos...</p>
+      )}
     </div>
-  );
+    <div className="product-list-column">
+      {Array.isArray(platos) ? (
+        platos
+          .slice(Math.ceil(platos.length / 3), Math.ceil((platos.length / 3) * 2))
+          .map((product) => (
+            <ProductCard
+              key={product.id}
+              id={product.id}
+              title={product.nombre}
+              description={product.descripcion}
+              price={`${product.precio}€`}
+              image={`../${product.imagen}`}
+              onAddToCart={() => onAddToCart(product)}
+            />
+          ))
+      ) : (
+        <p>Cargando productos...</p>
+      )}
+    </div>
+    <div className="product-list-column">
+      {Array.isArray(platos) ? (
+        platos.slice(Math.ceil((platos.length / 3) * 2)).map((product) => (
+          <ProductCard
+            key={product.id}
+            id={product.id}
+            title={product.nombre}
+            description={product.descripcion}
+            price={`${product.precio}€`}
+            image={`../${product.imagen}`}
+            onAddToCart={() => onAddToCart(product)}
+          />
+        ))
+      ) : (
+        <p>Cargando productos...</p>
+      )}
+    </div>
+  </div>
+);
 }
 
 export default ProductList;

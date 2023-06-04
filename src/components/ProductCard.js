@@ -30,7 +30,7 @@ function ProductCard(props) {
         <Card.Body className="card-body">
           <Card.Img className="card-image" variant="top" src={props.image} alt={props.title} />
           <Card.Text className="card-description">{props.description}</Card.Text>
-          <Button className="custom-button" onClick={handleClick}>
+          <Button className="btn-reviewed w-50" onClick={handleClick}>
             {props.price}
           </Button>
         </Card.Body>

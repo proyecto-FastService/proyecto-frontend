@@ -38,7 +38,7 @@ function ProductListPostre() {
     <div className="product-list-container">
       <div className="product-list-column">
         {Array.isArray(postres) ? (
-          postres.slice(0, Math.ceil(postres.length / 2)).map((product) => (
+          postres.slice(0, Math.ceil(postres.length / 3)).map((product) => (
             <ProductCard
               key={product.id}
               id={product.id}
@@ -55,7 +55,26 @@ function ProductListPostre() {
       </div>
       <div className="product-list-column">
         {Array.isArray(postres) ? (
-          postres.slice(Math.ceil(postres.length / 2)).map((product) => (
+          postres
+            .slice(Math.ceil(postres.length / 3), Math.ceil((postres.length / 3) * 2))
+            .map((product) => (
+              <ProductCard
+                key={product.id}
+                id={product.id}
+                title={product.nombre}
+                description={product.descripcion}
+                price={`${product.precio}€`}
+                image={`../${product.imagen}`}
+                onAddToCart={() => onAddToCart(product)}
+              />
+            ))
+        ) : (
+          <p>Cargando productos...</p>
+        )}
+      </div>
+      <div className="product-list-column">
+        {Array.isArray(postres) ? (
+          postres.slice(Math.ceil((postres.length / 3) * 2)).map((product) => (
             <ProductCard
               key={product.id}
               id={product.id}

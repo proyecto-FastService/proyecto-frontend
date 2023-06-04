@@ -12,8 +12,10 @@
 
 #root {
   background-color: #6174df;
-  background-image: url("./img/sticker.jpg"); /* Reemplaza "ruta/a/la/imagen.jpg" con la ruta de la imagen en tu carpeta "img/src" */
-  background-position:center; /* Centra la imagen dentro del contenedor */
+  background-image: url("./img/sticker.jpg");
+  /* Reemplaza "ruta/a/la/imagen.jpg" con la ruta de la imagen en tu carpeta "img/src" */
+  background-position: center;
+  /* Centra la imagen dentro del contenedor */
   background-size: contain;
   min-height: 100%;
 }
@@ -55,6 +57,37 @@
 }
 
 /* CSS DE LA CARD DE PRODUCTO */
+
+.btn-reviewed {
+
+
+  display: inline-block !important;
+  outline: 0 !important;
+  appearance: none !important;
+  padding: 0px 12px !important;
+  border-radius: 4px !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  background-color: orange !important;
+  border: 1px solid rgb(137, 151, 155) !important;
+  box-shadow: rgb(6 22 33 / 30%) 0px 1px 2px !important;
+  color: black !important;
+  font-size: 18px !important;
+  font-weight: 400 !important;
+  height: 36px !important;
+  transition: all 150ms ease-in-out 0s !important;
+
+
+
+}
+
+.btn-reviewed:hover {
+  color: black !important;
+  background-color: rgb(255, 255, 255) !important;
+  border: 1px solid rgb(93, 108, 116) !important;
+  box-shadow: rgb(0 0 0 / 30%) 0px 4px 4px, rgb(231 238 236) 0px 0px 0px 3px !important;
+}
+
 .custom-button {
   --borderWidth: 2 !important;
   --buttonColor: black !important;
@@ -211,7 +244,7 @@
 
 .product-list-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   padding: 30px;
 }
@@ -231,8 +264,10 @@
   font-weight: 600;
   line-height: 60px;
 }
+
 .card-body {
-  height: 650px; /* Ajusta la altura según tus necesidades */
+  height: 650px;
+  /* Ajusta la altura según tus necesidades */
 }
 
 .card-image {
@@ -343,16 +378,17 @@
   padding: 8px 16px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 1);
-  
+
   /* Centrar horizontalmente */
   margin-left: auto;
   margin-right: auto;
-  max-width: 100%; /* Ajusta el porcentaje según tus necesidades */
+  max-width: 100%;
+  /* Ajusta el porcentaje según tus necesidades */
   display: inline-block;
   word-wrap: break-word;
 }
 
-  
+
 
 
 .card-description {
@@ -373,12 +409,13 @@
   .card-body {
     height: max-content;
   }
+
   .card-description {
     height: max-content;
   }
 }
 
-.card-body-admin{
+.card-body-admin {
   height: max-content;
 }
 
@@ -398,16 +435,17 @@
   background-image: linear-gradient(to bottom, rgba(12, 10, 14, 0.9), rgba(12, 10, 14, 0.5));
 }
 
-.custom-nav-link{
+.custom-nav-link {
   color: white !important;
 }
 
-.custom-nav-link:hover{
+.custom-nav-link:hover {
   color: orange !important;
 }
 
 .custom-navbar .nav-link.active {
-  color: orange !important; /* Color del texto del enlace activo */
+  color: orange !important;
+  /* Color del texto del enlace activo */
   /* Otros estilos adicionales que desees aplicar al enlace activo */
 }
 
@@ -415,8 +453,8 @@
 .custom-hover-mi-recibo:hover button {
   color: white;
   -webkit-text-stroke-width: 0px;
-    background-color: #4158D0;
-    border: 0px;
+  background-color: #4158D0;
+  border: 0px;
 }
 
 .custom-hover-camarero:hover button {
@@ -458,7 +496,7 @@
 
 }
 
-#responsive-navbar-nav{
+#responsive-navbar-nav {
   color: white !important;
 }
 
@@ -473,9 +511,11 @@
 }
 
 .product-image {
-  width: 60px; /* Ajusta el tamaño de la imagen según sea necesario */
+  width: 60px;
+  /* Ajusta el tamaño de la imagen según sea necesario */
   height: 60px;
-  margin-right: 10px; /* Espacio entre la imagen y el texto del producto */
+  margin-right: 10px;
+  /* Espacio entre la imagen y el texto del producto */
 }
 
 .product-container p {
@@ -483,8 +523,10 @@
 }
 
 .card-body li {
-  list-style-type: none; /* Quita la viñeta de la lista */
-  margin-top: 10px; /* Ajusta el margen superior según sea necesario */
+  list-style-type: none;
+  /* Quita la viñeta de la lista */
+  margin-top: 10px;
+  /* Ajusta el margen superior según sea necesario */
 }
 
 .botones {
@@ -538,6 +580,7 @@
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
 }
+
 /* CSS DE HOME  */
 
 
@@ -667,7 +710,8 @@
   .swal2-popup {
     width: 80%;
     max-width: 300px;
-    overflow-x: hidden; /* Evita la barra de desplazamiento horizontal */
+    overflow-x: hidden;
+    /* Evita la barra de desplazamiento horizontal */
   }
 
   .swal2-title {
@@ -703,5 +747,3 @@
     width: 80%;
   }
 }
-
-
