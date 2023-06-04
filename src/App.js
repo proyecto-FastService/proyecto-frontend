@@ -10,6 +10,7 @@ import PanelAdmin from './components/administrador/PanelAdmin';
 import MesaCard from './components/administrador/MesaCard';
 import ProductEditor from './components/administrador/ProductEditor';
 import AdminNavegationbar from './components/administrador/AdminNavegationbar';
+import GhostNavBar from './components/GhosNavBar';
 import './App.css';
 import fastServiceLogo from './img/logo-fondo-blanco.png';
 import ProductListBebida from './components/ProductListBebida';
@@ -19,7 +20,9 @@ import Home from './components/Home';
 function App() {
   const [loading, setLoading] = useState(true);
   const [mesa, setMesa] = useState(localStorage.getItem('mesa'));
+  const [token, setToken] = useState(localStorage.getItem('token'));
   const [isHomePage, setIsHomePage] = useState(false);
+  const [rendered, setRendered] = useState(false); // Estado para controlar si los componentes se han renderizado
 
   useEffect(() => {
     // Simula una carga de datos o procesamiento
@@ -35,11 +38,20 @@ function App() {
   useEffect(() => {
     const interval = setInterval(() => {
       const updatedMesa = localStorage.getItem('mesa');
+      const updatedToken = localStorage.getItem('token');
       setMesa(updatedMesa);
+      setToken(updatedToken);
     }, 2000);
 
     return () => clearInterval(interval);
   }, []);
+
+  useEffect(() => {
+    // Marcar los componentes como renderizados
+    if (mesa && token) {
+      setRendered(true);
+    }
+  }, [mesa, token]);
 
   if (loading) {
     return (
@@ -47,6 +59,10 @@ function App() {
         <img src={fastServiceLogo} alt="FastService Logo" className="logo-loader" />
       </div>
     );
+  }
+
+  if (window.location.pathname === '/') {
+    return <GhostNavBar />;
   }
 
   return (
