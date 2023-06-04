@@ -104,7 +104,8 @@ const Pagar = () => {
             localStorage.clear();
             Swal.fire('¡Pago exitoso!', 'El pago se ha realizado correctamente', 'success');
             await axios.get(`https://daw206.medacarena.es/public/api/pagarCarrito/${token}`);
-            window.location.href = 'https://proyecto2.medacarena.es';
+            window.location.href = '/';
+            // 'https://proyecto2.medacarena.es'
           }
         }
       } else {
@@ -139,7 +140,7 @@ const Pagar = () => {
           Swal.fire('¡Pago exitoso!', 'El pago se ha realizado correctamente', 'success')
             .then(() => {
               axios.get(`https://daw206.medacarena.es/public/api/pagarCarrito/${token}`);
-              window.location.href = 'https://proyecto2.medacarena.es';
+              window.location.href = '/';
             });
         }
       }

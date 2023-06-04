@@ -188,9 +188,10 @@ function Admin() {
           </div>
         ))}
       </div>
-      <div className='card' style={{ bottom: '0', left: '0', width: "300px", height: "200px", background: "linear-gradient(135deg, #FF94B4 0%, #FFD291 50%, #96CFFF 100%)", borderRadius: "10%" }}>
+      <div className='card' style={{ width: "300px", height: "300px", background: "linear-gradient(135deg, #FF94B4 0%, #FFD291 50%, #96CFFF 100%)", borderRadius: "10%" }}>
         <div className='card-body d-flex flex-column justify-content-center'>
           <h2>Demo zone</h2>
+          <p>Las mesas pueden tardar hasta 10 segundos en aparecer, tenga paciencia</p>
           <button className='btn-admin mt-3 w-100' onClick={handleCerrarSesion}>
             Cerrar sesión admin
           </button>
