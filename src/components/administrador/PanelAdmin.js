@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { FaUser } from 'react-icons/fa';
 import Swal from 'sweetalert2';
-import { useParams } from 'react-router-dom';
 
 function Admin() {
   const [mesas, setMesas] = useState([]);
@@ -11,14 +10,10 @@ function Admin() {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
   const { numeroMesa } = useParams();
-  const [loaded, setLoaded] = useState(false);
-  const [loadedNumeroMesa, setLoadedNumeroMesa] = useState(false);
-  const [reloadPage, setReloadPage] = useState(false); // Estado para controlar la recarga de la página
 
   useEffect(() => {
     if (numeroMesa) {
       localStorage.setItem('mesa', numeroMesa);
-      setLoadedNumeroMesa(true); // Indicar que se ha cargado el número de mesa correctamente
     }
   }, [numeroMesa]);
 
@@ -44,42 +39,26 @@ function Admin() {
         const response = await axios.get(`https://daw206.medacarena.es/public/api/admObtenerTodasMesas/${token}`);
         setMesas(response.data.mesas);
         console.log(mesas);
-
-        setLoaded(true); // Indicar que se ha cargado correctamente
       } catch (error) {
         console.error('Error al obtener las mesas:', error);
       }
     };
 
-    if (loadedNumeroMesa) {
-      obtenerMesas();
-    }
-  }, [refresh, loadedNumeroMesa]); // Escucha cambios en los estados 'refresh' y 'loadedNumeroMesa'
+    obtenerMesas();
+  }, [refresh]); // Escucha cambios en el estado 'refresh'
 
   useEffect(() => {
-    if (loaded && !reloadPage) {
-      // Guardar token y mesa en el localStorage
-      localStorage.setItem('token', token);
-      localStorage.setItem('mesa', numeroMesa);
+    const interval = setInterval(() => {
+      setRefresh(!refresh); // Cambiar el valor del estado 'refresh' cada 5 segundos
+    }, 5000);
 
-      // Realizar la recarga de la página
-      setReloadPage(true);
+    return () => {
+      clearInterval(interval); // Limpiar el intervalo al desmontar el componente
+    };
+  }, [refresh]);
 
-    }
-  }, [loaded, reloadPage, token, numeroMesa]);
 
-  useEffect(() => {
-    if (reloadPage) {
-      const interval = setInterval(() => {
-        setRefresh((prevRefresh) => !prevRefresh);
-        console.log('Me recargo');
-      }, 10000);
-
-      return () => {
-        clearInterval(interval);
-      };
-    }
-  }, [reloadPage]);
+  
 
   const handleClickMesa = (mesaId) => {
     navigate(`/productos/admin/0/${mesaId}`);
@@ -170,8 +149,6 @@ function Admin() {
     }
   };
 
-
-
   return (
     <div className='d-flex' style={{ flexDirection: 'column' }}>
       <h1 className='text-center card-title-admin mt-5'>Panel de Administrador</h1>
@@ -224,8 +201,6 @@ function Admin() {
       </div>
     </div>
   );
-
 }
 
 export default Admin;
-

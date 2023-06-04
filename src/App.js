@@ -18,7 +18,7 @@ import Home from './components/Home';
 
 function App() {
   const [loading, setLoading] = useState(true);
-  const mesa = localStorage.getItem('mesa');
+  const [mesa, setMesa] = useState(localStorage.getItem('mesa'));
   const [isHomePage, setIsHomePage] = useState(false);
 
   useEffect(() => {
@@ -30,6 +30,15 @@ function App() {
 
   useEffect(() => {
     setIsHomePage(window.location.pathname === '/');
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const updatedMesa = localStorage.getItem('mesa');
+      setMesa(updatedMesa);
+    }, 2000);
+
+    return () => clearInterval(interval);
   }, []);
 
   if (loading) {
@@ -62,6 +71,3 @@ function App() {
 }
 
 export default App;
-
-
-
