@@ -29,23 +29,23 @@ function App() {
     // Simula una carga de datos o procesamiento
     setTimeout(() => {
       setLoading(false);
-    }, 3500);
-  }, []);
-
-  useEffect(() => {
-    setIsHomePage(window.location.pathname === '/');
-  }, []);
-
-  useEffect(() => {
+    }, 1500);
+  
     const interval = setInterval(() => {
       const updatedMesa = localStorage.getItem('mesa');
       const updatedToken = localStorage.getItem('token');
       setMesa(updatedMesa);
       setToken(updatedToken);
     }, 2000);
-
-    return () => clearInterval(interval);
+  
+    return () => clearInterval(interval); // Limpiar el intervalo al desmontar el componente
   }, []);
+  
+
+  useEffect(() => {
+    setIsHomePage(window.location.pathname === '/');
+  }, []);
+
 
   useEffect(() => {
     // Marcar los componentes como renderizados
