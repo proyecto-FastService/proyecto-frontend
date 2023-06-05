@@ -16,6 +16,7 @@ import fastServiceLogo from './img/logo-fondo-blanco.png';
 import ProductListBebida from './components/ProductListBebida';
 import ProductListPostre from './components/ProductListPostre';
 import Home from './components/Home';
+import Tunante from './components/Tunante';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -63,6 +64,10 @@ function App() {
 
   if (window.location.pathname === '/') {
     return <GhostNavBar />;
+  }
+
+  if (window.location.pathname === '/tunante') {
+    return <Tunante />;
   }
 
   return (

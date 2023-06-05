@@ -19,6 +19,10 @@ function ProductList() {
         response = await fetch(`https://daw206.medacarena.es/public/api/cargar-productos/${numeroMesa}`);
       }
       const data = await response.json();
+      if (data === false) {
+        console.log("hola")
+        window.location.href = '/tunante';
+      }
       if (data.token) {
         localStorage.setItem('token', data.token);
         setProductos(data.productosEnStock)
@@ -30,35 +34,17 @@ function ProductList() {
       }
     }
     fetchData();
+
   }, [numeroMesa, token, setMesa]);
 
   // Filtrar los productos por la categoría "plato"
   const platos = productos.filter((product) => product.categoria === 'plato');
 
   return (
-  <div className="product-list-container">
-    <div className="product-list-column">
-      {Array.isArray(platos) ? (
-        platos.slice(0, Math.ceil(platos.length / 3)).map((product) => (
-          <ProductCard
-            key={product.id}
-            id={product.id}
-            title={product.nombre}
-            description={product.descripcion}
-            price={`${product.precio}€`}
-            image={`../${product.imagen}`}
-            onAddToCart={() => onAddToCart(product)}
-          />
-        ))
-      ) : (
-        <p>Cargando productos...</p>
-      )}
-    </div>
-    <div className="product-list-column">
-      {Array.isArray(platos) ? (
-        platos
-          .slice(Math.ceil(platos.length / 3), Math.ceil((platos.length / 3) * 2))
-          .map((product) => (
+    <div className="product-list-container">
+      <div className="product-list-column">
+        {Array.isArray(platos) ? (
+          platos.slice(0, Math.ceil(platos.length / 3)).map((product) => (
             <ProductCard
               key={product.id}
               id={product.id}
@@ -69,29 +55,48 @@ function ProductList() {
               onAddToCart={() => onAddToCart(product)}
             />
           ))
-      ) : (
-        <p>Cargando productos...</p>
-      )}
+        ) : (
+          <p>Cargando productos...</p>
+        )}
+      </div>
+      <div className="product-list-column">
+        {Array.isArray(platos) ? (
+          platos
+            .slice(Math.ceil(platos.length / 3), Math.ceil((platos.length / 3) * 2))
+            .map((product) => (
+              <ProductCard
+                key={product.id}
+                id={product.id}
+                title={product.nombre}
+                description={product.descripcion}
+                price={`${product.precio}€`}
+                image={`../${product.imagen}`}
+                onAddToCart={() => onAddToCart(product)}
+              />
+            ))
+        ) : (
+          <p>Cargando productos...</p>
+        )}
+      </div>
+      <div className="product-list-column">
+        {Array.isArray(platos) ? (
+          platos.slice(Math.ceil((platos.length / 3) * 2)).map((product) => (
+            <ProductCard
+              key={product.id}
+              id={product.id}
+              title={product.nombre}
+              description={product.descripcion}
+              price={`${product.precio}€`}
+              image={`../${product.imagen}`}
+              onAddToCart={() => onAddToCart(product)}
+            />
+          ))
+        ) : (
+          <p>Cargando productos...</p>
+        )}
+      </div>
     </div>
-    <div className="product-list-column">
-      {Array.isArray(platos) ? (
-        platos.slice(Math.ceil((platos.length / 3) * 2)).map((product) => (
-          <ProductCard
-            key={product.id}
-            id={product.id}
-            title={product.nombre}
-            description={product.descripcion}
-            price={`${product.precio}€`}
-            image={`../${product.imagen}`}
-            onAddToCart={() => onAddToCart(product)}
-          />
-        ))
-      ) : (
-        <p>Cargando productos...</p>
-      )}
-    </div>
-  </div>
-);
+  );
 }
 
 export default ProductList;
